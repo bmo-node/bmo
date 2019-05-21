@@ -1,0 +1,12 @@
+node_modules
+config
+src
+.editorconfig
+.eslintrc
+.gitignore
+CHANGELOG.md
+Dockerfile
+Jenkinsfile
+README.md
+testSetup.js
+
