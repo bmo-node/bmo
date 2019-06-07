@@ -25,3 +25,4 @@ node_modules
 *.log
 coverage
 *.iml
+!packages/node_modules
