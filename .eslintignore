@@ -1,0 +1,7 @@
+# Ignore swagger html file.
+**/swagger-ui.html
+node_modules
+coverage
+.nyc_output
+dist
+!packages/node_modules

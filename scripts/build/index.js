@@ -4,42 +4,41 @@
 // run custom build if defined in package.json
 // run babel on any files not under a folder that has a package.json defined somewhere above it.
 //
-import { get, has } from 'lodash'
-import Listr from 'listr'
-import globby from 'globby'
-import execa from 'execa'
-import fse from 'fs-extra'
-import { basename } from 'path'
+import { get, has } from 'lodash';
+import Listr from 'listr';
+import execa from 'execa';
+import fse from 'fs-extra';
+import { basename } from 'path';
 import {
 	getTopLevelPackages,
 	loadPackage,
 	getTopLevelDirectories
-} from '../common'
+} from '../common';
 
-const CWD = process.cwd()
-const PACKAGE_PATH = 'packages/node_modules'
-const SEARCH_BUILD_FOLDERS = ['build', 'dist']
-const DESTINATION_DIRECTORY = `${CWD}/dist`
-const buildOutputError = pkg => `${pkg.name} at ${pkg.directory} does not contain any ${SEARCH_BUILD_FOLDERS.join(', ')} folder. Please put build output into one of those locations or define a build.output.folder key in your package.json`
+const CWD = process.cwd();
+const PACKAGE_PATH = 'packages/node_modules';
+const SEARCH_BUILD_FOLDERS = ['build', 'dist'];
+const DESTINATION_DIRECTORY = `${CWD}/dist`;
+const buildOutputError = pkg => `${pkg.name} at ${pkg.directory} does not contain any ${SEARCH_BUILD_FOLDERS.join(', ')} folder. Please put build output into one of those locations or define a build.output.folder key in your package.json`;
 const getCustomOutputDir = pkg => async (ctx) => {
 	// copy build files
 	if (has(pkg, 'build.output.folder')) {
-		ctx.customBuildOutput = pkg.build.output.folder
+		ctx.customBuildOutput = pkg.build.output.folder;
 	} else {
 		ctx.customBuildOutput = (await Promise.all(SEARCH_BUILD_FOLDERS.map(async (buildPath) => {
-			const path = `${pkg.directory}/${buildPath}`
-			const exists = await fse.pathExists(path)
-			return exists ? buildPath : null
-		}))).find(path => path)
+			const path = `${pkg.directory}/${buildPath}`;
+			const exists = await fse.pathExists(path);
+			return exists ? buildPath : null;
+		}))).find(path => path);
 	}
 	if (!ctx.customBuildOutput) {
-		throw new Error(buildOutputError(pkg))
+		throw new Error(buildOutputError(pkg));
 	}
-	ctx.relativePath = pkg.directory.replace(CWD, '')
-	ctx.baseOutputDir = `${DESTINATION_DIRECTORY}${ctx.relativePath}`
-}
+	ctx.relativePath = pkg.directory.replace(CWD, '');
+	ctx.baseOutputDir = `${DESTINATION_DIRECTORY}${ctx.relativePath}`;
+};
 
-const buildModule = modulePath => ctx => execa('babel', [`${modulePath}/`, '-d', `./dist/${modulePath}`, '--copy-files'], { cwd: CWD, spawn: true })
+const buildModule = modulePath => ctx => execa('babel', [`${modulePath}/`, '-d', `./dist/${modulePath}`, '--copy-files'], { cwd: CWD, spawn: true });
 
 const tasks = new Listr([
 	{
@@ -52,20 +51,20 @@ const tasks = new Listr([
 			{
 				title: 'Getting custom packages',
 				task: (ctx) => {
-					ctx.customPackagePaths = getTopLevelPackages(PACKAGE_PATH)
+					ctx.customPackagePaths = getTopLevelPackages(PACKAGE_PATH);
 				}
 			},
 			{
 				title: 'Loading packages',
 				task: (ctx) => {
-					ctx.customPackages = ctx.customPackagePaths.map(loadPackage)
+					ctx.customPackages = ctx.customPackagePaths.map(loadPackage);
 				}
 			},
 			{
 				title: 'Getting custom build packages',
 				task: (ctx) => {
-					ctx.customBuilds = ctx.customPackages.filter(pkg => has(pkg, 'scripts.build')) || []
-					ctx.customBuildPaths = ctx.customBuilds.map(pkg => pkg.directory)
+					ctx.customBuilds = ctx.customPackages.filter(pkg => has(pkg, 'scripts.build')) || [];
+					ctx.customBuildPaths = ctx.customBuilds.map(pkg => pkg.directory);
 				}
 			}
 		])
@@ -91,21 +90,21 @@ const tasks = new Listr([
 					}, {
 						title: 'Copy build files',
 						task: async (ctx) => {
-							const { customBuildOutput, relativePath, baseOutputDir } = ctx
+							const { customBuildOutput, baseOutputDir } = ctx;
 							// Copy package files
-							await fse.copy(`${pkg.directory}/${customBuildOutput}`, `${baseOutputDir}/${customBuildOutput}`)
+							await fse.copy(`${pkg.directory}/${customBuildOutput}`, `${baseOutputDir}/${customBuildOutput}`);
 						}
 					}, {
 						title: 'Copy package files`',
 						task: async (ctx) => {
-							const { customBuildOutput, relativePath, baseOutputDir } = ctx
+							const { baseOutputDir } = ctx;
 
-							const { main } = pkg
-							const otherFiles = [pkg.location, ...get(pkg, 'files', []).map(file => `${pkg.directory}${file}`)]
+							const { main } = pkg;
+							const otherFiles = [pkg.location, ...get(pkg, 'files', []).map(file => `${pkg.directory}${file}`)];
 							if (main) {
-								otherFiles.push(`${pkg.directory}/${main}`)
+								otherFiles.push(`${pkg.directory}/${main}`);
 							}
-							await Promise.all(otherFiles.map(file => fse.copy(`${file}`, `${baseOutputDir}/${basename(file)}`)))
+							await Promise.all(otherFiles.map(file => fse.copy(`${file}`, `${baseOutputDir}/${basename(file)}`)));
 						}
 					}])
 				})))
@@ -117,12 +116,12 @@ const tasks = new Listr([
 		task: () => new Listr([
 			{
 				title: 'Gathering directories',
-				task: ctx => ctx.topLevelDirectories = getTopLevelDirectories(PACKAGE_PATH)
+				task: ctx => (ctx.topLevelDirectories = getTopLevelDirectories(PACKAGE_PATH))
 			},
 			{
 				title: 'Filtering custom builds',
 				task: (ctx) => {
-					ctx.buildFolders = ctx.topLevelDirectories.filter(dir => !ctx.customBuildPaths.find(path => path.includes(dir)))
+					ctx.buildFolders = ctx.topLevelDirectories.filter(dir => !ctx.customBuildPaths.find(path => path.includes(dir)));
 				}
 			},
 			{
@@ -134,9 +133,9 @@ const tasks = new Listr([
 			}
 		])
 	}
-], { concurrent: false })
+], { concurrent: false });
 
 tasks.run().catch((err) => {
-	console.error(err)
-	process.exit(1)
-})
+	console.error(err);
+	process.exit(1);
+});

@@ -5,4 +5,4 @@ require('@babel/register')({
 	ignore: [],
 	exclude: [],
 	include: [/@randall/gi]
-})
+});
