@@ -10,7 +10,7 @@ RUN yarn config set registry https://pi-artifactory.lmig.com/artifactory/api/npm
 # take advantage of Docker's caching
 ADD package.json /tmp/package.json
 
-RUN cd /tmp && yarn --production --update-checksums
+RUN cd /tmp && yarn --production --update-checksums  --ignore-scripts
 RUN cp -a /tmp/node_modules /usr/src/app
 
 # We need to add the appdynamics agent globally to avoid integrity errors with the -lock file
