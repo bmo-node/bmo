@@ -41,18 +41,18 @@ timestamps
             checkpoint "Lint"
             sh 'yarn lint'
           }
-          
+
         stage("yarn test")
           {
             checkpoint "Test"
             sh 'CI=true NO_PROXY="localhost,127.0.0.1,*.lmig.com,*.lm.lmig.com,*.libertyec.com,192.168.99.100" HTTPS_PROXY="http://fusion-proxy.lmig.com:80" HTTP_PROXY="http://fusion-proxy.lmig.com:80" yarn test'
           }
-          
-        stage('Sonar Scan') 
-          {
-            scannerHome = tool name: 'Sonar Scanner 2.8', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectVersion=${appName}_${appVersion}"
-          }
+
+        // stage('Sonar Scan')
+        //   {
+        //     scannerHome = tool name: 'Sonar Scanner 2.8', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        //     sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectVersion=${appName}_${appVersion}"
+        //   }
 
         stage("Stash Artifacts")
           {
