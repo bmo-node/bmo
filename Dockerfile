@@ -2,7 +2,7 @@ FROM dtr-uscm.ddc2.prod-shared.aws.lmig.com/jenkinsuser/pl-nodejs-10.15.3:base-l
 
 # Create application directory
 RUN mkdir -p /usr/src/app
-
+RUN npm install -g yarn
 RUN npm config set registry https://pi-artifactory.lmig.com/artifactory/api/npm/npm
 RUN yarn config set registry https://pi-artifactory.lmig.com/artifactory/api/npm/npm
 
