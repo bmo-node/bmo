@@ -8,14 +8,10 @@
   },
   "scripts": {
     "start:dev": "nodemon --config ./nodemon.json -r ./scripts/babelRegister ./packages/node_modules/@bmo/server",
-    "start": "npm run build && cross-env WEBPACK_MODE=production node build/server",
+    "start": "npm run build && cross-env WEBPACK_MODE=production node dist/packages/node_modules/server",
     "start:local": "npm run build:local && node build/server",
     "prebuild": "rimraf build",
-    "build": "npm run build:client && npm run build:server",
-    "build:local": "npm run prebuild && npm run build:client:local && npm run build:server",
-    "build:client": "cross-env WEBPACK_MODE=production webpack -p --config=config/webpack.config.deployed.js",
-    "build:client:local": "cross-env WEBPACK_MODE=development webpack -p --config=config/webpack.config.local.js",
-    "build:server": "copyfiles -a -u 1 \"src/server/**/*\" build",
+    "build": "node -r ./scripts/babelRegister.js scripts/build/index.js",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern node_modules . --ext .js --ext .jsx",
     "precommit": "npm run lint && npm test && npm run test:feature",
     "selenium": "node ./scripts/postinstall",
@@ -23,9 +19,12 @@
     "test:feature": "npm run selenium && babel-node ./src/test/features/runFeatureTests",
     "test:feature:sauce": "babel-node ./src/test/features/runFeatureTests sauce",
     "test:feature:skipBuild": "npm run selenium && babel-node ./src/test/features/runFeatureTests skipBuild",
-    "test:unit": "cross-env nyc --report=html --report=text  mocha --require @babel/register --require ignore-styles ./testSetup.js \"src/**/*-test.js\""
+    "test:unit": "cross-env nyc --report=html --report=text  mocha --require @babel/register --require ignore-styles ./testSetup.js \"src/**/*-test.js\"",
+    "postinstall": "npm run installSubPackages",
+    "installSubPackages": "node -r ./scripts/babelRegister ./scripts/installSubpackages.js"
   },
   "devDependencies": {
+    "@babel/cli": "^7.4.4",
     "@babel/core": "7.2.2",
     "@babel/node": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.2.3",
@@ -40,6 +39,10 @@
     "eslint": "^5.12.0",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-import": "^2.4.0",
+    "execa": "^1.0.0",
+    "fs-extra": "^8.0.1",
+    "globby": "^9.2.0",
+    "listr": "^0.14.3",
     "nodemon": "^1.19.1"
   },
   "dependencies": {

@@ -1,5 +1,4 @@
-
-FROM node:8
+FROM dtr-uscm.ddc2.prod-shared.aws.lmig.com/jenkinsuser/pl-nodejs-10.15.3:base-latest
 
 # Create application directory
 RUN mkdir -p /usr/src/app
@@ -22,4 +21,4 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app/
 
 HEALTHCHECK --interval=60s --timeout=30s --retries=3 CMD curl -v --fail http://localhost:8080/health || exit 1
-CMD [ "node", "./build/server" ]
+CMD [ "npm","run","start"]
