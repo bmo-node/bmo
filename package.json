@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start:dev": "nodemon --config ./nodemon.json -r ./scripts/babelRegister ./packages/node_modules/@bmo/server",
-    "start": "npm run build && cross-env WEBPACK_MODE=production node dist/packages/node_modules/server",
+    "start": "node dist/packages/node_modules/@bmo/server",
     "start:local": "npm run build:local && node build/server",
     "prebuild": "rimraf build",
     "build": "node -r ./scripts/babelRegister.js scripts/build/index.js",
