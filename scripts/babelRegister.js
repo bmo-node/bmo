@@ -4,5 +4,5 @@ require('@babel/register')({
 	rootMode: 'upward',
 	ignore: [],
 	exclude: [],
-	include: [/@randall/gi]
+	include: [/@bmo/gi]
 });
