@@ -18,9 +18,8 @@
     "lint:fix": "eslint --fix .",
     "precommit": "npm run lint && npm test && npm run test:feature",
     "selenium": "node ./scripts/postinstall",
-    "test": "exit 0",
-    "postinstall": "npm run installSubPackages",
-    "installSubPackages": "node -r ./scripts/babelRegister ./scripts/installSubpackages.js"
+    "test": "jest",
+    "postinstall": "lerna bootstrap"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -43,6 +42,8 @@
     "execa": "^1.0.0",
     "fs-extra": "^8.0.1",
     "globby": "^9.2.0",
+    "jest": "^24.8.0",
+    "lerna": "^3.16.4",
     "listr": "^0.14.3",
     "nodemon": "^1.19.1",
     "pug": "^2.0.4",
@@ -53,22 +54,18 @@
     "@babel/polyfill": "^7.2.5",
     "@hapi/joi": "^15.0.3",
     "@vue/eslint-config-standard": "^4.0.0",
-    "http-methods-enum": "^0.1.1",
-    "http-status-codes": "^1.3.2",
-    "joi": "^14.3.1",
-    "joi-to-swagger": "^3.1.0",
-    "koa": "^2.7.0",
-    "koa-bodyparser": "^4.2.1",
-    "koa-helmet": "^4.1.0",
-    "koa-pino-logger": "^2.1.3",
-    "koa-proxy": "^1.0.0-alpha.2",
-    "koa-router": "^7.4.0",
-    "koa-static": "^5.0.0",
-    "koa2-swagger-ui": "^2.14.0",
-    "lodash": "^4.17.11",
     "mongodb": "^3.2.6",
     "npm-run-all": "^4.1.5",
     "pkg-up": "^3.1.0",
     "uuid": "^3.3.2"
+  },
+  "jest":{
+    "reporters":["default"],
+    "collectCoverage":true,
+    "collectCoverageFrom":[
+      "**/*.js",
+      "!**/node_modules/**"
+    ],
+    "projects": ["<rootDir>/packages/*"]
   }
 }

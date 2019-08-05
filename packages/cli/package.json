@@ -1,18 +1,17 @@
 {
-  "name": "@bmo/cli",
+  "name": "@lmig/bmo-cli",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "bin": {
-    "bmo": "index.js"
+    "bmo": "bin/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "commander": "^2.20.0",
-    "esm": "^3.2.25"
+    "esm": "^3.2.25",
+    "nodemon": "^1.19.1"
   }
 }

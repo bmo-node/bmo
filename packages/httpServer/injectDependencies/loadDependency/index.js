@@ -8,24 +8,7 @@ import {
 	isObject
 } from 'lodash';
 import extractDependencies from './extractDependencies';
-import pipe from './pipe';
-
-const DEPENDENCY_PROPERTY = 'dependencies';
-// TODO
-// find a home for the pipe function
-// make 'services configurable'
-export default async (config, dependencies) => {
-	let deps = {};
-	const formedManifest = await pipe(
-		Object.keys(dependencies)
-			.map((key) => async (manifest) => await loadDependency(manifest, key, dependencies[key], dependencies, {}))
-	)({
-		config,
-		[DEPENDENCY_PROPERTY]: {}
-	});
-	deps = formedManifest[DEPENDENCY_PROPERTY];
-	return formedManifest;
-};
+import compose from '../compose';
 
 const loadDependency = async (manifest, name, dependency, dependencies, depChain, path = []) => {
 	const fullPath = path.length > 0 ? `${path.join('.')}.${name}` : name;
@@ -35,10 +18,10 @@ const loadDependency = async (manifest, name, dependency, dependencies, depChain
 	}
 	if (isFunction(dependency)) {
 		const deps = extractDependencies(dependency, DEPENDENCY_PROPERTY);
-		await pipe(deps.map((dep) => async (manifest) => {
+		await compose(deps.map((dep) => async (manifest) => {
 			if (!manifest[DEPENDENCY_PROPERTY][dep] && dep !== name) {
 				// if (depChain[dep]) {
-				// 	throw new Error(`circular dependency detected. ${dep} is already in ${name}'s dependency chain. ${JSON.stringify(depChain, 0, 2)}`);
+				//  throw new Error(`circular dependency detected. ${dep} is already in ${name}'s dependency chain. ${JSON.stringify(depChain, 0, 2)}`);
 				// }
 				if (!dependencies[dep]) {
 					throw new Error(`Unknown dependency ${dep} in module: ${fullPath.join('.')}${name}`);
@@ -55,12 +38,12 @@ const loadDependency = async (manifest, name, dependency, dependencies, depChain
 		}
 	} else if (isObject(dependency)) {
 		path.push(name);
-		await pipe(
+		await compose(
 			map(dependency, (dep, subName) => async (manifest) => await loadDependency(manifest, subName, dep, dependencies, depChain, path))
 		)(manifest);
 	} else if (isArray(dependency)) {
 		path.push(name);
-		await pipe(
+		await compose(
 			map(dependency, (dep, index) => async (manifest) => await loadDependency(manifest, `[${index}]`, dep, dependencies, depChain, path))
 		)(manifest);
 	} else {
@@ -68,5 +51,3 @@ const loadDependency = async (manifest, name, dependency, dependencies, depChain
 	}
 	return manifest;
 };
-
-// TODO cleanup and move to external file

@@ -46,7 +46,8 @@ export default class HttpServer {
 			throw new Error(`Cannot start same server twice.`);
 		}
 		this._started = true;
-		this._pkg = await pkgup();
+		const packagePath = await pkgup();
+		this._pkg = require(packagePath);
 		this.config.pkg = this._pkg;
 		await this._loadDependencies();
 		this._loadMiddleware();
@@ -61,7 +62,6 @@ export default class HttpServer {
 			...defaultDependencies,
 			...dependencies,
 			routes
-		//	middleware
 		});
 	}
 

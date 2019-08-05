@@ -11,5 +11,9 @@ export default {
 	},
 	events: {
 		shutdown: 'app.shutdown'
+	},
+	eureka: {
+		enabled: true,
+		loggerLevel: 'debug'
 	}
 };
