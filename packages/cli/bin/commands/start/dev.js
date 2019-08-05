@@ -2,7 +2,7 @@ import nodemon from 'nodemon';
 const esm = require.resolve('esm');
 export default ({ args, cwd }) => {
 	nodemon({
-		script: __dirname + '/startDevServer.js',
+		script: __dirname + '/devServer.js',
 		ext: 'js json',
 		execMap: {
 			js: `node -r ${esm}`

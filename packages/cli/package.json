@@ -1,9 +1,10 @@
 {
   "name": "@lmig/bmo-cli",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+  },
   "bin": {
     "bmo": "bin/index.js"
   },
@@ -12,6 +13,8 @@
   "dependencies": {
     "commander": "^2.20.0",
     "esm": "^3.2.25",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "@lmig/bmo-http-server":"~0.1.0",
+    "@lmig/bmo-es6-require":"~0.1.0"
   }
 }

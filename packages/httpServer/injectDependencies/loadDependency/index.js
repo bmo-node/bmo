@@ -9,8 +9,7 @@ import {
 } from 'lodash';
 import extractDependencies from './extractDependencies';
 import compose from '../compose';
-
-const loadDependency = async (manifest, name, dependency, dependencies, depChain, path = []) => {
+const loadDependency = async (manifest, name, dependency, dependencies, depChain, path = [], DEPENDENCY_PROPERTY) => {
 	const fullPath = path.length > 0 ? `${path.join('.')}.${name}` : name;
 	const dependecyPath = `${DEPENDENCY_PROPERTY}.${fullPath}`;
 	if (has(manifest, dependecyPath)) {
@@ -28,7 +27,7 @@ const loadDependency = async (manifest, name, dependency, dependencies, depChain
 				}
 				depChain[dep] = true;
 				// manifest[DEPENDENCY_PROPERTY][dep] = loadDependency(manifest, dep, dependencies[dep], dependencies, depChain);
-				manifest = await loadDependency(manifest, dep, dependencies[dep], dependencies, depChain);
+				manifest = await loadDependency(manifest, dep, dependencies[dep], dependencies, depChain, [], DEPENDENCY_PROPERTY);
 			}
 			return manifest;
 		}))(manifest);
@@ -39,15 +38,17 @@ const loadDependency = async (manifest, name, dependency, dependencies, depChain
 	} else if (isObject(dependency)) {
 		path.push(name);
 		await compose(
-			map(dependency, (dep, subName) => async (manifest) => await loadDependency(manifest, subName, dep, dependencies, depChain, path))
+			map(dependency, (dep, subName) => async (manifest) => await loadDependency(manifest, subName, dep, dependencies, depChain, path, DEPENDENCY_PROPERTY))
 		)(manifest);
 	} else if (isArray(dependency)) {
 		path.push(name);
 		await compose(
-			map(dependency, (dep, index) => async (manifest) => await loadDependency(manifest, `[${index}]`, dep, dependencies, depChain, path))
+			map(dependency, (dep, index) => async (manifest) => await loadDependency(manifest, `[${index}]`, dep, dependencies, depChain, path, DEPENDENCY_PROPERTY))
 		)(manifest);
 	} else {
 		throw new Error(`Dependency ${path.join('.')}.${name} must be either a function, object, or array. type ${typeof dependency} not injectable`);
 	}
 	return manifest;
 };
+
+export default loadDependency;

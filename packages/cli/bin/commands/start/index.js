@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-import httpServer from '@bmo/httpServer';
-import es6require from '@bmo/es6Require';
+import httpServer from '@lmig/bmo-http-server';
+import es6require from '@lmig/bmo-es6-require';
 import commander from 'commander';
-import startDev from '@bmo/cli/startDev';
-import startRelease from '@bmo/cli/startRelease';
+import dev from './dev';
+import release from './release';
 
 commander
 	.option('-p, --port', 'override the port')
@@ -16,9 +16,9 @@ commander.parse(process.argv);
 try {
 	if (commander.dev) {
 		console.log('starting dev...');
-		startDev({ args: commander, cwd });
+		dev({ args: commander, cwd });
 	} else {
-		startRelease({ args: commander, cwd });
+		release({ args: commander, cwd });
 	}
 } catch (e) {
 	console.error('Unable to load configuration. Ensure that a config directory is in the current directory');

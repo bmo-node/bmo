@@ -1,5 +1,5 @@
 import program from 'commander';
-import logo from './logo';
+import logo from '../logo';
 
 console.log(logo());
 program

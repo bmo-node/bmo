@@ -1,4 +1,4 @@
-import httpServer from '@bmo/httpServer';
+import httpServer from '@lmig/bmo-http-server';
 
 export default async ({ config, args, cwd }) => {
 	const userConfig = await config();

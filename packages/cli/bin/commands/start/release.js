@@ -1,5 +1,5 @@
-import startServer from '@bmo/cli/startServer';
-import es6require from '@bmo/es6require';
+import server from './server';
+import es6require from '@lmig/bmo-es6-require';
 export default ({ args = {}, cwd }) => {
 	let config;
 	try {
@@ -11,5 +11,5 @@ export default ({ args = {}, cwd }) => {
 		console.log(e);
 		process.exit(1);
 	}
-	startServer({ config, args, cwd });
+	server({ config, args, cwd });
 };

@@ -1,15 +1,16 @@
 {
-  "name": "@bmo/cli",
-  "version": "1.0.0",
+  "name": "@lmig/bmo-http-server",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {},
   "bin": {
-    "bmo": "index.js"
+    "bmo": "bin/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@lmig/bmo-es6-require":"~1.0.0",
     "commander": "^2.20.0",
     "esm": "^3.2.25",
     "eureka-client": "^1.1.0",

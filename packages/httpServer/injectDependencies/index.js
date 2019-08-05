@@ -7,7 +7,7 @@ import {
 	isFunction,
 	isObject
 } from 'lodash';
-import extractDependencies from './extractDependencies';
+import loadDependency from './loadDependency';
 import compose from './compose';
 
 const DEPENDENCY_PROPERTY = 'dependencies';
@@ -18,7 +18,7 @@ export default async (config, dependencies) => {
 	let deps = {};
 	const formedManifest = await compose(
 		Object.keys(dependencies)
-			.map((key) => async (manifest) => await loadDependency(manifest, key, dependencies[key], dependencies, {}))
+			.map((key) => async (manifest) => await loadDependency(manifest, key, dependencies[key], dependencies, {}, [], DEPENDENCY_PROPERTY))
 	)({
 		config,
 		[DEPENDENCY_PROPERTY]: {}
