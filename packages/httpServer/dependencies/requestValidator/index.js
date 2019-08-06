@@ -4,10 +4,12 @@ export default () => (schema) => {
 	if (!isFunction(schema.validate)) {
 		throw new Error('Schema must have a validate function');
 	}
-	return (ctx, next) => {
+	return async (ctx, next) => {
 		const result = schema.validate(ctx.req.body);
 		if (result.error) {
 			throw new Error(`Invalid request: ${result.error.annotate()}`);
 		}
+		/* eslint-disable-next-line callback-return */
+		await next();
 	};
 };

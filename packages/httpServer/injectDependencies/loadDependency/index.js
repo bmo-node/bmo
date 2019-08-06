@@ -1,24 +1,23 @@
 import {
 	map,
-	get,
 	set,
 	has,
-	each,
 	isFunction,
 	isObject
 } from 'lodash';
 import extractDependencies from './extractDependencies';
 import compose from '../compose';
-const loadDependency = async (manifest, name, dependency, dependencies, depChain, path = [], DEPENDENCY_PROPERTY) => {
+
+const loadDependency = async (manifest, name, dependency, dependencies, depChain, path = [], dependencyProperty) => {
 	const fullPath = path.length > 0 ? `${path.join('.')}.${name}` : name;
-	const dependecyPath = `${DEPENDENCY_PROPERTY}.${fullPath}`;
-	if (has(manifest, dependecyPath)) {
+	const dependencyPath = `${dependencyProperty}.${fullPath}`;
+	if (has(manifest, dependencyPath)) {
 		return manifest;
 	}
 	if (isFunction(dependency)) {
-		const deps = extractDependencies(dependency, DEPENDENCY_PROPERTY);
+		const deps = extractDependencies(dependency, dependencyProperty);
 		await compose(deps.map((dep) => async (manifest) => {
-			if (!manifest[DEPENDENCY_PROPERTY][dep] && dep !== name) {
+			if (!manifest[dependencyProperty][dep] && dep !== name) {
 				// if (depChain[dep]) {
 				//  throw new Error(`circular dependency detected. ${dep} is already in ${name}'s dependency chain. ${JSON.stringify(depChain, 0, 2)}`);
 				// }
@@ -26,24 +25,24 @@ const loadDependency = async (manifest, name, dependency, dependencies, depChain
 					throw new Error(`Unknown dependency ${dep} in module: ${fullPath.join('.')}${name}`);
 				}
 				depChain[dep] = true;
-				// manifest[DEPENDENCY_PROPERTY][dep] = loadDependency(manifest, dep, dependencies[dep], dependencies, depChain);
-				manifest = await loadDependency(manifest, dep, dependencies[dep], dependencies, depChain, [], DEPENDENCY_PROPERTY);
+				// manifest[dependencyProperty][dep] = loadDependency(manifest, dep, dependencies[dep], dependencies, depChain);
+				manifest = await loadDependency(manifest, dep, dependencies[dep], dependencies, depChain, [], dependencyProperty);
 			}
 			return manifest;
 		}))(manifest);
-		if (!has(manifest, dependecyPath)) {
+		if (!has(manifest, dependencyPath)) {
 			const value = await dependency(manifest);
-			set(manifest, `${DEPENDENCY_PROPERTY}.${fullPath}`, value);
+			set(manifest, `${dependencyProperty}.${fullPath}`, value);
 		}
 	} else if (isObject(dependency)) {
 		path.push(name);
 		await compose(
-			map(dependency, (dep, subName) => async (manifest) => await loadDependency(manifest, subName, dep, dependencies, depChain, path, DEPENDENCY_PROPERTY))
+			map(dependency, (dep, subName) => async (manifest) => loadDependency(manifest, subName, dep, dependencies, depChain, path, dependencyProperty))
 		)(manifest);
-	} else if (isArray(dependency)) {
+	} else if (Array.isArray(dependency)) {
 		path.push(name);
 		await compose(
-			map(dependency, (dep, index) => async (manifest) => await loadDependency(manifest, `[${index}]`, dep, dependencies, depChain, path, DEPENDENCY_PROPERTY))
+			map(dependency, (dep, index) => async (manifest) => loadDependency(manifest, `[${index}]`, dep, dependencies, depChain, path, dependencyProperty))
 		)(manifest);
 	} else {
 		throw new Error(`Dependency ${path.join('.')}.${name} must be either a function, object, or array. type ${typeof dependency} not injectable`);

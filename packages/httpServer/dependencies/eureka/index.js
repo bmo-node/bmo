@@ -11,8 +11,7 @@ export default ({
 	}
 
 	eurekaClient.logger.level(loggerLevel);
-	eurekaClient.start((error) => {
-	});
+	eurekaClient.start();
 	// Configure the resilient client
 	// See https://www.npmjs.com/package/resilient#options for details
 	dnaClient.setConfiguration({

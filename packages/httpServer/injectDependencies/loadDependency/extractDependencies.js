@@ -1,6 +1,6 @@
 import { parse as parseAst } from 'esprima';
 import { parse as parseQuery, match } from 'esquery';
-import { get, has } from 'lodash';
+import { get } from 'lodash';
 export default (fn, dependencyProperty) => {
 	const ast = parseAst(fn.toString());
 	const root = ast.body[0];

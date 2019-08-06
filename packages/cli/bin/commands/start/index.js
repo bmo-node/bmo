@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import httpServer from '@lmig/bmo-http-server';
-import es6require from '@lmig/bmo-es6-require';
 import commander from 'commander';
 import dev from './dev';
 import release from './release';

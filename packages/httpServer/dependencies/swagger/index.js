@@ -1,4 +1,4 @@
-import swagger from 'koa2-swagger-ui';
+
 import createSwaggerDefinition from './createSwaggerDefinition';
 import ui from './ui';
 import httpMethods from 'http-methods-enum';

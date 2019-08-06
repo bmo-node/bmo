@@ -6,11 +6,15 @@ export default ({
 	}
 }) => async (ctx, next) => {
 	try {
+		// there is no return value not sure what eslint wants here
+		/* eslint-disable-next-line callback-return */
 		await next();
 	} catch (e) {
 		const type = typeof e;
 		ctx.status = INTERNAL_SERVER_ERROR;
 		each(errorMap, (types, code) => {
+			/* this will be a string since the typeof check is against another typeof check */
+			/* eslint-disable-next-line valid-typeof */
 			if (types.some(t => typeof t === type) >= 0) {
 				ctx.status = parseInt(code);
 			}
@@ -21,4 +25,5 @@ export default ({
 			};
 		}
 	}
+	return ctx;
 };

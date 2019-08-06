@@ -5,9 +5,9 @@ const SIGNALS = [
 
 export default ({
 	config: {
-  	events: {
-  		shutdown
-  	}
+		events: {
+			shutdown
+		}
 	},
 	dependencies: {
 		events

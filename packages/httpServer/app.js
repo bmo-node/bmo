@@ -2,7 +2,7 @@ import path from 'path';
 import Koa from 'koa';
 import Router from 'koa-router';
 import pkgup from 'pkg-up';
-import { merge, get, has } from 'lodash';
+import { has } from 'lodash';
 import es6Require from '@lmig/bmo-es6-require';
 import loadDependencies from './injectDependencies';
 import defaultDependencies from './dependencies';
@@ -65,15 +65,15 @@ export default class HttpServer {
 		});
 	}
 
-	 _loadRoutes () {
+	_loadRoutes () {
 		const { routes } = this.manifest.dependencies;
 		routes.forEach((route) => this._loadRoute(route));
 	}
 
 	_loadRoute (route) {
 		const router = loadRoute(route,
-		 this.manifest.dependencies.requestValidator,
-		 Router);
+			this.manifest.dependencies.requestValidator,
+			Router);
 		this.app.use(router.routes(), router.allowedMethods());
 	}
 

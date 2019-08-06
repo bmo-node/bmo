@@ -1,4 +1,4 @@
-import { has, each, set, isEmpty } from 'lodash';
+import { each, set, isEmpty } from 'lodash';
 import joi2Swagger from 'joi-to-swagger';
 import httpMethods from 'http-methods-enum';
 const PATH_DELIMITER = '/';
@@ -126,8 +126,8 @@ const getPaths = (routes, components) => {
 		routes[route.path] = routes[route.path] || {};
 		const definition = getPathDefinition(route, route.path, components);
 		set(paths,
-		 definition.key,
-		 definition.value);
+			definition.key,
+			definition.value);
 	});
 	return paths;
 };
@@ -144,9 +144,8 @@ const getComponents = (routes, parentPath, aggregate = {}) => {
 		if (route.schema) {
 			const { path } = route;
 			const componentName = getComponentName(path);
-			const formattedPath = formatPathParams(path);
 			each(route.schema, (schema, type) => {
-				const { swagger, components } = joi2Swagger(schema, aggregate);
+				const { swagger } = joi2Swagger(schema, aggregate);
 				set(aggregate, `schemas.${route.method}-${componentName}-${type}`, swagger);
 			});
 		}
