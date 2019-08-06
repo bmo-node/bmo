@@ -19,7 +19,7 @@
     "precommit": "npm run lint && npm test && npm run test:feature",
     "selenium": "node ./scripts/postinstall",
     "test": "jest",
-    "publish:packages": "lerna publish",
+    "publish:packages": "lerna publish from-package --graph-type all --yes --registry https://pi-artifactory.lmig.com/artifactory/api/npm/npm",
     "postinstall": "lerna bootstrap && npm run link:cli",
     "link:cli": "echo \"linking cli\" && cd ./packages/cli && yarn link",
     "snyk:test": "snyk test --org=liberty-mutual --severity-threshold=medium",

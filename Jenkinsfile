@@ -55,19 +55,14 @@ timestamps
               }
             }
           }
-
-        // stage('Sonar Scan')
-        //   {
-        //     scannerHome = tool name: 'Sonar Scanner 2.8', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-        //     sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectVersion=${appName}_${appVersion}"
-        //   }
-
-
       }
 
-      if (env.BRANCH_NAME == 'master') {
+      if (env.BRANCH_NAME == 'develop') {
+        // stage("publish"){
+        //   sh "yarn publish:packages"
+        // }
         stage("publish"){
-          sh "yarn publish:packages"
+          sh "echo \"publishing packages\""
         }
       }
 
