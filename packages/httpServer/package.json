@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@lmig/bmo-es6-require":"~1.0.0",
     "esprima": "^4.0.1",
     "esquery": "^1.0.1",
     "eureka-client": "^1.1.0",
