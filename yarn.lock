@@ -2484,6 +2484,10 @@ color-name@1.1.3:
   version "1.1.3"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
 
+colors@~0.6.0-1:
+  version "0.6.2"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/colors/-/colors-0.6.2.tgz#2423fe6678ac0c5dae8852e5d0e5be08c997abcc"
+
 columnify@^1.5.4:
   version "1.5.4"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/columnify/-/columnify-1.5.4.tgz#4737ddf1c7b69a8a7c340570782e947eec8e78bb"
@@ -2520,7 +2524,7 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
 
-concat-stream@^1.5.0:
+concat-stream@^1.4.10, concat-stream@^1.5.0:
   version "1.6.2"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/concat-stream/-/concat-stream-1.6.2.tgz#904bdf194cd3122fc675c77fc4ac3d4ff0fd1a34"
   dependencies:
@@ -2608,12 +2612,31 @@ conventional-changelog-writer@^4.0.6:
     split "^1.0.0"
     through2 "^3.0.0"
 
+conventional-commits-filter@^1.1.1:
+  version "1.1.6"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/conventional-commits-filter/-/conventional-commits-filter-1.1.6.tgz#4389cd8e58fe89750c0b5fb58f1d7f0cc8ad3831"
+  dependencies:
+    is-subset "^0.1.1"
+    modify-values "^1.0.0"
+
 conventional-commits-filter@^2.0.2:
   version "2.0.2"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/conventional-commits-filter/-/conventional-commits-filter-2.0.2.tgz#f122f89fbcd5bb81e2af2fcac0254d062d1039c1"
   dependencies:
     lodash.ismatch "^4.4.0"
     modify-values "^1.0.0"
+
+conventional-commits-parser@^2.1.1:
+  version "2.1.7"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/conventional-commits-parser/-/conventional-commits-parser-2.1.7.tgz#eca45ed6140d72ba9722ee4132674d639e644e8e"
+  dependencies:
+    JSONStream "^1.0.4"
+    is-text-path "^1.0.0"
+    lodash "^4.2.1"
+    meow "^4.0.0"
+    split2 "^2.0.0"
+    through2 "^2.0.0"
+    trim-off-newlines "^1.0.0"
 
 conventional-commits-parser@^3.0.3:
   version "3.0.3"
@@ -2626,6 +2649,18 @@ conventional-commits-parser@^3.0.3:
     split2 "^2.0.0"
     through2 "^3.0.0"
     trim-off-newlines "^1.0.0"
+
+conventional-recommended-bump@^1.0.0:
+  version "1.2.1"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/conventional-recommended-bump/-/conventional-recommended-bump-1.2.1.tgz#1b7137efb5091f99fe009e2fe9ddb7cc490e9375"
+  dependencies:
+    concat-stream "^1.4.10"
+    conventional-commits-filter "^1.1.1"
+    conventional-commits-parser "^2.1.1"
+    git-raw-commits "^1.3.0"
+    git-semver-tags "^1.3.0"
+    meow "^3.3.0"
+    object-assign "^4.0.1"
 
 conventional-recommended-bump@^5.0.0:
   version "5.0.1"
@@ -2931,6 +2966,13 @@ dir-glob@^2.2.2:
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/dir-glob/-/dir-glob-2.2.2.tgz#fa09f0694153c8918b18ba0deafae94769fc50c4"
   dependencies:
     path-type "^3.0.0"
+
+dna-resilient-client@^1.0.3:
+  version "1.0.3"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/dna-resilient-client/-/dna-resilient-client-1.0.3.tgz#b30e94a4777fff15764b05bb6fac2836677cbe57"
+  dependencies:
+    npm-autorelease "^1.0.5"
+    resilient "0.4.0"
 
 dockerfile-ast@0.0.16:
   version "0.0.16"
@@ -3730,12 +3772,29 @@ git-raw-commits@2.0.0:
     split2 "^2.0.0"
     through2 "^2.0.0"
 
+git-raw-commits@^1.3.0:
+  version "1.3.6"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/git-raw-commits/-/git-raw-commits-1.3.6.tgz#27c35a32a67777c1ecd412a239a6c19d71b95aff"
+  dependencies:
+    dargs "^4.0.1"
+    lodash.template "^4.0.2"
+    meow "^4.0.0"
+    split2 "^2.0.0"
+    through2 "^2.0.0"
+
 git-remote-origin-url@^2.0.0:
   version "2.0.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/git-remote-origin-url/-/git-remote-origin-url-2.0.0.tgz#5282659dae2107145a11126112ad3216ec5fa65f"
   dependencies:
     gitconfiglocal "^1.0.0"
     pify "^2.3.0"
+
+git-semver-tags@^1.3.0:
+  version "1.3.6"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/git-semver-tags/-/git-semver-tags-1.3.6.tgz#357ea01f7280794fe0927f2806bee6414d2caba5"
+  dependencies:
+    meow "^4.0.0"
+    semver "^5.5.0"
 
 git-semver-tags@^2.0.3:
   version "2.0.3"
@@ -4396,11 +4455,21 @@ is-stream@^1.0.0, is-stream@^1.1.0:
   version "1.1.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
 
+is-subset@^0.1.1:
+  version "0.1.1"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/is-subset/-/is-subset-0.1.1.tgz#8a59117d932de1de00f245fcdd39ce43f1e939a6"
+
 is-symbol@^1.0.2:
   version "1.0.2"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/is-symbol/-/is-symbol-1.0.2.tgz#a055f6ae57192caee329e7a860118b497a950f38"
   dependencies:
     has-symbols "^1.0.0"
+
+is-text-path@^1.0.0:
+  version "1.0.1"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/is-text-path/-/is-text-path-1.0.1.tgz#4e1aa0fb51bfbcb3e92688001397202c1775b66e"
+  dependencies:
+    text-extensions "^1.0.0"
 
 is-text-path@^2.0.0:
   version "2.0.0"
@@ -5035,6 +5104,14 @@ lie@~3.3.0:
   dependencies:
     immediate "~3.0.5"
 
+lil-event@^0.1.3:
+  version "0.1.3"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/lil-event/-/lil-event-0.1.3.tgz#100405e8c1f6716698d21cf7b07e0b4f540095e1"
+
+lil-http@^0.1.16:
+  version "0.1.17"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/lil-http/-/lil-http-0.1.17.tgz#df1f58a8738aa13ed6b0b83ad21c5f6a56fcebe7"
+
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/load-json-file/-/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"
@@ -5359,6 +5436,10 @@ micromatch@^3.1.10, micromatch@^3.1.4:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.2"
+
+midware@^0.1.7:
+  version "0.1.7"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/midware/-/midware-0.1.7.tgz#8276ecaf855abc1fbb621cb5add800dbe245a456"
 
 mime-db@1.40.0:
   version "1.40.0"
@@ -5688,6 +5769,16 @@ normalize-path@^3.0.0:
 normalize-url@^3.3.0:
   version "3.3.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
+
+npm-autorelease@^1.0.5:
+  version "1.1.2"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/npm-autorelease/-/npm-autorelease-1.1.2.tgz#8068c148aab752e1ee7076fb566726a33adf3e80"
+  dependencies:
+    colors "~0.6.0-1"
+    conventional-recommended-bump "^1.0.0"
+    cross-spawn "^6.0.5"
+    minimist "^1.2.0"
+    simple-git "^1.70.0"
 
 npm-bundled@^1.0.1:
   version "1.0.6"
@@ -6648,7 +6739,7 @@ request-promise-native@^1.0.5:
     stealthy-require "^1.1.1"
     tough-cookie "^2.3.3"
 
-request@^2.87.0:
+request@^2.67.0, request@^2.87.0:
   version "2.88.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   dependencies:
@@ -6684,6 +6775,16 @@ require-main-filename@^1.0.1:
 require-main-filename@^2.0.0:
   version "2.0.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/require-main-filename/-/require-main-filename-2.0.0.tgz#d0b329ecc7cc0f61649f62215be69af54aa8989b"
+
+resilient@0.4.0:
+  version "0.4.0"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/resilient/-/resilient-0.4.0.tgz#337306e061c3e476bce3e3bcc78ce8a83e394e89"
+  dependencies:
+    lil-event "^0.1.3"
+    lil-http "^0.1.16"
+    midware "^0.1.7"
+    request "^2.67.0"
+    yargs "^1.3.2"
 
 resolve-cwd@^2.0.0:
   version "2.0.0"
@@ -6883,6 +6984,12 @@ shellwords@^0.1.1:
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
+
+simple-git@^1.70.0:
+  version "1.124.0"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/simple-git/-/simple-git-1.124.0.tgz#10a73cc1af303832b5c11720d4256e134fba35ca"
+  dependencies:
+    debug "^4.0.1"
 
 sisteransi@^1.0.3:
   version "1.0.3"
@@ -7500,6 +7607,10 @@ test-exclude@^5.2.3:
     read-pkg-up "^4.0.0"
     require-main-filename "^2.0.0"
 
+text-extensions@^1.0.0:
+  version "1.9.0"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/text-extensions/-/text-extensions-1.9.0.tgz#1853e45fee39c945ce6f6c36b2d659b5aabc2a26"
+
 text-extensions@^2.0.0:
   version "2.0.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/text-extensions/-/text-extensions-2.0.0.tgz#43eabd1b495482fae4a2bf65e5f56c29f69220f6"
@@ -8090,6 +8201,10 @@ yargs-parser@^11.1.1:
   dependencies:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
+
+yargs@^1.3.2:
+  version "1.3.3"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/yargs/-/yargs-1.3.3.tgz#054de8b61f22eefdb7207059eaef9d6b83fb931a"
 
 yargs@^12.0.1, yargs@^12.0.2:
   version "12.0.5"
