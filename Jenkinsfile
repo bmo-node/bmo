@@ -55,16 +55,17 @@ timestamps
               }
             }
           }
-      }
-
-      if (env.BRANCH_NAME == 'develop') {
-        // stage("publish"){
-        //   sh "yarn publish:packages"
-        // }
-        stage("publish"){
-          sh "echo \"publishing packages\""
+          if (env.BRANCH_NAME == 'develop') {
+          // stage("publish"){
+          //   sh "yarn publish:packages"
+          // }
+          stage("publish"){
+            sh "echo \"publishing packages\""
+          }
         }
       }
+
+
 
     }
     catch (err) {
