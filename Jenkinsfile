@@ -56,12 +56,12 @@ timestamps
             }
           }
           if (env.BRANCH_NAME == 'develop') {
-          // stage("publish"){
-          //   sh "yarn publish:packages"
-          // }
           stage("publish"){
-            sh "echo \"publishing packages\""
+            sh "yarn publish:packages"
           }
+          // stage("publish"){
+          //   sh "echo \"publishing packages\""
+          // }
         }
       }
 
