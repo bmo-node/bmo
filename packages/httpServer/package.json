@@ -1,6 +1,6 @@
 {
   "name": "@lmig/bmo-http-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "index.js",
   "scripts": {},
@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@lmig/bmo-es6-require":"~1.0.0",
     "esprima": "^4.0.1",
     "esquery": "^1.0.1",
     "eureka-client": "^1.1.0",
