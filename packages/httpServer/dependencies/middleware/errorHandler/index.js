@@ -15,7 +15,7 @@ export default ({
 		each(errorMap, (types, code) => {
 			/* this will be a string since the typeof check is against another typeof check */
 			/* eslint-disable-next-line valid-typeof */
-			if (types.some(t => typeof t === type) >= 0) {
+			if (types.some(t => typeof t === type)) {
 				ctx.status = parseInt(code);
 			}
 		});
