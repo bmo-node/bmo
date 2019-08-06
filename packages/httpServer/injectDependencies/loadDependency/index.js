@@ -22,7 +22,7 @@ const loadDependency = async (manifest, name, dependency, dependencies, depChain
 				//  throw new Error(`circular dependency detected. ${dep} is already in ${name}'s dependency chain. ${JSON.stringify(depChain, 0, 2)}`);
 				// }
 				if (!dependencies[dep]) {
-					throw new Error(`Unknown dependency ${dep} in module: ${fullPath.join('.')}${name}`);
+					throw new Error(`Unknown dependency ${dep} in module: ${fullPath}.${name}`);
 				}
 				depChain[dep] = true;
 				// manifest[dependencyProperty][dep] = loadDependency(manifest, dep, dependencies[dep], dependencies, depChain);
