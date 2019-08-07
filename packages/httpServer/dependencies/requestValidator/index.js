@@ -5,7 +5,8 @@ export default () => (schema) => {
 		throw new Error('Schema must have a validate function');
 	}
 	return async (ctx, next) => {
-		const result = schema.validate(ctx.req.body);
+		const result = schema.validate(ctx.body);
+		console.log(result);
 		if (result.error) {
 			throw new Error(`Invalid request: ${result.error.annotate()}`);
 		}

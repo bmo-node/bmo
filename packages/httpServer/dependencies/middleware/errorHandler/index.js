@@ -10,12 +10,13 @@ export default ({
 		/* eslint-disable-next-line callback-return */
 		await next();
 	} catch (e) {
-		const type = typeof e;
 		ctx.status = INTERNAL_SERVER_ERROR;
 		each(errorMap, (types, code) => {
+			console.log(types, code);
+			types.forEach(t => console.log(e instanceof t));
 			/* this will be a string since the typeof check is against another typeof check */
 			/* eslint-disable-next-line valid-typeof */
-			if (types.some(t => typeof t === type)) {
+			if (types.some(t => e instanceof t)) {
 				ctx.status = parseInt(code);
 			}
 		});
