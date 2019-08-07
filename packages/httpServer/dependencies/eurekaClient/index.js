@@ -4,17 +4,47 @@
  * All Rights Reserved
  */
 
-import os from 'os';
-import ip from 'ip';
 import Eureka from 'eureka-client';
-
+export const createConfig = ({
+	serviceUrl,
+	name,
+	ip,
+	port,
+	hostname
+}) => ({
+	instance: {
+		app: name,
+		hostName: hostname,
+		ipAddr: ip,
+		homePageUrl: `http://${hostname}:${port}`,
+		statusPageUrl: `http://${hostname}:${port}/info`,
+		healthCheckUrl: `http://${hostname}:${port}/health`,
+		port: {
+			$: port,
+			'@enabled': true
+		},
+		vipAddress: name,
+		dataCenterInfo: {
+			'@class': 'com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo',
+			name: 'MyOwn'
+		}
+	},
+	eureka: {
+		serviceUrl,
+		fetchRegistry: true
+	}
+});
 let eurekaClient;
 export default ({
 	config: {
+		server: {
+			ip,
+			port,
+			hostname
+		},
 		pkg: { name },
 		eureka: {
 			enabled,
-			loggerLevel,
 			serviceUrl
 		}
 	}
@@ -28,28 +58,12 @@ export default ({
 		return eurekaClient;
 	}
 
-	eurekaClient = new Eureka({
-		instance: {
-			app: name,
-			hostName: os.hostname(),
-			ipAddr: ip.address(),
-			homePageUrl: `http://${os.hostname()}:${process.env.PORT}`,
-			statusPageUrl: `http://${os.hostname()}:${process.env.PORT}/info`,
-			healthCheckUrl: `http://${os.hostname()}:${process.env.PORT}/health`,
-			port: {
-				$: process.env.PORT,
-				'@enabled': true
-			},
-			vipAddress: name,
-			dataCenterInfo: {
-				'@class': 'com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo',
-				name: 'MyOwn'
-			}
-		},
-		eureka: {
-			serviceUrl,
-			fetchRegistry: true
-		}
-	});
+	eurekaClient = new Eureka(createConfig({
+		ip,
+		port,
+		hostname,
+		name,
+		serviceUrl
+	}));
 	return eurekaClient;
 };

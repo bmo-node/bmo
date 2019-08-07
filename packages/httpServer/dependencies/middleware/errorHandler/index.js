@@ -12,8 +12,6 @@ export default ({
 	} catch (e) {
 		ctx.status = INTERNAL_SERVER_ERROR;
 		each(errorMap, (types, code) => {
-			console.log(types, code);
-			types.forEach(t => console.log(e instanceof t));
 			/* this will be a string since the typeof check is against another typeof check */
 			/* eslint-disable-next-line valid-typeof */
 			if (types.some(t => e instanceof t)) {
