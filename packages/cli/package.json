@@ -3,20 +3,23 @@
   "version": "0.1.2",
   "description": "",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "bin": {
     "bmo": "bin/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@lmig/bmo-es6-require": "~1.0.0",
     "commander": "^2.20.0",
     "esm": "^3.2.25",
+    "execa": "^2.0.3",
+    "fs-extra": "^8.1.0",
+    "inquirer": "^6.5.0",
     "nodemon": "^1.19.1",
-    "@lmig/bmo-es6-require":"~1.0.0"
+    "pkg-up": "^3.1.0"
   },
-  "peerDependencies":{
-    "@lmig/bmo-http-server":">=0.1.0"
+  "peerDependencies": {
+    "@lmig/bmo-http-server": ">=0.1.0"
   }
 }

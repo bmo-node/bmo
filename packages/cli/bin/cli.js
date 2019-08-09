@@ -5,6 +5,6 @@ console.log(logo());
 program
 	.version('0.1.0')
 	.command('start', 'start an application server in the current directory')
-	.command('build', 'build the packages');
+	.command('create', 'creates a BMO http application');
 
 program.parse(process.argv);
