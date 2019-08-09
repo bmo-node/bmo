@@ -1,29 +1,35 @@
 
+export const createConfiguration = ({ eurekaClient }) => ({
+	eurekaClient,
+	resilientConfig: {
+		balancer: {
+			roundRobin: true,
+			roundRobinSize: 4
+		},
+		service: {
+			retry: 2
+		}
+	}
+});
 export default ({
-	config: { eureka: { enabled, loggerLevel } },
+	config: {
+		eureka: {
+			enabled,
+			loggerLevel
+		}
+	},
 	dependencies: {
 		eurekaClient,
 		dnaClient
 	}
 }) => {
 	if (!enabled) {
-		return {};
+		return;
 	}
 
 	eurekaClient.logger.level(loggerLevel);
 	eurekaClient.start();
 	// Configure the resilient client
 	// See https://www.npmjs.com/package/resilient#options for details
-	dnaClient.setConfiguration({
-		eurekaClient,
-		resilientConfig: {
-			balancer: {
-				roundRobin: true,
-				roundRobinSize: 4
-			},
-			service: {
-				retry: 2
-			}
-		}
-	});
+	dnaClient.setConfiguration(createConfiguration({ eurekaClient }));
 };

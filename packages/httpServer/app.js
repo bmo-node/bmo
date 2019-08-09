@@ -4,7 +4,7 @@ import Router from 'koa-router';
 import pkgup from 'pkg-up';
 import { has } from 'lodash';
 import es6Require from '@lmig/bmo-es6-require';
-import loadDependencies from './injectDependencies';
+import injectDependencies from './injectDependencies';
 import defaultDependencies from './dependencies';
 import defaultConfig from './defaultConfig';
 import loadRoute from './loadRoute';
@@ -49,20 +49,21 @@ export default class HttpServer {
 		const packagePath = await pkgup();
 		this._pkg = require(packagePath);
 		this.config.pkg = this._pkg;
-		await this._loadDependencies();
+		await this._injectDependencies();
 		this._loadMiddleware();
 		this._loadRoutes();
 		await this.app.listen(this.port);
 	}
 
-	async _loadDependencies () {
+	async _injectDependencies () {
 		const dependencies = es6Require(this.paths.dependencies);
 		const routes = es6Require(this.paths.routes);
-		this.manifest = await loadDependencies(this.config, {
+		this.manifest = await injectDependencies(this.config, {
 			...defaultDependencies,
 			...dependencies,
 			routes
 		});
+		console.log(this.manifest);
 	}
 
 	_loadRoutes () {

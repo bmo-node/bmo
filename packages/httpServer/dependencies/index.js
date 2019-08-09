@@ -6,6 +6,7 @@ import gracefulShutdown from './gracefulShutdown';
 import middleware from './middleware';
 import requestValidator from './requestValidator';
 import swagger from './swagger';
+import createSwaggerDefinition from './swagger/createSwaggerDefinition';
 
 export default {
 	dnaClient,
@@ -15,5 +16,6 @@ export default {
 	gracefulShutdown,
 	middleware,
 	requestValidator,
-	swagger
+	swagger,
+	createSwaggerDefinition
 };

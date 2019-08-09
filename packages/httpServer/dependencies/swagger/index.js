@@ -1,5 +1,4 @@
 
-import createSwaggerDefinition from './createSwaggerDefinition';
 import ui from './ui';
 import httpMethods from 'http-methods-enum';
 import httpStatus from 'http-status-codes';
@@ -8,7 +7,8 @@ const { GET } = httpMethods;
 export default async ({
 	config,
 	dependencies: {
-		routes
+		routes,
+		createSwaggerDefinition
 	}
 }) => {
 	const {

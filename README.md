@@ -7,11 +7,12 @@ flexibility in code by providing robust unobtrusive dependency injection.
 ## Project structure
 BMO expects your project to be structured with some folder.
 In the 'baseDirectory' BMO expects there to be several folders
+```
 |-\
 |--config
 |--dependencies
 |--routes
-
+```
 BMO expects the top level modules to export certain things.
 
 The config directory is expected to export an async function that takes in an object parsed from the command line.
@@ -62,7 +63,7 @@ in your base directory you can start the app:
  or
 `bmo start -d`
 
-
+If you are creating a bmo based app it is suggested that you install the dependency locally.
 
 
 

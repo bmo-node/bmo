@@ -10,7 +10,7 @@ const SCHEMA_TYPES = {
 const { REQUEST_BODY, RESPONSE_BODY } = SCHEMA_TYPES;
 const { GET, PUT, POST } = httpMethods;
 const OPEN_API_VERSION = '3.0.0';
-export default (routes, { title, description, contact, version }) => {
+export default () => (routes, { title, description, contact, version }) => {
 	const components = getComponents(routes, '', {});
 	const paths = getPaths(routes, components);
 	return {
