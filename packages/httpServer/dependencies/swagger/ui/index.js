@@ -1,8 +1,9 @@
-export default (docUrl) => `
+export default ({ docs, base }) => `
 <!DOCTYPE html>
 <html>
   <head>
     <title>ReDoc</title>
+    ${base ? `<base href='${baseUrl}'/>` : ''}
     <!-- needed for adaptive design -->
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,7 +20,7 @@ export default (docUrl) => `
     </style>
   </head>
   <body>
-    <redoc spec-url='${docUrl}'></redoc>
+    <redoc spec-url='${docs}'></redoc>
     <script src="https://cdn.jsdelivr.net/npm/redoc@2.0.0-alpha.17/bundles/redoc.standalone.js"> </script>
   </body>
 </html>

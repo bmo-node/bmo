@@ -5,7 +5,7 @@ describe('middleware', () => {
 		expect(typeof middleware).toEqual('function');
 	});
 	it('Should return an array when called', async () => {
-		const mw = await middleware({ config: {} });
+		const mw = await middleware({ config: {}, dependencies: {} });
 		expect(Array.isArray(mw)).toBeTruthy();
 	});
 });

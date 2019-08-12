@@ -1,21 +1,25 @@
+import createSwaggerDefinition from './swagger/createSwaggerDefinition';
+import dnaClient from './dnaClient';
+import errors from './errors';
+import errorMap from './errorMap';
 import events from './events';
 import eureka from './eureka';
 import eurekaClient from './eurekaClient';
-import dnaClient from './dnaClient';
 import gracefulShutdown from './gracefulShutdown';
 import middleware from './middleware';
 import requestValidator from './requestValidator';
 import swagger from './swagger';
-import createSwaggerDefinition from './swagger/createSwaggerDefinition';
 
 export default {
+	createSwaggerDefinition,
 	dnaClient,
-	events,
+	errors,
+	errorMap,
 	eureka,
 	eurekaClient,
+	events,
 	gracefulShutdown,
 	middleware,
 	requestValidator,
-	swagger,
-	createSwaggerDefinition
+	swagger
 };

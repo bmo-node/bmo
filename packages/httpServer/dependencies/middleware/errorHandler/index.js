@@ -1,8 +1,8 @@
 import { each } from 'lodash';
 import { INTERNAL_SERVER_ERROR } from 'http-status-codes';
 export default ({
-	config: {
-		errorMap = {}
+	dependencies: {
+		errorMap
 	}
 }) => async (ctx, next) => {
 	try {
@@ -10,14 +10,7 @@ export default ({
 		/* eslint-disable-next-line callback-return */
 		await next();
 	} catch (e) {
-		ctx.status = INTERNAL_SERVER_ERROR;
-		each(errorMap, (types, code) => {
-			/* this will be a string since the typeof check is against another typeof check */
-			/* eslint-disable-next-line valid-typeof */
-			if (types.some(t => e instanceof t)) {
-				ctx.status = parseInt(code);
-			}
-		});
+		ctx.status = errorMap.getErrorStatus(e);
 		if (e.message) {
 			ctx.body = {
 				message: e.message

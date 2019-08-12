@@ -29,7 +29,7 @@ export default async ({
 		path: urls.ui,
 		method: GET,
 		handler: (ctx) => {
-			ctx.body = ui(urls.docs);
+			ctx.body = ui(urls);
 			ctx.status = OK;
 		}
 	};
