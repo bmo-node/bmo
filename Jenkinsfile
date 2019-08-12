@@ -4,9 +4,9 @@ timestamps
     try {
       node('gcc4-8-5') {
         stage("Checkout") {
-
+          def nodeVer = "node_V10-15-3"
+          env.NODE_HOME="${tool nodeVer}"
           env.JAVA_HOME = "${tool global.java.java8.home}"
-          env.NODE_HOME = "${tool global.nodejs.node8.home}"
           env.PATH = "${env.JAVA_HOME}/bin:${env.NODE_HOME}/bin:${env.PATH}"
           env.jobstatus = "success"
           step([$class: 'WsCleanup'])
