@@ -29,7 +29,7 @@ timestamps
 
         stage("yarn install")
           {
-            sh 'yarn install --ignore-engines --pure-lockfile --update-checksums'
+            sh 'CI=true yarn install --ignore-engines --pure-lockfile --update-checksums'
           }
 
         stage("yarn run build")
