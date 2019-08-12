@@ -2,10 +2,11 @@
 import commander from 'commander';
 import dependency from './dependency';
 import project from './project';
+import resource from './resource';
 const supportedTemplates = {
 	project,
 	dependency,
-	route: () => console.log('creating route')
+	resource
 };
 let template, name;
 commander

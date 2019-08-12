@@ -4,7 +4,7 @@
   "description": "Basic Vue Application with ES2015, Koa.js",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=8.x"
+    "node": ">=10.x"
   },
   "scripts": {
     "start:dev": "run-p start:server:dev start:client:dev",
