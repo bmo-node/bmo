@@ -95,7 +95,7 @@ describe('swagger', () => {
 		swagger(m);
 		const route = m.dependencies.routes.find((r) => r.path === uiPath);
 		await route.handler(ctx, jest.fn());
-		expect(ctx.body).toEqual(ui(docsPath));
+		expect(ctx.body).toEqual(ui({ docs: docsPath }));
 		jest.resetAllMocks();
 	});
 });

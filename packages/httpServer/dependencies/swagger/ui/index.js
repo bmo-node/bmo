@@ -3,7 +3,7 @@ export default ({ docs, base }) => `
 <html>
   <head>
     <title>ReDoc</title>
-    ${base ? `<base href='${baseUrl}'/>` : ''}
+    ${base ? `<base href='${base}'/>` : ''}
     <!-- needed for adaptive design -->
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">

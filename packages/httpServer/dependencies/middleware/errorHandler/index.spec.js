@@ -1,7 +1,5 @@
-import httpStatus from 'http-status-codes';
 import handler from '.';
 class MockError {}
-const message = 'error!';
 const TEST_STATUS = 420;
 const errorMap = {
 	getErrorStatus: () => TEST_STATUS

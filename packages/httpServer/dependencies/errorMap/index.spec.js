@@ -3,8 +3,6 @@ import { each } from 'lodash';
 import errors from '../errors';
 import mapper from '.';
 class TestError extends ExtendableError {}
-const enabled = true;
-const loggerLevel = 'debug';
 const manifest = () => ({
 	dependencies: {
 		errors: errors()
