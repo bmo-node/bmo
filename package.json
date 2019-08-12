@@ -20,7 +20,7 @@
     "selenium": "node ./scripts/postinstall",
     "test": "jest",
     "publish:packages": "lerna publish from-package --graph-type all --yes --registry https://pi-artifactory.lmig.com/artifactory/api/npm/npm",
-    "postinstall": "lerna bootstrap && npm run link:cli",
+    "postinstall": "lerna bootstrap && if-env CI=true && echo 'ci skipping link' || npm run link:cli",
     "link:cli": "echo \"linking cli\" && cd ./packages/cli && yarn link",
     "snyk:test": "snyk test --org=liberty-mutual --severity-threshold=medium",
     "snyk:wizard": "snyk wizard"
@@ -45,6 +45,7 @@
     "eslint-plugin-vue": "^5.2.2",
     "fs-extra": "^8.0.1",
     "globby": "^9.2.0",
+    "if-env": "^1.0.4",
     "jest": "^24.8.0",
     "jest-mock-process": "^1.2.0",
     "joi": "^14.3.1",
