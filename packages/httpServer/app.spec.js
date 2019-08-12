@@ -1,12 +1,7 @@
 import App from './app';
 import Router from 'koa-router';
-import pkgup from 'pkg-up';
-import es6Require from '@lmig/bmo-es6-require';
 import injectDependencies from './injectDependencies';
 import loadRoute from './loadRoute';
-import Koa from 'koa';
-import defaultDependencies from './dependencies';
-import defaultConfig from './defaultConfig';
 
 const testConfig = { thing: 'thing' };
 jest.mock('./injectDependencies');

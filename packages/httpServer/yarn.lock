@@ -2,6 +2,37 @@
 # yarn lockfile v1
 
 
+"@hapi/address@2.x.x":
+  version "2.0.0"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/@hapi/address/-/address-2.0.0.tgz#9f05469c88cb2fd3dcd624776b54ee95c312126a"
+
+"@hapi/hoek@6.x.x":
+  version "6.2.4"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/@hapi/hoek/-/hoek-6.2.4.tgz#4b95fbaccbfba90185690890bdf1a2fbbda10595"
+
+"@hapi/hoek@8.x.x":
+  version "8.2.0"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/@hapi/hoek/-/hoek-8.2.0.tgz#079a133be240ff866ad8532eaa46a691bdd91117"
+
+"@hapi/joi@^15.1.0":
+  version "15.1.0"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/@hapi/joi/-/joi-15.1.0.tgz#940cb749b5c55c26ab3b34ce362e82b6162c8e7a"
+  dependencies:
+    "@hapi/address" "2.x.x"
+    "@hapi/hoek" "6.x.x"
+    "@hapi/marker" "1.x.x"
+    "@hapi/topo" "3.x.x"
+
+"@hapi/marker@1.x.x":
+  version "1.0.0"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/@hapi/marker/-/marker-1.0.0.tgz#65b0b2b01d1be06304886ce9b4b77b1bfb21a769"
+
+"@hapi/topo@3.x.x":
+  version "3.1.3"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/@hapi/topo/-/topo-3.1.3.tgz#c7a02e0d936596d29f184e6d7fdc07e8b5efce11"
+  dependencies:
+    "@hapi/hoek" "8.x.x"
+
 "@lmig/bmo-es6-require@~1.0.0":
   version "1.0.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/@lmig/bmo-es6-require/-/@lmig/bmo-es6-require-1.0.0.tgz#37d15dd01aa069916bab4ec6b5bbe792a7b07fab"
@@ -691,6 +722,10 @@ isexe@^2.0.0:
 isstream@~0.1.2:
   version "0.1.2"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
+
+jest-mock-process@^1.2.0:
+  version "1.2.0"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/jest-mock-process/-/jest-mock-process-1.2.0.tgz#8ac1818cb8aad05164b1f955036849369ee580d4"
 
 joi-to-swagger@^3.1.0:
   version "3.2.0"

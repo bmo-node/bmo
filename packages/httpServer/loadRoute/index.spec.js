@@ -1,8 +1,6 @@
-import joi from 'joi';
+import joi from '@hapi/joi';
 import loadRoute from '.';
-class MockRouter {
-	constructor () {}
-}
+class MockRouter {}
 MockRouter.prototype.get = jest.fn();
 MockRouter.prototype.use = jest.fn();
 const schema = joi
@@ -22,14 +20,14 @@ describe('Load route', () => {
 		it('Should load the route', () => {
 			const r = mockRoute();
 			const router = loadRoute(r, mockValidator, MockRouter);
-		  expect(router.get).toHaveBeenCalledWith(r.path, r.handler);
+			expect(router.get).toHaveBeenCalledWith(r.path, r.handler);
 		});
 		it('Should create a request validator if the schema is populated', () => {
 			const r = mockRoute();
 			r.schema = {
 				requestBody: schema
 			};
-			const router = loadRoute(r, mockValidator, MockRouter);
+			loadRoute(r, mockValidator, MockRouter);
 			expect(mockValidator).toHaveBeenCalledWith(schema);
 		});
 		it('Should use request validator if the schema is populated', () => {
@@ -50,7 +48,7 @@ describe('Load route', () => {
 				requestBody: schema
 			};
 			r.handler = [mockMw, r.handler];
-			const router = loadRoute(r, mockValidator, MockRouter);
+			loadRoute(r, mockValidator, MockRouter);
 			expect(mockValidator).toHaveBeenCalledWith(schema);
 		});
 		it('Should use request validator if the schema is populated', () => {

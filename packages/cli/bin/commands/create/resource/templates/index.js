@@ -1,6 +1,7 @@
 import es6Require from '@lmig/bmo-es6-require';
 import { routes } from '../../project/templates/config';
 // ToDo add schema / repository creation
+/* eslint-disable no-useless-escape */
 const handler = ({
 	method,
 	path,

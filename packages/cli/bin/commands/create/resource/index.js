@@ -1,11 +1,9 @@
-import pkgup from 'pkg-up';
 import inquirer from 'inquirer';
 import fs from 'fs-extra';
-import execa from 'execa';
 import { each } from 'lodash';
 import httpMethods from 'http-methods-enum';
 import templates from './templates';
-const { GET, POST, PUT, DELETE } = httpMethods;
+const { GET, POST, PUT } = httpMethods;
 const HANDLER_TEMPLATES = {
 	list: ({ path, version, name }) => ({
 		method: GET,

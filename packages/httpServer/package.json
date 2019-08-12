@@ -6,6 +6,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi": "^15.1.0",
     "@lmig/bmo-es6-require": "~1.0.0",
     "dna-resilient-client": "^1.0.3",
     "esprima": "^4.0.1",
@@ -22,5 +23,8 @@
     "koa-router": "^7.4.0",
     "lodash": "^4.17.11",
     "pkg-up": "^3.1.0"
+  },
+  "devDependencies": {
+    "jest-mock-process": "^1.2.0"
   }
 }

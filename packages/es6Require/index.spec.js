@@ -2,7 +2,6 @@ import es6Require from '.';
 
 import testExport from './test/test.export';
 import testModule from './test/test.module';
-import testModuleDefault from './test/test.module';
 
 describe('es6 require', () => {
 	it('Should import the default if defined', () => {

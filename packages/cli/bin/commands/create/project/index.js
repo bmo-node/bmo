@@ -31,7 +31,7 @@ const getProjectInfo = async (name) => {
 	},
 	{
 		type: 'list',
-		choices: ['yarn', 'npm'],
+		choices: packageManagers,
 		name: 'packageManager',
 		message: 'Which package manager do you want to use'
 	}, {

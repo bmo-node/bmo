@@ -1,7 +1,7 @@
-export const index = ({}) =>
+export const index = () =>
 	`import health from './health';
 export default [...health];`;
-export const health = ({}) =>
+export const health = () =>
 	(`import { OK } from 'http-status-codes';
 import httpMethods from 'http-methods-enum'
 const { GET } = httpMethods;

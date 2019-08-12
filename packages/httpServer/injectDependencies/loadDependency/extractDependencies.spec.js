@@ -1,5 +1,5 @@
 import extractDependencies from './extractDependencies';
-
+/* eslint-disable no-unused-vars */
 const dependenciesKey = 'dependencies';
 
 describe('extractDependencies', () => {
@@ -102,13 +102,6 @@ describe('extractDependencies', () => {
 			const dependencies = await extractDependencies(otherDependency, dependenciesKey);
 			expect(dependencies).toEqual([]);
 		});
-		// it('Should extract the sub dependencies from the function', () => {
-		// 	const dep = function myFn (manifest) {
-		// 		const thing = manifest.dependencies.sub.foo;
-		// 	};
-		// 	const dependencies = extractDependencies(dep, dependenciesKey);
-		// 	expect(dependencies).toEqual(['sub.foo']);
-		// });
 	});
 
 	describe('Error cases', () => {

@@ -6,7 +6,7 @@ describe('load dependencies', () => {
 			return tm;
 		};
 		const otherDependency = ({ dependencies: { fooDependency } }) => fooDependency;
-	  const manifest = await inject({}, { otherDependency, fooDependency });
+		const manifest = await inject({}, { otherDependency, fooDependency });
 		console.log(manifest);
 		expect(manifest.dependencies.otherDependency).toEqual(tm);
 	});
@@ -78,7 +78,7 @@ describe('load dependencies', () => {
 		};
 		const barDependency = ({ dependencies: { fooDependency } }) => fooDependency;
 		const bazDependency = ({ dependencies: { barDependency, fooDependency } }) => barDependency;
-		const manifest = await inject({}, { fooDependency, barDependency, bazDependency });
+		await inject({}, { fooDependency, barDependency, bazDependency });
 		expect(value).toEqual(1);
 	});
 });

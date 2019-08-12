@@ -1,4 +1,4 @@
-import joi from 'joi';
+import joi from '@hapi/joi';
 import ui from './ui';
 import swagger from '.';
 import createSwaggerDefinition from './createSwaggerDefinition';
