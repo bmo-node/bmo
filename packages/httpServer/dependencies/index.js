@@ -21,7 +21,7 @@ export default {
 	eurekaClient,
 	events,
 	gracefulShutdown,
-	health
+	health,
 	middleware,
 	requestValidator,
 	serveStatic,
