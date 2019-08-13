@@ -1,0 +1,9 @@
+{
+  "name": "@lmig/bmo-eureka",
+  "version": "0.1.0",
+  "description": "eureka integration for BMO",
+  "main": "index.js",
+  "scripts": {  },
+  "author": "tsteele",
+  "license": "MIT"
+}
