@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "description": "dependency injector for bmo",
   "main": "index.js",
-  "scripts": {  },
+  "scripts": {},
   "author": "tsteele",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "esprima": "^4.0.1",
+    "esquery": "^1.0.1",
+    "lodash": "^4.17.15"
+  }
 }
