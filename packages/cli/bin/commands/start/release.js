@@ -9,7 +9,6 @@ export default ({ args = {}, cwd }) => {
 		// TODO Escape hatch to change config directory
 		if (fs.existsSync(configPath)) {
 			const fullPath = require.resolve(configPath);
-			console.log('Loading custom configuration');
 			config = es6require(fullPath);
 		} else {
 			config = async () => ({

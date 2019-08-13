@@ -140,7 +140,6 @@ const getComponentName = (path) => {
 };
 
 const getComponents = (routes, parentPath, aggregate = {}) => {
-	console.log(routes);
 	each(routes, (route, key) => {
 		if (route.schema) {
 			const { path } = route;

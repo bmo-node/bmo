@@ -7,6 +7,5 @@ export default async ({ config, args, cwd }) => {
 	set(userConfig, 'server.static', args.serve || []);
 	const server = httpServer(userConfig);
 	await server.start();
-	console.log(server);
 	console.log(`Server listening on ${server.port}`);
 };
