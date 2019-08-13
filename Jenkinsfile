@@ -56,7 +56,7 @@ timestamps
               }
             }
           }
-          if (env.BRANCH_NAME == 'master') {
+          if (env.BRANCH_NAME == 'develop') {
           stage("publish"){
             sh "yarn publish:packages"
           }
