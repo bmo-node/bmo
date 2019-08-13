@@ -1,11 +1,23 @@
-import server from './server';
+import fs from 'fs';
 import es6require from '@lmig/bmo-es6-require';
+import server from './server';
+
 export default ({ args = {}, cwd }) => {
-	let config;
+	let config = {};
 	try {
-		const configPath = args.configDir || `${cwd}/config`;
+		const configPath = args.configDir || `${cwd}/config/index.js`;
 		// TODO Escape hatch to change config directory
-		config = es6require(require.resolve(configPath));
+		if (fs.existsSync(configPath)) {
+			const fullPath = require.resolve(configPath);
+			console.log('Loading custom configuration');
+			config = es6require(fullPath);
+		} else {
+			config = async () => ({
+				eureka: {
+					enabled: false
+				}
+			});
+		}
 	} catch (e) {
 		console.error('Unable to load configuration. Ensure that a config directory is in the current directory');
 		console.log(e);

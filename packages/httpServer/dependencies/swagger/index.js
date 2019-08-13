@@ -7,7 +7,7 @@ const { GET } = httpMethods;
 export default async ({
 	config,
 	dependencies: {
-		routes,
+		routes = [],
 		createSwaggerDefinition
 	}
 }) => {

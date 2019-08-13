@@ -9,6 +9,7 @@ import gracefulShutdown from './gracefulShutdown';
 import middleware from './middleware';
 import requestValidator from './requestValidator';
 import swagger from './swagger';
+import serveStatic from './serveStatic';
 
 export default {
 	createSwaggerDefinition,
@@ -21,5 +22,6 @@ export default {
 	gracefulShutdown,
 	middleware,
 	requestValidator,
+	serveStatic,
 	swagger
 };
