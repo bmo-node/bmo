@@ -84,7 +84,6 @@ export default class HttpServer {
 
 	_loadRoutes () {
 		const routes = get(this, 'manifest.dependencies.routes', []);
-		console.log(routes);
 		routes.forEach((route) => this._loadRoute(route));
 	}
 
