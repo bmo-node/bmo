@@ -84,6 +84,12 @@ The DI or dependency injection that BMO supplies is meant to be totally unobtrus
 Simply attach your constructor to the root dependencies export, and deconstruct your modules dependencies
 off of the manifest passed to each constructor.
 
+Why dependency injection over `import`?
+
+When you import a module, your are coupling your module directly to the imported module.
+References to dependencies
+
+
 Database module Example
 
 ```
@@ -95,3 +101,23 @@ export default async ({ config, dependencies :{ connectionPool } }) => ({
     }
   })
 ```
+
+During application start up BMO has 3 phases, configuration, injection, and running.
+First BMO resolves the config function. After that it instantiates all the dependency modules.
+It inspects each module's constructor to ensure that all of it's dependencies are available.
+It does this by parsing the functions AST. Currently it is well tested using the destructure syntax, It also attempt's to find any
+accesses to the first parameters dependency object if the destructure syntax is not used.
+Using other syntax may create different AST formats that may not be supported.
+Using transpilers, minifiers, or uglifiers that modify the AST may or may not work.
+
+
+
+
+
+
+
+
+
+
+
+

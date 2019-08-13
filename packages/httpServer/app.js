@@ -63,7 +63,6 @@ export default class HttpServer {
 			...dependencies,
 			routes
 		});
-		console.log(this.manifest);
 	}
 
 	_loadRoutes () {
