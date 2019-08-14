@@ -52,7 +52,7 @@ export default async ({config, dependencies}) => ({
 ```
 - `path` - indicates what the path to the handers should be.
 - `method` - is the http method that the handler is for.
-- `schema`- schema takes in two sub objects, these objects should be joi schemas that are then used to
+- `schema`- an optinal schema takes in two sub objects, these objects should be [joi](https://www.npmjs.com/package/@hapi/joi) schemas that are then used to
 generate OpenAPI documentation for the resources. These are optional and will be ignored if not supplied.
 - `handler`- Is an async function that is invoked when a request is received with the given path and method.
 
@@ -65,8 +65,9 @@ It even comes with a dev mode that will watch your files and restart during deve
 install the bmo cli with your package manager of choice:
 
 `npm install @lmig/bmo-cli`
+
 If you want BMO can be installed at the global level,
- but it is recommended to be added on a per-project level.
+but it is recommended to be added on a per-project level.
 
 once installed in your base directory you can change your start commands to be:
 
@@ -76,6 +77,17 @@ once installed in your base directory you can change your start commands to be:
 
 If run in a folder structure as outlined above an http server with all the routes mounted
 will be started, and available.
+
+CLI commands:
+
+`bmo start`
+
+|Option          | Description                                              |
+|----------------|----------------------------------------------------------|
+|-d              | Start the server in dev mode, changes restart the server |
+|-s <dir>        | Add a directory to be served as static assets            |
+|-c <dir>        | Set the base directory where BMO looks for the config    |
+|--baseDir <dir> | Set the base directory for BMO's entry point.            |
 
 
 ## DI
@@ -87,7 +99,11 @@ off of the manifest passed to each constructor.
 Why dependency injection over `import`?
 
 When you import a module, your are coupling your module directly to the imported module.
-References to dependencies
+References to dependencies are hard coded and strewn throughout the code base.
+If you need to change a dependency or module you have to update every reference to it and ensure that
+the interface was not broken. Using dependency injection allows you to wrap your
+external dependencies in modules that are then shared through the DI framework.
+Any changes or updates are isolated to the one module, and percolated from that single point.
 
 
 Database module Example
@@ -104,17 +120,29 @@ export default async ({ config, dependencies :{ connectionPool } }) => ({
 
 During application start up BMO has 3 phases, configuration, injection, and running.
 First BMO resolves the config function. After that it instantiates all the dependency modules.
-It inspects each module's constructor to ensure that all of it's dependencies are available.
+During this process it inspects each module's constructor to ensure that all of it's dependencies are available.
 It does this by parsing the functions AST. Currently it is well tested using the destructure syntax, It also attempt's to find any
-accesses to the first parameters dependency object if the destructure syntax is not used.
+accesses to the first parameters 'dependencies' key if the destructure syntax is not used.
 Using other syntax may create different AST formats that may not be supported.
 Using transpilers, minifiers, or uglifiers that modify the AST may or may not work.
 
+## Default dependencies
+
+BMO has some built in dependencies to make your life easier.
+- `errorMap` -> this dependency controls how your application maps errors to http statuses.
+- `errors` -> this contains references to all the error types defined by BMO.
+- `events` -> This module acts as an event hub for your application. Use it to communicate via pub-sub across dependencies.
+- `gracefulShutdown` -> This module implements a graceful shutdown. It emits a shutdown event when the application requests to close.
+- `errorHandler` -> This module catches any middleware errors an sends back an appropriate response based off the errorMap.
+- `requestValidator` -> This module validates requests based off of a joi schema.
+- `serveStatic` -> this module can be used to serve static files.
+- `swagger` -> this module adds in an open api spec to your application based off the schemas defined in your routes.
+- `health` -> This module adds in a basic health endpoint to allow live checking at /health
 
 
+## Other BMO modules
 
-
-
+- 'eureka' -> Implements eureka service discovery for BMO applications
 
 
 
