@@ -6,6 +6,7 @@ import events from './events';
 import eureka from './eureka';
 import eurekaClient from './eurekaClient';
 import gracefulShutdown from './gracefulShutdown';
+import health from './health';
 import middleware from './middleware';
 import requestValidator from './requestValidator';
 import swagger from './swagger';
@@ -20,6 +21,7 @@ export default {
 	eurekaClient,
 	events,
 	gracefulShutdown,
+	health,
 	middleware,
 	requestValidator,
 	serveStatic,

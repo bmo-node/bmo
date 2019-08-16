@@ -69,7 +69,7 @@ export default class HttpServer {
 		if (fs.existsSync(this.paths.routes)) {
 			return es6Require(this.paths.routes);
 		}
-		return [];
+		return () => [];
 	}
 
 	async _injectDependencies () {

@@ -1,0 +1,13 @@
+{
+  "name": "@lmig/bmo-eureka",
+  "version": "0.1.0",
+  "description": "eureka integration for BMO",
+  "main": "index.js",
+  "scripts": {},
+  "author": "tsteele",
+  "license": "MIT",
+  "dependencies": {
+    "dna-resilient-client": "^1.0.3",
+    "eureka-client": "^1.1.0"
+  }
+}
