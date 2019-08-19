@@ -4,9 +4,6 @@ export default async ()=>({
   server: {
     port: process.env.PORT || 3000
   },
-  eureka:{
-    enabled:false
-  },
   routes
 });`;
 

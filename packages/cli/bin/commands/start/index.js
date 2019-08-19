@@ -6,7 +6,6 @@ function collect (value, previous) {
 	return previous.concat([value]);
 }
 commander
-	.option('-p, --port', 'override the port')
 	.option('--baseDir <dir>', 'Set the base directory')
 	.option('-c, --configDir <dir>', 'Set the configuration directory')
 	.option('-d, --dev', 'Starts a watch on the base directory to look for changes')
