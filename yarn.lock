@@ -3282,6 +3282,10 @@ eslint@^5.12.0:
     table "^5.2.3"
     text-table "^0.2.0"
 
+esm@^3.2.25:
+  version "3.2.25"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/esm/-/esm-3.2.25.tgz#342c18c29d56157688ba5ce31f8431fbb795cc10"
+
 espree@^4.1.0:
   version "4.1.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/espree/-/espree-4.1.0.tgz#728d5451e0fd156c04384a7ad89ed51ff54eb25f"
