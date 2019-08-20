@@ -1,8 +1,9 @@
 {
   "name": "@lmig/bmo-injector",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "dependency injector for bmo",
   "main": "index.js",
+  "files":["**/*.js","!*.spec.js"],
   "scripts": {},
   "author": "tsteele",
   "license": "MIT",
