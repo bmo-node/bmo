@@ -1,6 +1,6 @@
 import App from './app';
 import Router from 'koa-router';
-import injectDependencies from './injectDependencies';
+import injectDependencies from '@lmig/bmo-injector';
 import loadRoute from './loadRoute';
 
 const testConfig = { thing: 'thing' };

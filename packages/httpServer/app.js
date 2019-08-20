@@ -5,7 +5,7 @@ import pkgup from 'pkg-up';
 import { has, get, merge } from 'lodash';
 import fs from 'fs';
 import es6Require from '@lmig/bmo-es6-require';
-import injectDependencies from './injectDependencies';
+import injectDependencies from '@lmig/bmo-injector';
 import defaultDependencies from './dependencies';
 import defaultConfig from './defaultConfig';
 import loadRoute from './loadRoute';

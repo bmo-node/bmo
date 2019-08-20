@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "dependency injector for bmo",
   "main": "index.js",
+  "files":[".","!*.spec.js"],
   "scripts": {},
   "author": "tsteele",
   "license": "MIT",
