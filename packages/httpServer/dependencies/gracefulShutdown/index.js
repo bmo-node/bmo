@@ -16,7 +16,7 @@ export default ({
 	SIGNALS.forEach((signal) => {
 		process.on(signal, async () => {
 			events.emit(shutdown);
-			// process.exit(0);
+			process.exit(0);
 		});
 	});
 };
