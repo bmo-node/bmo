@@ -55,7 +55,6 @@
     "snyk": "^1.210.0"
   },
   "dependencies": {
-    "@lmig/bmo-injector": "^0.1.1",
     "esm": "^3.2.25",
     "lodash": "^4.17.15"
   },
