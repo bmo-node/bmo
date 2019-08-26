@@ -6,7 +6,6 @@ export default () => (schema) => {
 	}
 	return async (ctx, next) => {
 		const result = schema.validate(ctx.body);
-		console.log(result);
 		if (result.error) {
 			throw new Error(`Invalid request: ${result.error.annotate()}`);
 		}
