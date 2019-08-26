@@ -2,7 +2,7 @@ import path from 'path';
 import Koa from 'koa';
 import Router from 'koa-router';
 import pkgup from 'pkg-up';
-import { has, get, merge } from 'lodash';
+import { has, get, merge, mergeDeep } from 'lodash';
 import fs from 'fs';
 import es6Require from '@lmig/bmo-es6-require';
 import injectDependencies from '@lmig/bmo-injector';
@@ -75,11 +75,8 @@ export default class HttpServer {
 	async _injectDependencies () {
 		const dependencies = this._getDependencyConstructors();
 		const routes = this._getRouteConstructors();
-		this.manifest = await injectDependencies(this.config, {
-			...defaultDependencies,
-			...dependencies,
-			routes
-		});
+		const allDependencies = mergeDeep({}, defaultDependencies, dependencies, { routes });
+		this.manifest = await injectDependencies(this.config, allDependencies);
 	}
 
 	_loadRoutes () {
