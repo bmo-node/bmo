@@ -13,13 +13,16 @@ const yarn = 'yarn';
 const npm = 'npm';
 const install = 'install';
 const packageManagers = [yarn, npm];
+
 const deploymentTemplates = {
 	fusion: async (projectInfo) => {
 		const { baseDir } = projectInfo;
+		console.log(templates.deploy);
 		await fs.outputFile(`${baseDir}/Jenkinsfile`, templates.deploy.jenkinsFile(projectInfo));
 		await fs.outputFile(`${baseDir}/Dockerfile`, templates.deploy.dockerFile(projectInfo));
-		await fs.outputFile(`${baseDir}/docker-compose/docker-compose.yml`, templates.deploy.dockerCompose(projectInfo));
-	}
+		// await fs.outputFile(`${baseDir}/docker-compose/docker-compose.yml`, templates.deploy.dockerCompose(projectInfo));
+	},
+	none: () => {}
 };
 const deploymentTypes = Object.keys(deploymentTemplates);
 const shell = true;
@@ -28,7 +31,11 @@ const installCmds = {
 	[npm]: () => execa(npm, [install], { shell }).stdout.pipe(process.stdout)
 };
 
+const getGitRepoAddress = async () => (await execa('git', ['remote', 'get-url', 'origin'])).stdout;
+
 const getProjectInfo = async (name) => {
+	const foundRepo = await getGitRepoAddress();
+	console.log(foundRepo);
 	const answers = await inquirer.prompt([{
 		name: 'name',
 		default: name,
@@ -37,7 +44,7 @@ const getProjectInfo = async (name) => {
 	{
 		default: `A project description for ${name}`,
 		name: 'description',
-		message: 'Create test file?'
+		message: 'Project description'
 	},
 	{
 		type: 'list',
@@ -92,12 +99,9 @@ const writeFiles = async (projectInfo) => {
 		await fs.outputFile(`${baseDir}/sonar-project.properties`, templates.sonar(projectInfo));
 	}
 };
-const addSnky = () => {
 
-};
 export default async ({ name }) => {
 	const pkgPath = await pkgup({ cwd: __dirname });
-	console.log(pkgPath);
 	const pkg = require(pkgPath);
 	const serverVersion = pkg.peerDependencies[BMO_HTTP];
 	const cliVersion = pkg.version;

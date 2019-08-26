@@ -8,7 +8,12 @@
     "bmo": "bin/index.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
+  "esm":{
+    "cjs": {
+      "vars": true
+    }
+  },
   "dependencies": {
     "@lmig/bmo-es6-require": "~1.0.0",
     "commander": "^2.20.0",
