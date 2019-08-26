@@ -2,7 +2,7 @@
 timestamps
   {
     try {
-      node('gcc4-8-5') {
+      node('linux') {
         stage("Checkout") {
           def nodeVer = "node_V10-15-3"
           env.NODE_HOME="${tool nodeVer}"
