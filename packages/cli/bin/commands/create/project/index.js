@@ -3,7 +3,10 @@ import inquirer from 'inquirer';
 import fs from 'fs-extra';
 import execa from 'execa';
 import templates from './templates';
-const BMO_HTTP = '@lmig/bmo-http-server';
+// TODO
+// extendable registries
+// extendable eslint options
+//
 const defaultRegistry = 'default';
 const registries = [
 	'https://pi-artifactory.lmig.com/artifactory/api/npm/npm',
@@ -14,29 +17,22 @@ const npm = 'npm';
 const install = 'install';
 const packageManagers = [yarn, npm];
 
-const deploymentTemplates = {
-	fusion: async (projectInfo) => {
-		const { baseDir } = projectInfo;
-		console.log(templates.deploy);
-		await fs.outputFile(`${baseDir}/Jenkinsfile`, templates.deploy.jenkinsFile(projectInfo));
-		await fs.outputFile(`${baseDir}/Dockerfile`, templates.deploy.dockerFile(projectInfo));
-		// await fs.outputFile(`${baseDir}/docker-compose/docker-compose.yml`, templates.deploy.dockerCompose(projectInfo));
-	},
-	none: () => {}
-};
-const deploymentTypes = Object.keys(deploymentTemplates);
 const shell = true;
 const installCmds = {
-	[yarn]: () => execa(yarn, [install], { shell }).stdout.pipe(process.stdout),
-	[npm]: () => execa(npm, [install], { shell }).stdout.pipe(process.stdout)
+	[yarn]: () => {
+	 const cmd = execa(yarn, [install], { shell });
+	 cmd.stdout.pipe(process.stdout);
+	 return cmd;
+	},
+	[npm]: () => {
+		const cmd = execa(npm, [install], { shell });
+		cmd.stdout.pipe(process.stdout);
+		return cmd;
+	}
 };
-
-const getGitRepoAddress = async () => (await execa('git', ['remote', 'get-url', 'origin'])).stdout;
-
-const getProjectInfo = async (name) => {
-	const foundRepo = await getGitRepoAddress();
-	console.log(foundRepo);
-	const answers = await inquirer.prompt([{
+export default async ({ name }) => {
+	const baseDir = process.cwd();
+	const questions = [{
 		name: 'name',
 		default: name,
 		message: 'project name'
@@ -60,15 +56,6 @@ const getProjectInfo = async (name) => {
 	}, {
 		type: 'confirm',
 		default: 'yes',
-		name: 'deployment',
-		message: 'Would you like a deployment boilerplate?'
-	}, {
-		type: 'list',
-		choices: deploymentTypes,
-		name: 'deploymentType'
-	}, {
-		type: 'confirm',
-		default: 'yes',
 		name: 'sonar',
 		message: 'Would you like to run sonar on the project?'
 	}, {
@@ -76,40 +63,43 @@ const getProjectInfo = async (name) => {
 		default: 'yes',
 		name: 'snyk',
 		message: 'Would you like to run snyk on the project?'
-	}]);
-	return answers;
-};
+	}, {
+		type: 'confirm',
+		default: 'yes',
+		name: 'eslint',
+		message: 'Would you like to run eslint on the project?'
+	}];
 
-const writeFiles = async (projectInfo) => {
-	const baseDir = process.cwd();
-	projectInfo.baseDir = baseDir;
-	projectInfo.gitRepo = 'git.repo';
-	await fs.outputFile(`${baseDir}/config/index.js`, templates.config.index(projectInfo));
-	await fs.outputFile(`${baseDir}/config/routes.js`, templates.config.routes({}));
-	await fs.outputFile(`${baseDir}/package.json`, templates.pkg(projectInfo));
-	await fs.outputFile(`${baseDir}/dependencies/index.js`, templates.dependencies.index(projectInfo));
-	await fs.outputFile(`${baseDir}/routes/index.js`, templates.routes.index(projectInfo));
-	if (projectInfo.registry !== defaultRegistry) {
-		await fs.outputFile(`${baseDir}/.${projectInfo.packageManager}rc`, templates.rc[projectInfo.packageManager](projectInfo));
-	}
-	if (projectInfo.deployment) {
-		await deploymentTemplates[projectInfo.deploymentType](projectInfo);
-	}
-	if (projectInfo.sonar) {
-		await fs.outputFile(`${baseDir}/sonar-project.properties`, templates.sonar(projectInfo));
-	}
-};
-
-export default async ({ name }) => {
-	const pkgPath = await pkgup({ cwd: __dirname });
-	const pkg = require(pkgPath);
-	const serverVersion = pkg.peerDependencies[BMO_HTTP];
-	const cliVersion = pkg.version;
-	const info = await getProjectInfo(name);
-	await writeFiles({
-		...info,
-		serverVersion,
-		cliVersion
-	});
-	await installCmds[info.packageManager]();
+	return {
+		questions,
+		preProcess: async ({ files, answers }) => {
+			if (answers.registry !== defaultRegistry) {
+				files[`${baseDir}/.${answers.packageManager}rc`] = templates.rc[answers.packageManager];
+			}
+			if (answers.sonar) {
+				files[`${baseDir}/sonar-project.properties`] = templates.sonar;
+			}
+			if (answers.eslint) {
+				files[`${baseDir}/.eslintrc.js`] = templates.eslint;
+			}
+			return { files, answers };
+		},
+		files: {
+			[`${baseDir}/config/index.js`]: templates.config.index,
+			[`${baseDir}/config/routes.js`]: () => templates.config.routes({}),
+			[`${baseDir}/package.json`]: templates.pkg,
+			[`${baseDir}/dependencies/index.js`]: templates.dependencies.index,
+			[`${baseDir}/routes/index.js`]: templates.routes.index,
+			[`${baseDir}/.gitignore`]: templates.gitIgnore
+		},
+		postProcess: async ({ files, answers: { packageManager, eslint } }) => {
+			await installCmds[packageManager]();
+			if (eslint) {
+				const cmd = execa.command(`${packageManager} lint:fix`);
+				cmd.stdout.pipe(process.stdout);
+				cmd.stderr.pipe(process.stderr);
+				await cmd;
+			}
+		}
+	};
 };

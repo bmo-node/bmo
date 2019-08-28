@@ -1,0 +1,240 @@
+ timestamps {
+
+    try {
+        node('linux') {
+        def nodeVer = "node_V10-14-2"
+            env.NODE_HOME="${tool nodeVer}"
+      env.PATH = "${env.NODE_HOME}/bin:${env.PATH}"
+
+      env.JAVA_HOME = "${tool global.latestJava8}"
+      env.PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
+
+      stage("Checkout") {
+
+        env.jobstatus = "success"
+
+        checkout([
+          $class           : 'GitSCM',
+          extensions       : scm.extensions + [[$class: 'LocalBranch']],
+          userRemoteConfigs: scm.userRemoteConfigs
+        ])
+
+        env.SERVICE_NAME = sh(
+          returnStdout: true,
+          script: "cat package.json | grep name | head -1 | awk -F: '{print \$2}' | sed 's/[\" ,]//g'"
+        ).trim()
+
+        env.SERVICE_MAJOR_VERSION = sh(
+          returnStdout: true,
+          script: "cat package.json | grep version | head -1 | awk -F: '{print \$2}' | sed 's/[\" ,]//g' | cut -d '.' -f1"
+        ).trim()
+
+        env.SERVICE_VERSION = sh(
+          returnStdout: true,
+          script: "cat package.json | grep version | head -1 | awk -F: '{print \$2}' | sed 's/[\" ,]//g'"
+        ).trim()
+
+        applicationVersion = "${SERVICE_VERSION}_B${env.BUILD_NUMBER}"
+        println "applicationVersion: ${applicationVersion}"
+        println "service version: ${SERVICE_VERSION}"
+        env.REV = sh(
+          returnStdout: true,
+          script: "git rev-parse --short HEAD"
+        ).trim()
+
+        env.APP_VERSION = "${SERVICE_VERSION}"
+        env.SERVICE_VERSION = "${SERVICE_VERSION}-${REV}"
+        env.SERVICE_DEPLOY_NAME="${SERVICE_NAME}-v${SERVICE_MAJOR_VERSION}"
+        currentBuild.displayName = "${SERVICE_NAME}.${SERVICE_VERSION}"
+        env.BRANCH_PREFIX = 'develop'
+        env.HOST_URL_ENV = 'develop'
+        if(env.BRANCH_NAME != 'master'){
+
+          def split=BRANCH_NAME.split('/')
+          def TICKET_NUMBER
+          env.BRANCH_PREFIX=split[0]
+          if(split.length >= 2){
+            def branchTicket=split[1].split('-')
+            TICKET_NUMBER="-" + branchTicket[1]
+            env.HOST_URL_ENV = (env.BRANCH_PREFIX + TICKET_NUMBER).toLowerCase()
+          }else{
+            env.HOST_URL_ENV = env.BRANCH_PREFIX.replace(' -','')
+          }
+        }
+      }
+
+      stage("Install") {
+        sh "yarn install --ignore-engines --pure-lockfile"
+      }
+
+      stage("Security Audit") {
+        withCredentials([string(credentialsId: 'help_snyk_token', variable: 'SNYK_TOKEN')]) {
+          withEnv(["SNYK_TOKEN=${SNYK_TOKEN}","http-proxy=http://vxpit-putil001.lmig.com:3128","https_proxy=http://vxpit-putil001.lmig.com:3128"]){
+            sh "yarn snyk:test"
+          }
+        }
+      }
+
+      stage("Test") {
+        sh "yarn run test"
+      }
+
+      stage("Code Quality") {
+        sh "npm run lint"
+      }
+
+      if(env.BRANCH_NAME == "quality-scans"){
+        stage('Sonar Scan') {
+          withSonarQubeEnv('Production') {
+            scannerHome = tool name: 'Sonar Scanner 2.8', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectVersion=${SERVICE_NAME}.${SERVICE_VERSION}"
+          }
+        }
+
+        stage("Checkmarx Scan") {
+          step([
+            $class: 'CxScanBuilder',
+            comment: '',
+            excludeFolders: 'JenkinsBuild, build, test, tests, lib, Libraries, node_modules, coverage',
+            excludeOpenSourceFolders: '',
+            exclusionsSetting: 'job',
+            filterPattern:
+              '''
+              !**/_cvs/**/*, !**/.svn/**/*,   !**/.hg/**/*,   !**/.git/**/*,  !**/.bzr/**/*, !**/bin/**/*,
+              !**/obj/**/*,  !**/backup/**/*, !**/.idea/**/*, !**/*.DS_Store, !**/*.ipr,     !**/*.iws,
+              !**/*.bak,     !**/*.tmp,       !**/*.aac,      !**/*.aif,      !**/*.iff,     !**/*.m3u, !**/*.mid, !**/*.mp3,
+              !**/*.mpa,     !**/*.ra,        !**/*.wav,      !**/*.wma,      !**/*.3g2,     !**/*.3gp, !**/*.asf, !**/*.asx,
+              !**/*.avi,     !**/*.flv,       !**/*.mov,      !**/*.mp4,      !**/*.mpg,     !**/*.rm,  !**/*.swf, !**/*.vob,
+              !**/*.wmv,     !**/*.bmp,       !**/*.gif,      !**/*.jpg,      !**/*.png,     !**/*.psd, !**/*.tif, !**/*.swf,
+              !**/*.jar,     !**/*.zip,       !**/*.rar,      !**/*.exe,      !**/*.dll,     !**/*.pdb, !**/*.7z,  !**/*.gz,
+              !**/*.tar.gz,  !**/*.tar,       !**/*.gz,       !**/*.ahtm,     !**/*.ahtml,   !**/*.fhtml, !**/*.hdm,
+              !**/*.hdml,    !**/*.hsql,      !**/*.ht,       !**/*.hta,      !**/*.htc,     !**/*.htd,
+              !**/*.htmls,   !**/*.ihtml,     !**/*.mht,      !**/*.mhtm,     !**/*.mhtml,   !**/*.ssi, !**/*.stm,
+              !**/*.stml,    !**/*.ttml,      !**/*.txn,      !**/*.xhtm,     !**/*.xhtml,   !**/*.class, !**/*.iml, !**/*.lock''',
+
+            fullScanCycle: 10,
+            fullScansScheduled: true,
+            generatePdfReport: true,
+            groupId: '251373a1-cb42-4263-856d-f1552f0b8208',
+            includeOpenSourceFolders: '',
+            preset: '100006',
+            projectName: "${SERVICE_NAME}",
+            serverUrl: 'https://checkmarxJenkins.lmig.com:8443',
+            sourceEncoding: '1',
+            waitForResultsEnabled: true,
+            incremental: true,
+            highThreshold: 0,
+            mediumThreshold: 0,
+            lowThreshold: 41,
+            vulnerabilityThresholdEnabled: true,
+            vulnerabilityThresholdResult: 'FAILURE'
+          ])
+        }
+      }
+
+      stage("Prune") {
+        sh "npm prune --production"
+      }
+
+      stage("Stash Artifacts") {
+        stash name: "application", includes: "**"
+      }
+
+      stage("Cleanup") {
+        step([$class: 'WsCleanup'])
+      }
+    }
+
+    if(env.BRANCH_NAME == "master" || env.BRANCH_NAME.contains("feature")) {
+      stage("Build Docker Image") {
+        checkpoint "Build Docker Image"
+        node("docker_build") {
+
+          def DTR_USER_ID_BASE = global.dtr['prod'].base64
+          def DTR_HOST = global.dtr['prod'].host
+          def DTR_REPO_NAME = "${SERVICE_NAME}".toLowerCase()
+
+          withCredentials([[$class: 'StringBinding', credentialsId: DTR_USER_ID_BASE, variable: 'DTR_CREDS_BASE']]) {
+
+            def DTR_REPO = 'jenkinsuser' + "/${DTR_REPO_NAME}"
+
+            def REPO = sh(script: "/bin/curl -k -s -H \"Authorization: Basic ${DTR_CREDS_BASE}\" --insecure -X GET https://${DTR_HOST}/api/v0/repositories/${DTR_REPO} | /builds/tools/jq/jq -r .name", returnStdout: true)
+            env.REPO = REPO.trim()
+            REPO = REPO.replace('\n', '')
+
+            if (REPO == DTR_REPO_NAME) {
+              println 'Repo ' + DTR_REPO_NAME + ' already exists.'
+            } else {
+              println 'Repo ' + DTR_REPO_NAME + ' does not exist, creating it...'
+              sh '/bin/curl -k -s -H "Authorization: Basic ' + DTR_CREDS_BASE + '" --insecure -X POST --data \'{"name":"' + DTR_REPO_NAME + '","visibility":"public"}\' --header "Content-type: application/json" https://' + DTR_HOST + '/api/v0/repositories/' + 'jenkinsuser'
+            }
+
+            unstash "application"
+
+            def APP_IMAGE_BASE = "${global.dtr['prod'].host}/${global.dtr['prod'].repoUserName}/${DTR_REPO_NAME}"
+            APP_IMAGE = APP_IMAGE_BASE + ":${SERVICE_VERSION}"
+
+            if(env.BRANCH_NAME == 'master'){
+              def LATEST_APP_IMAGE = APP_IMAGE_BASE + ":master"
+              sh "sudo docker build . " + "--build-arg all_proxy=http://vxpit-putil001:3128 " + "--build-arg http_proxy=http://vxpit-putil001:3128 " + "--build-arg https_proxy=http://vxpit-putil001:3128 " + "-t ${APP_IMAGE} -t ${LATEST_APP_IMAGE} --pull"
+              sh "sudo docker push ${LATEST_APP_IMAGE}"
+
+            } else {
+              sh "sudo docker build . " + "--build-arg all_proxy=http://vxpit-putil001:3128 " + "--build-arg http_proxy=http://vxpit-putil001:3128 " + "--build-arg https_proxy=http://vxpit-putil001:3128 " + "-t ${APP_IMAGE} --pull"
+            }
+
+            PUSH_OUTPUT = sh(script: "sudo docker push ${APP_IMAGE}", returnStdout: true)
+            sh "sudo docker push ${APP_IMAGE}"
+            println 'THIS IS THE SERVICE_VERSION: ' + SERVICE_VERSION
+            println 'THIS IS THE SERVICE__MAJOR_VERSION: ' + SERVICE_MAJOR_VERSION
+            println 'THIS IS THE SERVICE_NAME: ' + SERVICE_NAME
+            println 'THIS IS THE SERVICE_DEPLOY_NAME: ' + SERVICE_DEPLOY_NAME
+            println 'THIS IS THE APP_IMAGE: ' + APP_IMAGE
+            println 'THIS IS THE PUSH OUTPUT: ' + PUSH_OUTPUT
+            IMAGE_SHA = getSHA(PUSH_OUTPUT)
+            println 'THIS IS THE IMAGE_SHA: ' + IMAGE_SHA
+
+            env.IMAGE_PATH = "${DTR_HOST}/${DTR_REPO}:${SERVICE_VERSION}@${IMAGE_SHA}"
+            println 'IMAGE PATH IS THIS: ' + IMAGE_PATH
+
+            step([$class: 'WsCleanup'])
+          }
+        }
+      }
+
+      stage("Deploy") {
+
+        build job:'/grmus/Deploy Services' , parameters:[
+          string(name: "service_name",value: env.SERVICE_NAME),
+          string(name: "target_environment",value: "develop"),
+          string(name: "image_tag",value: SERVICE_VERSION),
+          string(name: "mesh_env",value: env.HOST_URL_ENV)
+        ]
+
+      }
+    }
+    }
+    catch(err) {
+        node {
+            env.jobstatus="failed"
+            env.END_PHASE_VALUE=PHASE_VALUE
+            env.END_PHASE_STRING=PHASE_STRING
+            throw err
+        }
+    }
+    finally {
+        stage("Notify")
+        {
+            node('linux')
+            {
+                postbuild()
+                step([$class: 'WsCleanup'])
+            }
+        }
+    }
+}
+@NonCPS
+def getSHA(push_output) {
+  def matcher = push_output =~ /sha256:[A-Fa-f0-9]{64}/
+  return matcher[0]
+}

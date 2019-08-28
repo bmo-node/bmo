@@ -5,21 +5,18 @@
   "main": "index.js",
   "scripts": {},
   "bin": {
-    "bmo": "bin/index.js"
+    "bmo": "node -r esm bin/index.js"
   },
   "author": "",
   "license": "MIT",
-  "esm":{
-    "cjs": {
-      "vars": true
-    }
-  },
   "dependencies": {
     "@lmig/bmo-es6-require": "~1.0.0",
-    "commander": "^2.20.0",
+    "chalk": "^2.4.2",
+    "commander": "^3.0.0",
     "esm": "^3.2.25",
     "execa": "^2.0.3",
     "fs-extra": "^8.1.0",
+    "globby": "^10.0.1",
     "http-methods-enum": "^0.1.1",
     "inquirer": "^6.5.0",
     "lodash": "^4.17.15",

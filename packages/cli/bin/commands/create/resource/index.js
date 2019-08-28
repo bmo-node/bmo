@@ -30,8 +30,9 @@ const HANDLER_TEMPLATES = {
 		version
 	})
 };
-const getResourceInfo = async (name) => {
-	const answers = await inquirer.prompt([{
+
+export default async () => ({
+	questions: [{
 		message: 'What is the path of your resource?',
 		name: 'path',
 		default: `/api/${name}`
@@ -39,22 +40,19 @@ const getResourceInfo = async (name) => {
 		message: 'What version of the resource?',
 		default: `v1`,
 		name: 'version'
-	}]);
-	return answers;
-};
-export default async (name) => {
-	const info = await getResourceInfo(name);
-	const handlers = Object.keys(HANDLER_TEMPLATES);
-	each(HANDLER_TEMPLATES, async (template, method) => {
-		const handlerSrc = templates.handler(template({ name, ...info }));
-		await fs.outputFile(`routes/${name}/${info.version}/handlers/${method}/index.js`, handlerSrc);
-		await fs.outputFile(`routes/${name}/${info.version}/handlers/${method}/index.test.js`, templates.test(name));
-	});
-	const newRoute = {
-		[name]: {
-			[info.version]: `${info.path}/${info.version}`
-		}
-	};
-	await fs.outputFile(`routes/${name}/${info.version}/handlers/index.js`, templates.index(handlers));
-	await fs.outputFile(`config/routes.js`, templates.routesConfig(newRoute));
-};
+	}],
+	preProcess: ({ files, answers }) => {
+		const { path, version } = answers;
+		each(HANDLER_TEMPLATES, async (template, method) => {
+			files[`routes/${name}/${version}/handlers/${method}/index.js`] = () => templates.handler(template(answers));
+			files[`routes/${name}/${version}/handlers/${method}/index.test.js`] = templates.test;
+		});
+		files[`routes/${name}/${version}/handlers/index.js`] = templates.index;
+		files[`config/routes.js`] = () => templates.routesConfig({
+			[name]: {
+				[version]: `${path}/${version}`
+			}
+		});
+		return { files, answers };
+	}
+});

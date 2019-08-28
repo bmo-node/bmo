@@ -1,6 +1,6 @@
 export const index = () => `
-import routes from './routes'
-export default async ()=>({
+import routes from './routes';
+export default async () => ({
   server: {
     port: process.env.PORT || 3000
   },

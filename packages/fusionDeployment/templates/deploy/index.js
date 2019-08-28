@@ -7,9 +7,9 @@ WORKDIR /usr/src/app
 
 # Add app
 COPY node_modules /usr/src/app/node_modules
-COPY dist /usr/src/app/dist
+COPY routes /usr/src/app/routes
 COPY config /usr/src/app/config
-COPY swagger /usr/src/app/swagger
+COPY dependencies /usr/src/app/dependencies
 COPY package.json /usr/src/app/package.json
 
 HEALTHCHECK --interval=60s --timeout=30s --retries=3 CMD curl -v --fail http://localhost:8080/health || exit 1

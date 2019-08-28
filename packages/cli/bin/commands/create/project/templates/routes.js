@@ -1,1 +1,1 @@
-export const index = () => `export default [];`;
+export const index = () => `export default ()=>[];`;

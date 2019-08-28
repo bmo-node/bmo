@@ -1,8 +1,8 @@
 import inquirer from 'inquirer';
 import fs from 'fs-extra';
 import { dependency, test } from './template';
-export default async (name) => {
-	const answers = await inquirer.prompt([{
+export default async ({ name }) => ({
+	questions: [{
 		name: 'name',
 		default: name,
 		message: 'Dependency name'
@@ -17,9 +17,12 @@ export default async (name) => {
 		type: 'confirm',
 		name: 'test',
 		message: 'Create test file?'
-	}]);
-	await fs.outputFile(`${answers.location}/${answers.name}/index.js`, dependency(name));
-	if (answers.test) {
-		await fs.outputFile(`${answers.location}/${answers.name}/index.spec.js`, test(name));
+	}],
+	preProcess: ({ files, answers }) => {
+		files[`${answers.location}/${answers.name}/index.js`] = dependency;
+		if (answers.test) {
+			files[`${answers.location}/${answers.name}/index.spec.js`] = test;
+		}
+		return { files, answers };
 	}
-};
+});
