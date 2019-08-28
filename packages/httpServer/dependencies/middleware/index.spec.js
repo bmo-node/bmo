@@ -1,11 +1,10 @@
 import middleware from '.';
-
+import { isFunction } from 'lodash';
 describe('middleware', () => {
-	it('Should be a function', () => {
-		expect(typeof middleware).toEqual('function');
+	it('Should be an array', () => {
+		expect(Array.isArray(middleware)).toBeTruthy();
 	});
-	it('Should return an array when called', async () => {
-		const mw = await middleware({ config: {}, dependencies: {} });
-		expect(Array.isArray(mw)).toBeTruthy();
+	it('Should be populated with all functions', async () => {
+		expect(middleware.every((mw) => isFunction(mw))).toBeTruthy();
 	});
 });

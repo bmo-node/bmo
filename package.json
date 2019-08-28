@@ -35,6 +35,7 @@
     "@babel/register": "^7.4.4",
     "@lmig/eslint-config-cm": "^1.0.6",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.5",
     "babel-watch": "^7.0.0",
     "cheerio": "^1.0.0-rc.1",
@@ -55,6 +56,7 @@
     "snyk": "^1.210.0"
   },
   "dependencies": {
+    "esm": "^3.2.25",
     "lodash": "^4.17.15"
   },
   "jest": {
@@ -68,6 +70,9 @@
     ],
     "projects": [
       "<rootDir>/packages/*"
-    ]
+    ],
+    "transform": {
+      "\\.m?js$": "babel-jest"
+    }
   }
 }

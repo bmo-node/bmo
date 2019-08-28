@@ -1,10 +1,10 @@
 import App from './app';
 import Router from 'koa-router';
-import injectDependencies from './injectDependencies';
+import injectDependencies from '@lmig/bmo-injector';
 import loadRoute from './loadRoute';
 
 const testConfig = { thing: 'thing' };
-jest.mock('./injectDependencies');
+jest.mock('@lmig/bmo-injector');
 jest.mock('./loadRoute');
 jest.mock('@lmig/bmo-es6-require');
 jest.mock('koa');
