@@ -6,8 +6,6 @@ console.log(logo());
 
 const run = async () => {
 	const ext = await extensions();
-	console.log(ext);
-
 	program
 		.version('0.1.0')
 		.command('start', 'start an application server in the current directory')
@@ -17,7 +15,6 @@ const run = async () => {
 		console.log(`Loading command ${key}`);
 		const executableFile = cmd.file;
 		if (executableFile) {
-			console.log(executableFile);
 			program.command(cmd.format, cmd.description, { executableFile });
 		} else {
 			if (!cmd.action) {

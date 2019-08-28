@@ -57,7 +57,7 @@ generate OpenAPI documentation for the resources. These are optional and will be
 - `handler`- Is an async function that is invoked when a request is received with the given path and method.
 
 
-#CLI
+# CLI
 
 BMO comes with an easy to use command line interface. It takes care of starting up and running your application
 It even comes with a dev mode that will watch your files and restart during development
