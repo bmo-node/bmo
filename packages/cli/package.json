@@ -1,11 +1,11 @@
 {
   "name": "@lmig/bmo-cli",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "main": "index.js",
   "scripts": {},
   "bin": {
-    "bmo": "node -r esm bin/index.js"
+    "bmo": "bin/index.js"
   },
   "author": "",
   "license": "MIT",
