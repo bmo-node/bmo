@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
 import fs from 'fs-extra';
-import { each } from 'lodash';
+import { each, map } from 'lodash';
 import httpMethods from 'http-methods-enum';
 import templates from './templates';
 const { GET, POST, PUT } = httpMethods;
@@ -31,7 +31,7 @@ const HANDLER_TEMPLATES = {
 	})
 };
 
-export default async () => ({
+export default async ({ name }) => ({
 	questions: [{
 		message: 'What is the path of your resource?',
 		name: 'path',
@@ -43,11 +43,13 @@ export default async () => ({
 	}],
 	preProcess: ({ files, answers }) => {
 		const { path, version } = answers;
+		const handlers = [];
 		each(HANDLER_TEMPLATES, async (template, method) => {
 			files[`routes/${name}/${version}/handlers/${method}/index.js`] = () => templates.handler(template(answers));
 			files[`routes/${name}/${version}/handlers/${method}/index.test.js`] = templates.test;
+			handlers.push(method);
 		});
-		files[`routes/${name}/${version}/handlers/index.js`] = templates.index;
+		files[`routes/${name}/${version}/handlers/index.js`] = () => templates.index(handlers);
 		files[`config/routes.js`] = () => templates.routesConfig({
 			[name]: {
 				[version]: `${path}/${version}`

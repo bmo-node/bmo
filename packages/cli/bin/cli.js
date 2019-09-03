@@ -15,7 +15,7 @@ const run = async () => {
 		console.log(`Loading command ${key}`);
 		const executableFile = cmd.file;
 		if (executableFile) {
-			program.command(cmd.format, cmd.description, { executableFile });
+ 			program.command(cmd.format, cmd.description, { executableFile });
 		} else {
 			if (!cmd.action) {
 				throw new Error(`command ${key} must define either action or file`);

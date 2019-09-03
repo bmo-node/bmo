@@ -1,5 +1,3 @@
-import inquirer from 'inquirer';
-import fs from 'fs-extra';
 import { dependency, test } from './template';
 export default async ({ name }) => ({
 	questions: [{
