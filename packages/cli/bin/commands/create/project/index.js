@@ -1,6 +1,3 @@
-import pkgup from 'pkg-up';
-import inquirer from 'inquirer';
-import fs from 'fs-extra';
 import execa from 'execa';
 import templates from './templates';
 // TODO
@@ -20,9 +17,9 @@ const packageManagers = [yarn, npm];
 const shell = true;
 const installCmds = {
 	[yarn]: () => {
-	 const cmd = execa(yarn, [install], { shell });
-	 cmd.stdout.pipe(process.stdout);
-	 return cmd;
+		const cmd = execa(yarn, [install], { shell });
+		cmd.stdout.pipe(process.stdout);
+		return cmd;
 	},
 	[npm]: () => {
 		const cmd = execa(npm, [install], { shell });

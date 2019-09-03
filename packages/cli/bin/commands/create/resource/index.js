@@ -1,6 +1,4 @@
-import inquirer from 'inquirer';
-import fs from 'fs-extra';
-import { each, map } from 'lodash';
+import { each } from 'lodash';
 import httpMethods from 'http-methods-enum';
 import templates from './templates';
 const { GET, POST, PUT } = httpMethods;

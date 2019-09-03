@@ -9,7 +9,7 @@ const getTopLevelPackages = async (dir) => {
 	const packages = await globby(`${dir}/*/**/package.json`);
 	return packages.filter(pkg => !/node_modules/gi.test(pkg.replace(dir, '')));
 };
-const exec = async (command) => await execa.command(command, { shell: true });
+const exec = async (command) => execa.command(command, { shell: true });
 
 const globalPath = {
 	yarn: 'yarn global dir',
@@ -40,10 +40,10 @@ const isLocalModule = (path) => {
 	return path.includes(process.cwd());
 };
 
-let cached_extensions;
+let CACHED_EXTENSIONS;
 export default async () => {
-	if (cached_extensions) {
-		return cached_extensions;
+	if (CACHED_EXTENSIONS) {
+		return CACHED_EXTENSIONS;
 	}
 	try {
 		const isYarn = await fs.exists('yarn.lock');
@@ -54,7 +54,7 @@ export default async () => {
 		}
 		const modules = flattenDeep((await Promise.all(loaders)));
 
-		cached_extensions = transform(modules, (accumulator, value, key) => {
+		CACHED_EXTENSIONS = transform(modules, (accumulator, value, key) => {
 			if (value.match(/bmo-extension/gim)) {
 				const modulePath = path.dirname(value);
 				const pkg = es6Require(value);
@@ -69,7 +69,7 @@ export default async () => {
 			}
 			return accumulator;
 		}, {});
-		return cached_extensions;
+		return CACHED_EXTENSIONS;
 	} catch (e) {
 		console.log('There was an error getting your dependencies');
 		console.error(e);

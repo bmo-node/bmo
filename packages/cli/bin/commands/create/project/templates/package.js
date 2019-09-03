@@ -83,5 +83,5 @@ export default (info) => {
 		};
 	}
 
-	return 	JSON.stringify(basePkg, 0, 2);
+	return JSON.stringify(basePkg, 0, 2);
 };

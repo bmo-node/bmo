@@ -7,7 +7,6 @@ const ExtenstionTypes = {
 };
 const getExtensionsForType = (extensionPackages, type) =>
 	transform(extensionPackages, (accumulator, mod, moduleName) => {
-		const templates = Object.keys(mod[type]);
 		each(mod[type], (template, name) => {
 			template.__moduleName = moduleName;
 			let key = name;

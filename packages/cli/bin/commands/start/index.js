@@ -2,6 +2,8 @@
 import commander from 'commander';
 import dev from './dev';
 import release from './release';
+import logger from '../../../logger';
+
 function collect (value, previous) {
 	return previous.concat([value]);
 }
