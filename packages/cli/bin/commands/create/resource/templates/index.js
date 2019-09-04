@@ -20,8 +20,7 @@ export default ({
       }
     }
   },
-  dependencies:{
-  }
+  dependencies
 }) => ({
   path:\`\$\{${name}${version.toUpperCase()}\}\`${additionalPath ? `/${additionalPath}` : ''},
   method,
