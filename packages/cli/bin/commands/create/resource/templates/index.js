@@ -21,20 +21,13 @@ export default ({
     }
   },
   dependencies:{
-    repositories:{
-      ${name}:${name}Repository
-    },
-    schemas:{
-      ${name}:${name}Schema
-    },
   }
 }) => ({
   path:\`\$\{${name}${version.toUpperCase()}\}\`${additionalPath ? `/${additionalPath}` : ''},
-  schema:${name}Schema,
   method,
   handler:async (ctx,next)=>{}
 })`);
-const test = (name) =>
+const test = ({ name }) =>
 	`import ${name} from '.'
 describe('${name}', () => {
   it('Should have some tests', () => {
