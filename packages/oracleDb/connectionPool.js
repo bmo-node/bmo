@@ -5,7 +5,8 @@ export default async ({
 			user,
 			password,
 			poolAlias = 'database',
-			poolMax = 15
+			poolMax = 15,
+			autoCommit = true
 		},
 		events: { shutdown }
 	},
@@ -23,7 +24,7 @@ export default async ({
 			poolAlias,
 			poolMax
 		});
-		oracledb.autoCommit = true;
+		oracledb.autoCommit = autoCommit;
 		oracledb.outFormat = oracledb.OBJECT;
 		logger.info('Creating Connection Pool');
 	} catch (e) {
