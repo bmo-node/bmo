@@ -51,6 +51,12 @@ const testRoutes = () => ([
 
 const manifest = () => ({
 	config: {
+		pkg: {
+			name: 'test',
+			version: '1.0.0',
+			author: 'tsteele',
+			description: 'test'
+		},
 		swagger: {
 			urls: {
 				docs: docsPath,
