@@ -12,7 +12,7 @@ install the bmo cli with your package manager of choice:
 
 `yarn global add @lmig/bmo-cli`
 
-This will make the `bmo` command available in you terminal. From there you can use any commands you need.
+This will make the `bmo` command available in your terminal. From there you can use any commands you need.
 When using bmo in a npm module it is suggested that you install it locally to that project so you do not need
 any globally installed dependencies. Its more convenient to use the global `bmo` command to generate
 new resources and dependencies,
