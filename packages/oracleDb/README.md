@@ -38,7 +38,8 @@ config: {
     user,
     password,
     poolAlias = 'database',
-    poolMax = 15
+    poolMax = 15,
+    autoCommit = true
   },
 ```
 
