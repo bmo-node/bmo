@@ -3,5 +3,6 @@ import oracledb from './oracleDb';
 
 export default {
 	connectionPool,
-	oracledb
+	oracledb,
+	execute
 };
