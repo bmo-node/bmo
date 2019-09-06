@@ -79,7 +79,7 @@ export default async ({config, dependencies}) => ({
 - `method` - is the http method that the handler is for.
 - `schema`- an optional schema takes in two sub objects, these objects should be [joi](https://www.npmjs.com/package/@hapi/joi) schemas that are then used to
 generate OpenAPI documentation for the resources. These are optional and will be ignored if not supplied.
--- if request body is supplied then in coming requests will be validated against the schema.
+-- if request body is supplied then incoming requests will be validated against the schema.
 - `handler`- Is an async function that is invoked when a request is received with the given path and method.
 
 ### Adding Custom Middleware
@@ -207,7 +207,7 @@ and a top level error handling middleware are all provided by default.
 
 #### requestValidator
 
-This is used  internally by the frame work to validate your in coming requests if a requestBody schema is provided
+This is used internally by the framework to validate your incoming requests if a requestBody schema is provided
 
 #### serveStatic
 
