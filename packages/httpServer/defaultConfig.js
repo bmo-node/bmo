@@ -8,7 +8,7 @@ export default {
 		redact: ['req.headers.authorization']
 	},
 	server: {
-		port: 3000,
+		port: process.env.PORT || 3000,
 		ip: ip.address(),
 		hostname: os.hostname()
 	},
