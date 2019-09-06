@@ -1,8 +1,25 @@
+import { Context } from '@lmig/bmo-injector';
 import connectionPool from './connectionPool';
-import oracledb from './oracleDb';
 import execute from './execute';
-export default {
-	connectionPool,
-	oracledb,
-	execute
+const oracledb = require('oracledb');
+
+export default async ({ config, dependencies: { logger, events } }) => {
+	const ctx = new Context();
+	const built = (await ctx
+		.config(config)
+		.dependencies({
+			logger: () => logger,
+			events: () => events,
+			oracledb: () => oracledb,
+			connectionPool,
+			execute
+		})
+		.build());
+
+	return built
+		.expose({
+			connectionPool: true,
+			execute: true
+		})
+		.module();
 };

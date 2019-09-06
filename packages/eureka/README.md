@@ -16,40 +16,55 @@ then include the dependency in your project's dependencies.
 import eureka from '@lmig/bmo-eureka'
 export default {
   // other dependencies
-  ...eureka
+  eureka,
 }
 ```
-this package will provide the following modules:
-  - dnaClient
-  - eureka
-  - eurekaClient
 
-## dnaClient
-This is http module provided to us by the DNA team. It is a simple wrapper around
+## Exposed modules
 
-## eureka
-This module registers your service with the eureka instance. It expects these config values.
+This module is a side effect, has no public functions.
+It expects the following config to be supplied
+
 
 ```
 config: {
   eureka: {
+      serviceUrl,
       enabled = false,
       loggerLevel = 'debug'
     }
   }
 ```
 
+
+
+## Internal modules
+
+### eureka
+This module registers your service with the eureka instance. It expects these config values.
+
+```
+config: {
+  eureka: {
+      serviceUrl,
+      enabled = false,
+      loggerLevel = 'debug'
+    }
+  }
+```
 They are both optional and disabled by default.
 
+### dnaClient
+This is http module provided to us by the DNA team. It is a simple wrapper around
 
-## eurekaClient
+### eurekaClient
 This is the module used to communicate with the eureka instance, it is used internally by the eureka module.
 It expects these config values to be supplied by the user:
 ```
 config: {
   eureka: {
+      serviceUrl,
       enabled = false,
-      serviceUrl
     }
   }
 ```

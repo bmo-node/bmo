@@ -10,5 +10,8 @@
   "dependencies": {
     "dna-resilient-client": "^1.0.3",
     "eureka-client": "^1.1.0"
+  },
+  "bmo": {
+    "module": true
   }
 }
