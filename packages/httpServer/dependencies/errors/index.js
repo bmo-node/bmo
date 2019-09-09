@@ -5,5 +5,7 @@ class Unauthenticated extends ExtendableError {}
 export default () => ({
 	Unauthorized,
 	Unauthenticated,
-	Validation
+	Validation,
+	// To avoid conflicts with global Error
+	ExtendableError
 });

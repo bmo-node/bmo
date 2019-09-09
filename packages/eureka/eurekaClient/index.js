@@ -45,7 +45,7 @@ export default ({
 		pkg: { name },
 		eureka: {
 			enabled = false,
-			serviceUrl = 'debug'
+			serviceUrl
 		}
 	}
 }) => {

@@ -49,7 +49,7 @@ const runTemplate = async (template) => {
 		return fs.outputFile(name, t(processed.answers));
 	}));
 	if (template.postProcess) {
-		template.postProcess({ files, answers });
+		await template.postProcess({ files, answers });
 	}
 };
 
