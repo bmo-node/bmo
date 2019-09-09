@@ -2,7 +2,7 @@ timestamps {
 
     try {
         node('linux') {
-		    def nodeVer = "node_V10-14-2"
+		    def nodeVer = "node_V10-15-3"
             env.NODE_HOME="${tool nodeVer}"
 			env.PATH = "${env.NODE_HOME}/bin:${env.PATH}"
 
@@ -176,7 +176,7 @@ timestamps {
 
 						if(env.BRANCH_NAME == 'master'){
 							def MASTER_APP_IMAGE = APP_IMAGE_BASE + ":master"
-							sh "sudo docker build . " + "--build-arg all_proxy=http://vxpit-putil001:3128 " + "--build-arg http_proxy=http://vxpit-putil001:3128 " + "--build-arg https_proxy=http://vxpit-putil001:3128 " + "-t ${APP_IMAGE} -t ${LATEST_APP_IMAGE} --pull"
+							sh "sudo docker build . " + "--build-arg all_proxy=http://vxpit-putil001:3128 " + "--build-arg http_proxy=http://vxpit-putil001:3128 " + "--build-arg https_proxy=http://vxpit-putil001:3128 " + "-t ${APP_IMAGE} -t ${MASTER_APP_IMAGE} --pull"
 							sh "sudo docker push ${MASTER_APP_IMAGE}"
 
 						} else {
