@@ -77,7 +77,9 @@ export default class HttpServer {
 		const routes = this._getRouteConstructors();
 
 		const allDependencies = merge({}, defaultDependencies, dependencies, { routes });
-		allDependencies.middleware = [].concat(defaultDependencies.middleware, dependencies.middleware); ;
+		if (dependencies.middleware) {
+			allDependencies.middleware = [].concat(defaultDependencies.middleware, dependencies.middleware); ;
+		}
 		this.manifest = await injectDependencies(this.config, allDependencies);
 	}
 
