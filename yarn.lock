@@ -5115,6 +5115,7 @@ left-pad@^1.3.0:
 lerna@^3.16.4:
   version "3.16.4"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/lerna/-/lerna-3.16.4.tgz#158cb4f478b680f46f871d5891f531f3a2cb31ec"
+  integrity sha1-FYy09Hi2gPRvhx1YkfUx86LLMew=
   dependencies:
     "@lerna/add" "3.16.2"
     "@lerna/bootstrap" "3.16.2"
