@@ -1,7 +1,7 @@
 {
-  "name": "@lmig/bmo-extension-fusion-deploy",
+  "name": "@lmig/bmo-auth",
   "version": "0.1.0",
-  "description": "extension to create a fusion based deployment. ",
+  "description": "authentication and authorization modules",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,8 @@
   "author": "tsteele",
   "license": "SEE LICENSE IN LICENSE.md",
   "dependencies": {
-    "fs-extra": "^8.1.0"
+    "http-status-codes": "^1.3.2",
+    "jsonwebtoken": "^8.5.1",
+    "node-fetch": "^2.6.0"
   }
 }

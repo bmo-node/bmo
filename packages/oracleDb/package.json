@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "tsteele",
+  "license": "SEE LICENSE IN LICENSE.md",
   "dependencies": {
     "oracledb": "~3"
   }

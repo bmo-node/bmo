@@ -3,8 +3,8 @@
   "version": "0.2.5",
   "description": "",
   "main": "index.js",
-  "author": "",
-  "license": "ISC",
+  "author": "tsteele",
+  "license": "SEE LICENSE IN LICENSE.md",
   "dependencies": {
     "@hapi/joi": "15.1.1",
     "@lmig/bmo-es6-require": "~1.0.0",
