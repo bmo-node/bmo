@@ -73,5 +73,5 @@ const getDependencies = (root, path) => {
 	if (root.value.type === 'AssignmentPattern') {
 		hasDefaultValue = true;
 	}
-	return { path, hasDefaultValue };
+	return path;
 };
