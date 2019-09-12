@@ -41,9 +41,10 @@ export default async ({ name }) => ({
 	}],
 	preProcess: ({ files, answers }) => {
 		const { path, version } = answers;
+		const merged = { name, ...answers };
 		const handlers = [];
 		each(HANDLER_TEMPLATES, async (template, method) => {
-			files[`routes/${name}/${version}/handlers/${method}/index.js`] = () => templates.handler(template(answers));
+			files[`routes/${name}/${version}/handlers/${method}/index.js`] = () => templates.handler(template(merged));
 			files[`routes/${name}/${version}/handlers/${method}/index.test.js`] = templates.test;
 			handlers.push(method);
 		});

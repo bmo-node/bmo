@@ -124,7 +124,7 @@ caseless@~0.12.0:
   version "0.12.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
 
-chalk@^2.4.1:
+chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
   dependencies:
