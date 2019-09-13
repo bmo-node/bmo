@@ -2,6 +2,7 @@ import { get } from 'lodash';
 import HTTP_STATUS from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 import fetch from 'node-fetch';
+
 export default ({
 	config: { auth },
 	dependencies: { logger }
