@@ -1,7 +1,7 @@
 import inject from './inject';
 const isObject = (o) => { return (o instanceof Object && !(o instanceof Array)); };
 
-export default class {
+class Context {
 	config (config) {
 		this._config = config;
 		return this;
@@ -16,7 +16,7 @@ export default class {
 		let keys;
 		const exposed = {};
 		if (isObject(values)) {
-			keys = Object.keys(values);
+			keys = Object.keys(values).filter((key) => values[key]);
 		} else if (Array.isArray(values)) {
 			keys = values;
 		}
@@ -41,3 +41,5 @@ export default class {
 		return exposed;
 	}
 }
+
+export default () => new Context();

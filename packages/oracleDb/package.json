@@ -1,6 +1,6 @@
 {
   "name": "@lmig/bmo-oracledb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "provides and interface an oracle db connection pool",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@lmig/bmo-injector": "^0.1.1",
     "oracledb": "^4.0.1"
   }
 }

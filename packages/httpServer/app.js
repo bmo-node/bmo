@@ -18,6 +18,7 @@ const paths = (dir) => ({
 	index: path.resolve(dir, './index.js')
 });
 
+const middlewareKey = 'middleware';
 export default class HttpServer {
 	constructor (config) {
 		this._app = new Koa();
@@ -75,7 +76,12 @@ export default class HttpServer {
 	async _injectDependencies () {
 		const dependencies = this._getDependencyConstructors();
 		const routes = this._getRouteConstructors();
+
 		const allDependencies = merge({}, defaultDependencies, dependencies, { routes });
+		allDependencies.middleware = [].concat(
+			get(defaultDependencies, middlewareKey, []),
+			get(dependencies, middlewareKey, [])
+		);
 		this.manifest = await injectDependencies(this.config, allDependencies);
 	}
 

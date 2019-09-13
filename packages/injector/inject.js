@@ -1,9 +1,15 @@
 import loadDependency from './loadDependency';
 import compose from './compose';
-
+import context from './context';
 const DEPENDENCY_PROPERTY = 'dependencies';
 
-export default async (config, dependencies) => {
+const inject = async (config, dependencies) => {
+	dependencies.bmo = () => ({
+		di: {
+			inject,
+			context
+		}
+	});
 	const formedManifest = await compose(
 		Object.keys(dependencies)
 			.map((key) => async (manifest) => loadDependency(manifest, key, dependencies[key], dependencies, {}, DEPENDENCY_PROPERTY))
@@ -13,3 +19,5 @@ export default async (config, dependencies) => {
 	});
 	return formedManifest;
 };
+
+export default inject;
