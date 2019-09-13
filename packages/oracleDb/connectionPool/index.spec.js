@@ -1,5 +1,5 @@
 import oracledb from 'oracledb';
-import connectionPool from './connectionPool';
+import connectionPool from '.';
 
 const pool = {
 	key: 'database'

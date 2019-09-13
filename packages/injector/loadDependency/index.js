@@ -21,8 +21,15 @@ const loadDependency = async (manifest, name, dependency, dependencies, depChain
 				// if (depChain[dep]) {
 				//  throw new Error(`circular dependency detected. ${dep} is already in ${name}'s dependency chain. ${JSON.stringify(depChain, 0, 2)}`);
 				// }
-				if (!get(dependencies, dep)) {
-					throw new Error(`Unknown dependency ${dep} in module: ${name}`);
+				if (!get(dependencies, dep) && !get(manifest, dep)) {
+					const parts = dep.split('.');
+					if (parts.length > 1) {
+						// covers the case for deeply nested modules.
+						const moduleToLoad = parts[0];
+						manifest = await (loadDependency(manifest, moduleToLoad, dependencies[moduleToLoad], dependencies, depChain, dependencyProperty));
+					} else {
+					 throw new Error(`Unknown dependency ${dep} in module: ${name}`);
+					}
 				}
 				depChain[dep] = true;
 				manifest = await loadDependency(manifest, dep, get(dependencies, dep), dependencies, depChain, dependencyProperty);

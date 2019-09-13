@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "oracledb": "~3"
+    "oracledb": "^4.0.1"
   }
 }

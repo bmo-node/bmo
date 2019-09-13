@@ -17,6 +17,7 @@ export default async ({
 	}
 }) => {
 	try {
+		console.log(connectString, user, oracledb);
 		await oracledb.createPool({
 			connectString,
 			user,
