@@ -19,6 +19,8 @@ class Context {
 			keys = Object.keys(values).filter((key) => values[key]);
 		} else if (Array.isArray(values)) {
 			keys = values;
+		} else if (!values) {
+			this._keys = [];
 		}
 		this._keys = keys;
 		return this;
