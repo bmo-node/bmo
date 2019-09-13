@@ -11,6 +11,7 @@ import compose from '../compose';
 
 const loadDependency = async (manifest, name, dependency, dependencies, depChain, dependencyProperty) => {
 	const dependencyPath = `${dependencyProperty}.${name}`;
+	console.log(`Loading ${name}`, dependency);
 	if (has(manifest, dependencyPath)) {
 		return manifest;
 	}
@@ -49,7 +50,14 @@ const loadDependency = async (manifest, name, dependency, dependencies, depChain
 			map(dependency, (dep, index) => async (manifest) => loadDependency(manifest, `${name}[${index}]`, dep, dependencies, depChain, dependencyProperty))
 		)(manifest);
 	} else {
-		throw new Error(`Dependency ${name} must be either a function, object, or array. type ${typeof dependency} not injectable`);
+		const parts = name.split('.');
+		if (parts.length > 1) {
+			// covers the case for deeply nested modules.
+			const moduleToLoad = parts[0];
+			manifest = await (loadDependency(manifest, moduleToLoad, dependencies[moduleToLoad], dependencies, depChain, dependencyProperty));
+		} else {
+			throw new Error(`Dependency ${name} must be either a function, object, or array. type ${typeof dependency} not injectable`);
+		}
 	}
 	return manifest;
 };

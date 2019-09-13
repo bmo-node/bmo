@@ -40,6 +40,7 @@ const run = async () => {
 
 	set(pkg.bmo, `modules.${pkgName}`, moduleName);
 	fs.writeFileSync(pkgPath, JSON.stringify(pkg, 0, 2));
+	logger.info(`Added ${pkgName} as ${moduleName}`);
 };
 
 run();
