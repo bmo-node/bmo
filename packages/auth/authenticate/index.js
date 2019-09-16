@@ -22,7 +22,6 @@ export default ({
 			// so we can safely decode here without verifying the signature
 			ctx.userInfo = jwt.decode(token);
 			await next();
-			return;
 		} catch (e) {
 			logger.error(e);
 			ctx.status = HTTP_STATUS.UNAUTHORIZED;
