@@ -16,11 +16,13 @@ export default ({
 			const token = get(ctx, 'headers.authorization', '')
 				.replace(/Bearer/, '')
 				.trim();
-			const result = await axios.put(`${host}${verifyToken}`, { token });
+			// Axios throws an error on > 400 so if this passes we are good.
+			await axios.put(`${host}${verifyToken}`, { token });
 			// The token has been authenticated by our service
 			// so we can safely decode here without verifying the signature
 			ctx.userInfo = jwt.decode(token);
 			await next();
+			return;
 		} catch (e) {
 			logger.error(e);
 			ctx.status = HTTP_STATUS.UNAUTHORIZED;
