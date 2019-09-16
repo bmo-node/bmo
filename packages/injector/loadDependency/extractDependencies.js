@@ -8,7 +8,6 @@ const FN_NAME = 'anon';
 export default (fn, dependencyProperty) => {
 	const fnString = wrapAnon(fn.toString());
 	const ast = parseAst(fnString);
-	console.log(JSON.stringify(ast, 0, 2));
 	const root = ast.body[0];
 	if (root && paramParsers[root.type]) {
 		const params = paramParsers[root.type](root, dependencyProperty);
@@ -23,7 +22,6 @@ const wrapAnon = (fnString) => {
 	}
 	return fnString;
 };
-
 const paramParsers = {
 	ExpressionStatement: (root, dependencyProperty) => {
 		const configParam = root.expression.params[0];
@@ -64,14 +62,10 @@ const configParsers = {
 };
 
 const getDependencies = (root, path) => {
-	let hasDefaultValue = false;
 	const currentKeyName = root.key.type === 'Literal' ? root.key.value : root.key.name;
 	path.length === 0 ? path = currentKeyName : path = `${path}.${currentKeyName}`;
 	if (root.value.type === 'ObjectPattern') {
 		return root.value.properties.map((p) => getDependencies(p, path));
-	}
-	if (root.value.type === 'AssignmentPattern') {
-		hasDefaultValue = true;
 	}
 	return path;
 };
