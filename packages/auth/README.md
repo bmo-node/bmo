@@ -22,3 +22,15 @@ if the service returns a 200 level status code then the
 jwt is decoded and attached to userInfo on the requests context.
 
 if the service returns an error the request is returned with a 401 status.
+
+to use in your application add it to your middleware stack
+
+
+```
+// dependencies.js
+import { authenticate } from '@lmig/bmo-auth'
+export default {
+  //...
+  middleware:[authenticate]
+}
+```
