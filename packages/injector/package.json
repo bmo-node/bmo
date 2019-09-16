@@ -6,7 +6,7 @@
   "files":["**/*.js","!*.spec.js"],
   "scripts": {},
   "author": "tsteele",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "dependencies": {
     "esprima": "^4.0.1",
     "esquery": "^1.0.1",

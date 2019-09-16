@@ -8,6 +8,7 @@ module.exports = {
   },
   rules: {
     'semi':['error','always'],
+    'callback-return':['error',['cb']],
     'no-tabs': ['error', { allowIndentationTabs: true }],
     'linebreak-style': ['error', 'unix'],
     'import/no-extraneous-dependencies': ['error', {

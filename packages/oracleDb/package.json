@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "tsteele",
+  "license": "UNLICENSED",
   "dependencies": {
     "@lmig/bmo-injector": "^0.1.1",
     "oracledb": "^4.0.1"

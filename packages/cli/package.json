@@ -7,8 +7,8 @@
   "bin": {
     "bmo": "bin/index.js"
   },
-  "author": "",
-  "license": "MIT",
+  "author": "tsteele",
+  "license": "UNLICENSED",
   "dependencies": {
     "@lmig/bmo-es6-require": "~1.0.0",
     "chalk": "^2.4.2",
