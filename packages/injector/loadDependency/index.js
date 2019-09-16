@@ -29,7 +29,7 @@ const loadDependency = async (manifest, name, dependency, dependencies, depChain
 						const moduleToLoad = parts[0];
 						manifest = await (loadDependency(manifest, moduleToLoad, dependencies[moduleToLoad], dependencies, depChain, dependencyProperty));
 					} else {
-					 throw new Error(`Unknown dependency ${dep} in module: ${name}`);
+						throw new Error(`Unknown dependency ${dep} in module: ${name}`);
 					}
 				}
 				depChain[dep] = true;

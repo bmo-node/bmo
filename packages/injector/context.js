@@ -14,7 +14,6 @@ class Context {
 
 	expose (values) {
 		let keys;
-		const exposed = {};
 		if (isObject(values)) {
 			keys = Object.keys(values).filter((key) => values[key]);
 		} else if (Array.isArray(values)) {
@@ -34,7 +33,7 @@ class Context {
 	module () {
 		const keys = this._keys || Object.keys(this._manifest);
 		const exposed = {};
-		this._keys.forEach((key) => {
+		keys.forEach((key) => {
 			if (!this._manifest.dependencies[key]) {
 				throw new Error(`Unknown key ${key}`);
 			}

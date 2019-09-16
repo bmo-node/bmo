@@ -13,6 +13,6 @@
     "oracledb": "^4.0.1"
   },
   "bmo": {
-    "module":true
+    "module": true
   }
 }

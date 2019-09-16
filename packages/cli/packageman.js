@@ -1,11 +1,6 @@
 import execa from 'execa';
 import fs from 'fs-extra';
 
-const defaultRegistry = 'default';
-const registries = [
-	'https://pi-artifactory.lmig.com/artifactory/api/npm/npm',
-	defaultRegistry
-];
 const yarn = 'yarn';
 const npm = 'npm';
 const install = 'install';
