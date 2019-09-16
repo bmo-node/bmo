@@ -20,7 +20,7 @@ export default ({
 			await axios.put(`${host}${verifyToken}`, { token });
 			// The token has been authenticated by our service
 			// so we can safely decode here without verifying the signature
-			ctx.userInfo = jwt.decode(token);
+			ctx.user = jwt.decode(token);
 			await next();
 		} catch (e) {
 			logger.error(e);

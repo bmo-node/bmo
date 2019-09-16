@@ -1,6 +1,8 @@
 import authenticate from '.';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import HTTP_STATUS from 'http-status-codes';
+
 jest.mock('axios');
 jest.mock('jsonwebtoken');
 
@@ -49,8 +51,8 @@ describe('authenticate', () => {
 			expect(axios.put).toHaveBeenCalledWith(`${host}${verifyToken}`, { token: testToken });
 		});
 
-		it('Should populate ctx.userInfo with the result of jwt.decode', () => {
-			expect(ctx.userInfo).toEqual(testData);
+		it('Should populate ctx.user with the result of jwt.decode', () => {
+			expect(ctx.user).toEqual(testData);
 		});
 	});
 
@@ -60,24 +62,21 @@ describe('authenticate', () => {
 		let ctx;
 		let next;
 		beforeAll(async () => {
+			axios.put.mockImplementation(() => {
+				throw new Error();
+			});
 			m = manifest();
 			mw = authenticate(m);
 			ctx = context();
 			next = jest.fn();
 		});
 		it('Should log the error when the service denies the request', async () => {
-			axios.put.mockImplementation(() => {
-				throw new Error();
-			});
 			await mw(ctx, next);
 			expect(m.dependencies.logger.error).toHaveBeenCalled();
 		});
 		it('Should set the status to 401 when the service call fails', async () => {
-			axios.put.mockImplementation(() => {
-				throw new Error();
-			});
 			await mw(ctx, next);
-			expect(ctx.status).toEqual(401);
+			expect(ctx.status).toEqual(HTTP_STATUS.UNAUTHORIZED);
 		});
 	});
 });
