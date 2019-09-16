@@ -6,7 +6,16 @@ import errorHandler from './errorHandler';
 export default [
 	// Already a module so no need to wrap it
 	errorHandler,
-	() => helmet(),
+	({ config: {
+		server: {
+			helmet: helmetConfig = {
+				frameguard: {
+					action: 'SAMEORIGIN'
+				}
+			}
+		}
+	}
+	}) => helmet(helmetConfig),
 	() => bodyparser(),
 	() => logger()
 ];
