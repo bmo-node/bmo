@@ -4,7 +4,7 @@ timestamps
     try {
       node('linux') {
         stage("Checkout") {
-          def nodeVer = "node_V10-16-3"
+          def nodeVer = "node_V10-16-2"
           env.NODE_HOME="${tool nodeVer}"
           env.JAVA_HOME = "${tool global.java.java8.home}"
           env.PATH = "${env.JAVA_HOME}/bin:${env.NODE_HOME}/bin:${env.PATH}"
