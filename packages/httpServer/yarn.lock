@@ -112,7 +112,7 @@ caseless@~0.12.0:
   version "0.12.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
 
-chalk@^2.4.1, chalk@^2.4.2:
+chalk@^2.4.2:
   version "2.4.2"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
   dependencies:
@@ -174,7 +174,7 @@ copy-to@^2.0.1:
   version "2.0.1"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/copy-to/-/copy-to-2.0.1.tgz#2680fbb8068a48d08656b6098092bdafc906f4a5"
 
-core-util-is@1.0.2, core-util-is@~1.0.0:
+core-util-is@1.0.2:
   version "1.0.2"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
@@ -243,12 +243,6 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-end-of-stream@^1.1.0:
-  version "1.4.1"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/end-of-stream/-/end-of-stream-1.4.1.tgz#ed29634d19baba463b6ce6b80a37213eab71ec43"
-  dependencies:
-    once "^1.4.0"
-
 error-inject@^1.0.0:
   version "1.0.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/error-inject/-/error-inject-1.0.0.tgz#e2b3d91b54aed672f309d950d154850fa11d4f37"
@@ -298,17 +292,19 @@ fast-deep-equal@^2.0.1:
   version "2.0.1"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
 
-fast-json-parse@^1.0.3:
-  version "1.0.3"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/fast-json-parse/-/fast-json-parse-1.0.3.tgz#43e5c61ee4efa9265633046b770fb682a7577c4d"
-
 fast-json-stable-stringify@^2.0.0:
   version "2.0.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/fast-json-stable-stringify/-/fast-json-stable-stringify-2.0.0.tgz#d5142c0caee6b1189f87d3a76111064f86c8bbf2"
 
-fast-safe-stringify@^1.0.8, fast-safe-stringify@^1.2.3:
-  version "1.2.3"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/fast-safe-stringify/-/fast-safe-stringify-1.2.3.tgz#9fe22c37fb2f7f86f06b8f004377dbf8f1ee7bc1"
+fast-redact@^1.4.4:
+  version "1.5.0"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/fast-redact/-/fast-redact-1.5.0.tgz#302892f566750c4f5eec7b830bfc9bc473484034"
+  integrity sha1-MCiS9WZ1DE9e7HuDC/ybxHNIQDQ=
+
+fast-safe-stringify@^2.0.7:
+  version "2.0.7"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/fast-safe-stringify/-/fast-safe-stringify-2.0.7.tgz#124aa885899261f68aedb42a7c080de9da608743"
+  integrity sha1-EkqohYmSYfaK7bQqfAgN6dpgh0M=
 
 feature-policy@0.3.0:
   version "0.3.0"
@@ -320,7 +316,7 @@ find-up@^3.0.0:
   dependencies:
     locate-path "^3.0.0"
 
-flatstr@^1.0.5:
+flatstr@^1.0.12, flatstr@^1.0.9:
   version "1.0.12"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/flatstr/-/flatstr-1.0.12.tgz#c2ba6a08173edbb6c9640e3055b95e287ceb5931"
 
@@ -472,7 +468,7 @@ inherits@2.0.3:
   version "2.0.3"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
-inherits@2.0.4, inherits@~2.0.3:
+inherits@2.0.4:
   version "2.0.4"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
 
@@ -491,10 +487,6 @@ is-typedarray@~1.0.0:
 isarray@0.0.1:
   version "0.0.1"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
-
-isarray@~1.0.0:
-  version "1.0.0"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
 
 isstream@~0.1.2:
   version "0.1.2"
@@ -579,12 +571,6 @@ koa-helmet@5.1.0:
 koa-is-json@^1.0.0:
   version "1.0.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
-
-koa-pino-logger@^2.1.3:
-  version "2.1.3"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/koa-pino-logger/-/koa-pino-logger-2.1.3.tgz#bc2de057113969a189546897f7130083c65ed236"
-  dependencies:
-    pino-http "^2.0.1"
 
 koa-router@^7.4.0:
   version "7.4.0"
@@ -709,12 +695,6 @@ on-finished@^2.3.0:
   dependencies:
     ee-first "1.1.1"
 
-once@^1.3.1, once@^1.4.0:
-  version "1.4.0"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/once/-/once-1.4.0.tgz#583b1aa775961d4b113ac17d9c50baef9dd76bd1"
-  dependencies:
-    wrappy "1"
-
 only@~0.0.2:
   version "0.0.2"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/only/-/only-0.0.2.tgz#2afde84d03e50b9a8edc444e30610a70295edfb4"
@@ -757,28 +737,29 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
 
-pino-http@^2.0.1:
-  version "2.6.2"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/pino-http/-/pino-http-2.6.2.tgz#aedb71b08d15bc69d959870bafa6b7780103274f"
+pino-http@^4.3.0:
+  version "4.3.0"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/pino-http/-/pino-http-4.3.0.tgz#ebe0505d871efc2f8a5e1ca57f4cbd5667708007"
+  integrity sha1-6+BQXYce/C+KXhylf0y9VmdwgAc=
   dependencies:
-    pino "^4.0.2"
+    pino "^5.0.0"
+    pino-std-serializers "^2.4.0"
 
-pino-std-serializers@^2.0.0:
+pino-std-serializers@^2.3.0, pino-std-serializers@^2.4.0:
   version "2.4.2"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/pino-std-serializers/-/pino-std-serializers-2.4.2.tgz#cb5e3e58c358b26f88969d7e619ae54bdfcc1ae1"
 
-pino@^4.0.2:
-  version "4.17.6"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/pino/-/pino-4.17.6.tgz#8c237f3a29f4104f89321c25037deab6a7998fb4"
+pino@^5.0.0, pino@^5.13.3:
+  version "5.13.3"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/pino/-/pino-5.13.3.tgz#26cd6f69b4bd03d6408af28eddcd9313687f143d"
+  integrity sha1-Js1vabS9A9ZAivKO3c2TE2h/FD0=
   dependencies:
-    chalk "^2.4.1"
-    fast-json-parse "^1.0.3"
-    fast-safe-stringify "^1.2.3"
-    flatstr "^1.0.5"
-    pino-std-serializers "^2.0.0"
-    pump "^3.0.0"
-    quick-format-unescaped "^1.1.2"
-    split2 "^2.2.0"
+    fast-redact "^1.4.4"
+    fast-safe-stringify "^2.0.7"
+    flatstr "^1.0.9"
+    pino-std-serializers "^2.3.0"
+    quick-format-unescaped "^3.0.2"
+    sonic-boom "^0.7.5"
 
 pkg-up@^3.1.0:
   version "3.1.0"
@@ -790,20 +771,9 @@ platform@1.3.5:
   version "1.3.5"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/platform/-/platform-1.3.5.tgz#fb6958c696e07e2918d2eeda0f0bc9448d733444"
 
-process-nextick-args@~2.0.0:
-  version "2.0.1"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
-
 psl@^1.1.24:
   version "1.3.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/psl/-/psl-1.3.0.tgz#e1ebf6a3b5564fa8376f3da2275da76d875ca1bd"
-
-pump@^3.0.0:
-  version "3.0.0"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/pump/-/pump-3.0.0.tgz#b4a2116815bde2f4e1ea602354e8c75565107a64"
-  dependencies:
-    end-of-stream "^1.1.0"
-    once "^1.3.1"
 
 punycode@^1.4.1:
   version "1.4.1"
@@ -821,11 +791,10 @@ qs@~6.5.2:
   version "6.5.2"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
 
-quick-format-unescaped@^1.1.2:
-  version "1.1.2"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/quick-format-unescaped/-/quick-format-unescaped-1.1.2.tgz#0ca581de3174becef25ac3c2e8956342381db698"
-  dependencies:
-    fast-safe-stringify "^1.0.8"
+quick-format-unescaped@^3.0.2:
+  version "3.0.2"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/quick-format-unescaped/-/quick-format-unescaped-3.0.2.tgz#0137e94d8fb37ffeb70040535111c378e75396fb"
+  integrity sha1-ATfpTY+zf/63AEBTURHDeOdTlvs=
 
 raw-body@^2.3.3:
   version "2.4.1"
@@ -835,18 +804,6 @@ raw-body@^2.3.3:
     http-errors "1.7.3"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
-
-readable-stream@~2.3.6:
-  version "2.3.6"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/readable-stream/-/readable-stream-2.3.6.tgz#b11c27d88b8ff1fbe070643cf94b0c79ae1b0aaf"
-  dependencies:
-    core-util-is "~1.0.0"
-    inherits "~2.0.3"
-    isarray "~1.0.0"
-    process-nextick-args "~2.0.0"
-    safe-buffer "~5.1.1"
-    string_decoder "~1.1.1"
-    util-deprecate "~1.0.1"
 
 referrer-policy@1.2.0:
   version "1.2.0"
@@ -884,7 +841,7 @@ resolve-path@^1.4.0:
     http-errors "~1.6.2"
     path-is-absolute "1.0.1"
 
-safe-buffer@5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
+safe-buffer@5.1.2:
   version "5.1.2"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
 
@@ -904,11 +861,12 @@ setprototypeof@1.1.1:
   version "1.1.1"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/setprototypeof/-/setprototypeof-1.1.1.tgz#7e95acb24aa92f5885e0abef5ba131330d4ae683"
 
-split2@^2.2.0:
-  version "2.2.0"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/split2/-/split2-2.2.0.tgz#186b2575bcf83e85b7d18465756238ee4ee42493"
+sonic-boom@^0.7.5:
+  version "0.7.6"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/sonic-boom/-/sonic-boom-0.7.6.tgz#c42df6df884a6a3d54fa7a45b11e4e2196818d45"
+  integrity sha1-xC3234hKaj1U+npFsR5OIZaBjUU=
   dependencies:
-    through2 "^2.0.2"
+    flatstr "^1.0.12"
 
 sprintf-js@~1.0.2:
   version "1.0.3"
@@ -932,12 +890,6 @@ sshpk@^1.7.0:
   version "1.5.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
 
-string_decoder@~1.1.1:
-  version "1.1.1"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
-  dependencies:
-    safe-buffer "~5.1.0"
-
 supports-color@^5.3.0:
   version "5.5.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/supports-color/-/supports-color-5.5.0.tgz#e2e69a44ac8772f78a1ec0b35b689df6530efc8f"
@@ -955,13 +907,6 @@ thenify-all@^1.0.0:
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/thenify/-/thenify-3.3.0.tgz#e69e38a1babe969b0108207978b9f62b88604839"
   dependencies:
     any-promise "^1.0.0"
-
-through2@^2.0.2:
-  version "2.0.5"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/through2/-/through2-2.0.5.tgz#01c1e39eb31d07cb7d03a96a70823260b23132cd"
-  dependencies:
-    readable-stream "~2.3.6"
-    xtend "~4.0.1"
 
 toidentifier@1.0.0:
   version "1.0.0"
@@ -1005,10 +950,6 @@ urijs@^1.19.0:
   version "1.19.1"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/urijs/-/urijs-1.19.1.tgz#5b0ff530c0cbde8386f6342235ba5ca6e995d25a"
 
-util-deprecate@~1.0.1:
-  version "1.0.2"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
-
 uuid@^3.3.2:
   version "3.3.2"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
@@ -1025,17 +966,9 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-wrappy@1:
-  version "1.0.2"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
-
 x-xss-protection@1.2.0:
   version "1.2.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/x-xss-protection/-/x-xss-protection-1.2.0.tgz#3170498ff8e7e8159f4896b27fa4d4810c2ff486"
-
-xtend@~4.0.1:
-  version "4.0.2"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/xtend/-/xtend-4.0.2.tgz#bb72779f5fa465186b1f438f674fa347fdb5db54"
 
 ylru@^1.2.0:
   version "1.2.1"

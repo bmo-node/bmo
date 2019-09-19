@@ -4,6 +4,9 @@ export default {
 	di: {
 		namespace: 'dependencies'
 	},
+	pino: {
+		redact: ['req.headers.authorization']
+	},
 	server: {
 		port: 3000,
 		ip: ip.address(),

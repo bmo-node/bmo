@@ -1,9 +1,10 @@
-export default ({
+export default async ({
 	dependencies: {
 		connectionPool
 	}
-}) => async (query) => {
+}) => async (statement) => {
 	const connection = await connectionPool.getConnection();
-	connection.execute(query);
+	const value = await connection.execute(statement);
 	connection.close();
+	return value;
 };
