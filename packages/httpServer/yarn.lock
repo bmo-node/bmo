@@ -29,18 +29,6 @@
   dependencies:
     "@hapi/hoek" "8.x.x"
 
-"@lmig/bmo-es6-require@~1.0.0":
-  version "1.0.0"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/@lmig/bmo-es6-require/-/@lmig/bmo-es6-require-1.0.0.tgz#37d15dd01aa069916bab4ec6b5bbe792a7b07fab"
-
-"@lmig/bmo-injector@^0.1.1":
-  version "0.1.1"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/@lmig/bmo-injector/-/@lmig/bmo-injector-0.1.1.tgz#8fdc950caf87ee3c30305056df39fd515029a0a2"
-  dependencies:
-    esprima "^4.0.1"
-    esquery "^1.0.1"
-    lodash "^4.17.15"
-
 accepts@^1.3.5:
   version "1.3.7"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/accepts/-/accepts-1.3.7.tgz#531bc726517a3b2b41f850021c6cc15eaab507cd"
@@ -273,19 +261,9 @@ escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
-esprima@^4.0.0, esprima@^4.0.1:
+esprima@^4.0.0:
   version "4.0.1"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
-
-esquery@^1.0.1:
-  version "1.0.1"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/esquery/-/esquery-1.0.1.tgz#406c51658b1f5991a5f9b62b1dc25b00e3e5c708"
-  dependencies:
-    estraverse "^4.0.0"
-
-estraverse@^4.0.0:
-  version "4.2.0"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
 
 eureka-client@^1.1.0:
   version "1.1.0"
@@ -671,7 +649,7 @@ locate-path@^3.0.0:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
 
-lodash@^4.13.1, lodash@^4.17.11, lodash@^4.17.15:
+lodash@^4.13.1, lodash@^4.17.11:
   version "4.17.15"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
 
