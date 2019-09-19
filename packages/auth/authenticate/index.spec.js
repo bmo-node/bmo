@@ -1,7 +1,6 @@
 import authenticate from '.';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import HTTP_STATUS from 'http-status-codes';
 
 jest.mock('axios');
 jest.mock('jsonwebtoken');

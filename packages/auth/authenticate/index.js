@@ -1,5 +1,4 @@
 import { get } from 'lodash';
-import HTTP_STATUS from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 export default ({
