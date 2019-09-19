@@ -12,13 +12,19 @@ export default {
     onAuthenticated: Function
   },
   mounted(){
-    window.addEventListener('message', event => {
-        if (event.origin.startsWith(this.$props.host)) {
-          this.$props.onAuthenticated(event.data.token)
-        } else {
-          return;
-        }
-    })
+    window.addEventListener('message', this.listener)
+  },
+  unmounted(){
+    window.removeEventListener('message', this.listener)
+  },
+  methods: {
+    listener(event){
+      if (event.origin.startsWith(this.$props.host)) {
+        this.$props.onAuthenticated(event.data.token)
+      } else {
+        return;
+      }
+    }
   }
 }
 </script>
