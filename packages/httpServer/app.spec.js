@@ -2,7 +2,6 @@ import App from './app';
 import Router from 'koa-router';
 import injectDependencies from '@lmig/bmo-injector';
 import loadRoute from './loadRoute';
-require = require('esm')(module, {});
 
 const testConfig = { thing: 'thing' };
 jest.mock('@lmig/bmo-injector');
