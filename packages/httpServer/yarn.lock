@@ -29,6 +29,11 @@
   dependencies:
     "@hapi/hoek" "8.x.x"
 
+"@lmig/bmo-es6-require@~1.0.0":
+  version "1.0.0"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/@lmig/bmo-es6-require/-/@lmig/bmo-es6-require-1.0.0.tgz#37d15dd01aa069916bab4ec6b5bbe792a7b07fab"
+  integrity sha1-N9Fd0BqgaZFrq07Gtbvnkqewf6s=
+
 "@lmig/bmo-injector@^0.1.1":
   version "0.1.1"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/@lmig/bmo-injector/-/@lmig/bmo-injector-0.1.1.tgz#8fdc950caf87ee3c30305056df39fd515029a0a2"
