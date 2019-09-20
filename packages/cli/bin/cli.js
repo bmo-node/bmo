@@ -1,8 +1,10 @@
 import program from 'commander';
 import { each } from 'lodash';
+import pkg from '../package.json';
 import logo from '../logo';
 import extensions from '../extensions';
 console.log(logo());
+console.log(`BMO CLI v${pkg.version}`);
 
 const run = async () => {
 	const ext = await extensions();
