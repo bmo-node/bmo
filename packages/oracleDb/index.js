@@ -25,6 +25,7 @@ export default async ({
 	.build())
 	.expose({
 		connectionPool: true,
-		execute: true
+		execute: true,
+		oracledb: true
 	})
 	.module();

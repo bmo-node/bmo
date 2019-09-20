@@ -1,7 +1,6 @@
 import authenticate from '.';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import HTTP_STATUS from 'http-status-codes';
 
 jest.mock('axios');
 jest.mock('jsonwebtoken');
@@ -18,6 +17,9 @@ const manifest = () => ({
 		}
 	},
 	dependencies: {
+		errors: {
+			Unauthenticated: Error
+		},
 		logger: {
 			error: jest.fn()
 		}
@@ -71,12 +73,17 @@ describe('authenticate', () => {
 			next = jest.fn();
 		});
 		it('Should log the error when the service denies the request', async () => {
-			await mw(ctx, next);
+			try {
+				await mw(ctx, next);
+			} catch (e) {}
 			expect(m.dependencies.logger.error).toHaveBeenCalled();
 		});
-		it('Should set the status to 401 when the service call fails', async () => {
-			await mw(ctx, next);
-			expect(ctx.status).toEqual(HTTP_STATUS.UNAUTHORIZED);
+		it('Should throw an Unauthenticated Error', async () => {
+			try {
+				await mw(ctx, next);
+			} catch (e) {
+				expect(e).toBeInstanceOf(Error);
+			}
 		});
 	});
 });

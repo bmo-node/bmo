@@ -5,6 +5,7 @@
 "@lmig/bmo-es6-require@~1.0.0":
   version "1.0.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/@lmig/bmo-es6-require/-/@lmig/bmo-es6-require-1.0.0.tgz#37d15dd01aa069916bab4ec6b5bbe792a7b07fab"
+  integrity sha1-N9Fd0BqgaZFrq07Gtbvnkqewf6s=
 
 "@nodelib/fs.scandir@2.1.1":
   version "2.1.1"

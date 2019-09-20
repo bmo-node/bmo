@@ -11,11 +11,7 @@ export default ({ args = {}, cwd }) => {
 			const fullPath = require.resolve(configPath);
 			config = es6require(fullPath);
 		} else {
-			config = async () => ({
-				eureka: {
-					enabled: false
-				}
-			});
+			config = async () => ({});
 		}
 	} catch (e) {
 		console.error('Unable to load configuration. Ensure that a config directory is in the current directory');

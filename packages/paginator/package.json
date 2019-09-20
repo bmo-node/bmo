@@ -1,7 +1,7 @@
 {
-  "name": "@lmig/bmo-oracledb",
-  "version": "1.0.3",
-  "description": "provides an interface and oracle db connection pool",
+  "name": "@lmig/bmo-paginator",
+  "version": "0.1.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,8 +9,7 @@
   "author": "tsteele",
   "license": "UNLICENSED",
   "dependencies": {
-    "@lmig/bmo-injector": "^0.1.1",
-    "oracledb": "^4.0.1"
+    "lodash.clamp": "^4.0.3"
   },
   "bmo": {
     "module": true
