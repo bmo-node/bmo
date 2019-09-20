@@ -6,7 +6,8 @@ const connection = ({ mockResult }) => ({
 const manifest = ({ connection }) => ({
 	dependencies: {
 		connectionPool: {
-			getConnection: jest.fn(() => connection)
+			getConnection: jest.fn(() => connection),
+			closeConnection: jest.fn()
 		}
 	}
 });
@@ -26,9 +27,22 @@ describe('execute', () => {
 		expect(result).toEqual(mockResult);
 	});
 	it('Should call execute on the connection with the statement', () => {
-		expect(mockConnection.execute).toHaveBeenCalledWith(statement);
+		expect(mockConnection.execute).toHaveBeenCalledWith(statement, {});
 	});
 	it('Should call execute on the connection with the statement', () => {
-		expect(mockConnection.close).toHaveBeenCalled();
+		expect(mockManifest.dependencies.connectionPool.closeConnection).toHaveBeenCalled();
+	});
+
+	describe('With bindings', () => {
+		it('should call execute with an empty object if no bindings are passed', async () => {
+			expect(mockConnection.execute).toHaveBeenCalledWith(statement, {});
+		});
+		it('should call execute with a statement and bindings', async () => {
+			const bindings = { foo: 'bar' };
+			mockConnection = connection({ mockResult });
+			mockManifest = manifest({ connection: mockConnection });
+			result = await (await execute(mockManifest))(statement, bindings);
+			expect(mockConnection.execute).toHaveBeenCalledWith(statement, bindings);
+		});
 	});
 });
