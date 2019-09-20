@@ -10,7 +10,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@lmig/bmo-injector": "^0.1.1",
-    "oracledb": "^4.0.1"
+    "oracledb": "~3"
   },
   "bmo": {
     "module": true

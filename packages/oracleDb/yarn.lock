@@ -33,7 +33,7 @@ lodash@^4.17.15:
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha1-tEf2ZwoEVbv+7dETku/zMOoJdUg=
 
-oracledb@^4.0.1:
-  version "4.0.1"
-  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/oracledb/-/oracledb-4.0.1.tgz#1580be9d932a394bfe9cb5f913dfb41b21849cb8"
-  integrity sha1-FYC+nZMqOUv+nLX5E9+0GyGEnLg=
+oracledb@~3:
+  version "3.1.2"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/oracledb/-/oracledb-3.1.2.tgz#4d7df7b8eda161d4e645837cd43c530232d139e8"
+  integrity sha1-TX33uO2hYdTmRYN81DxTAjLROeg=
