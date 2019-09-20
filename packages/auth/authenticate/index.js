@@ -1,5 +1,4 @@
 import { get } from 'lodash';
-import HTTP_STATUS from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 export default ({
@@ -7,7 +6,8 @@ export default ({
 		auth
 	},
 	dependencies: {
-		logger
+		logger,
+		errors
 	}
 }) => {
 	const { host, verifyToken } = auth;
@@ -21,11 +21,10 @@ export default ({
 			// The token has been authenticated by our service
 			// so we can safely decode here without verifying the signature
 			ctx.user = jwt.decode(token);
-			await next();
 		} catch (e) {
 			logger.error(e);
-			ctx.status = HTTP_STATUS.UNAUTHORIZED;
-			ctx.body = {};
+			throw new errors.Unauthenticated(`Access Denied`);
 		}
+		await next();
 	};
 };

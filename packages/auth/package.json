@@ -1,6 +1,6 @@
 {
   "name": "@lmig/bmo-auth",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "authentication and authorization modules",
   "main": "index.js",
   "scripts": {
