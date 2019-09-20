@@ -19,7 +19,8 @@ export default async ({ config, dependencies: { logger, events } }) => {
 	return built
 		.expose({
 			connectionPool: true,
-			execute: true
+			execute: true,
+			oracledb: true
 		})
 		.module();
 };
