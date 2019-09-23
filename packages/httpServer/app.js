@@ -2,7 +2,7 @@ import path from 'path';
 import Koa from 'koa';
 import Router from 'koa-router';
 import pkgup from 'pkg-up';
-import { has, get, merge } from 'lodash';
+import { has, get, merge, transform } from 'lodash';
 import fs from 'fs';
 import es6Require from '@lmig/bmo-es6-require';
 import injectDependencies from '@lmig/bmo-injector';
@@ -73,11 +73,34 @@ export default class HttpServer {
 		return () => [];
 	}
 
+	_getLocalPath (module) {
+		return require.resolve(`${module}`, {
+			paths: [`${process.cwd()}/node_modules/`]
+		});
+	}
+	_getModules () {
+		if (this._pkg.bmo) {
+			const modules = get(this._pkg.bmo, 'modules', {});
+			return transform(modules, (agg, value, key) => {
+				console.log(`Loading module ${key} as ${value}`);
+
+				const val = es6Require(this._getLocalPath(key));
+				const modPackage = es6Require(this._getLocalPath(`${key}/package.json`));
+				if (key.match(/bmo-/) || modPackage.bmo.module) {
+					agg[value] = val;
+				} else {
+					agg[value] = () => val;
+				}
+			}, {});
+		}
+		return {};
+	}
+
 	async _injectDependencies () {
 		const dependencies = this._getDependencyConstructors();
 		const routes = this._getRouteConstructors();
-
-		const allDependencies = merge({}, defaultDependencies, dependencies, { routes });
+		const externalModules = this._getModules();
+		const allDependencies = merge({}, defaultDependencies, dependencies, { routes }, externalModules);
 		allDependencies.middleware = [].concat(
 			get(defaultDependencies, middlewareKey, []),
 			get(dependencies, middlewareKey, [])

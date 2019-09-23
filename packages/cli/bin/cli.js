@@ -11,7 +11,8 @@ const run = async () => {
 	program
 		.version('0.1.0')
 		.command('start', 'start an application server in the current directory')
-		.command('create', 'creates a BMO http application');
+		.command('create', 'creates a BMO http application')
+		.command('add', 'adds a npm module to the bmo dependencies, and installs if it is not in the package.json');
 
 	each(ext.commands, (cmd, key) => {
 		console.log(`Loading command ${key}`);

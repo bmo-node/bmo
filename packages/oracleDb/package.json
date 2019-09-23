@@ -9,7 +9,6 @@
   "author": "tsteele",
   "license": "UNLICENSED",
   "dependencies": {
-    "@lmig/bmo-injector": "^0.1.1",
     "oracledb": "~3"
   },
   "bmo": {

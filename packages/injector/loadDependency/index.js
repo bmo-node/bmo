@@ -11,6 +11,7 @@ import compose from '../compose';
 
 const loadDependency = async (manifest, name, dependency, dependencies, depChain, dependencyProperty) => {
 	const dependencyPath = `${dependencyProperty}.${name}`;
+	console.log(`Loading ${name}`, dependency);
 	if (has(manifest, dependencyPath)) {
 		return manifest;
 	}

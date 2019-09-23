@@ -1,7 +1,9 @@
 import inject from './inject';
 const isObject = (o) => { return (o instanceof Object && !(o instanceof Array)); };
 
-export default class {
+export default () => new Context();
+
+class Context {
 	config (config) {
 		this._config = config;
 		return this;
