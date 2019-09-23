@@ -46,6 +46,18 @@ Some templates are included but more can be added by using extensions
 |resource        | Creates a restful resource with the given name           |
 |dependency      | Creates a new dependency for BMO dependency injection    |
 
+### Add
+
+`bmo add <pkg@version> [as <alias>]`
+
+This will add the given package as a dependency and include it in your manifest automatically.
+
+
+|Option          | Description                                              |
+|----------------|----------------------------------------------------------|
+|as <alias>      | When injected into the manifest it will use this instead |
+|                | of the module name.                                      |
+
 
 ## Extensions
 
