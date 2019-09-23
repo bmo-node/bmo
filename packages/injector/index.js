@@ -1,7 +1,7 @@
 import inject from './inject';
-import Context from './context';
 
+import context from './context';
 export default inject;
 export {
-	Context
+	context
 };
