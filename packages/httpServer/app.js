@@ -86,7 +86,7 @@ export default class HttpServer {
 
 				const val = es6Require(this._getLocalPath(key));
 				const modPackage = es6Require(this._getLocalPath(`${key}/package.json`));
-				if (key.match(/bmo-/) || modPackage.bmo.module) {
+				if (key.match(/bmo-/) || get(modPackage, 'bmo.module')) {
 					agg[value] = val;
 				} else {
 					agg[value] = () => val;
