@@ -13,17 +13,21 @@ then include the dependency in your project's dependencies.
 
 ```
 //dependencies.js
-import oracleDb from '@lmig/bmo-oracledb'
+import bmoOracledb from '@lmig/bmo-oracledb'
 export default {
   // other dependencies
-  ...oracleDB
+  bmoOracledb
 }
 ```
-this package will provide the following modules:
+this package will provide the following public modules:
   - connectionPool
   - oracledb
   - execute
 
+access the modules in your other dependencies
+```
+({ bmoOracledb:{ execute, connectionPool, oracledb } })
+```
 ## oracledb
 This is a simple module that wraps [node-oracledb](https://github.com/oracle/node-oracledb).
 
