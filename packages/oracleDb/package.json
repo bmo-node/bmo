@@ -1,7 +1,7 @@
 {
   "name": "@lmig/bmo-oracledb",
   "version": "1.0.5",
-  "description": "provides and interface an oracle db connection pool",
+  "description": "provides an interface to an oracle db connection pool",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
