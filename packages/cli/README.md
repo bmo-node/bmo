@@ -80,12 +80,12 @@ export default {
   commands: {
     myCommand:{
       format: 'myCommand [params]',
-      description: 'my command that does some stuff'
-      action: (params)=>{}
+      description: 'my command that does some stuff',
+      action: ({ config, dependencies:{ logger } }) => (params) => {}
     },
     myOtherCommand:{
       format: 'myOtherCommand [params]',
-      description: 'my command that does some stuff'
+      description: 'my command that does some stuff',
       file: path.resolve(__dirname,'./myCommand')
     }
   }

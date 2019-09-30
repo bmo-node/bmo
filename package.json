@@ -65,7 +65,9 @@
     "reporters": [
       "default"
     ],
-    "setupFiles": ["<rootDir>/setupTests.js"],
+    "setupFiles": [
+      "<rootDir>/setupTests.js"
+    ],
     "collectCoverage": true,
     "collectCoverageFrom": [
       "**/*.js",

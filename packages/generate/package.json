@@ -1,0 +1,11 @@
+{
+  "name": "@lmig/bmo-extension-generate",
+  "version": "0.1.0",
+  "description": "implements a plugable templating plugin for the cli.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tsteele",
+  "license": "UNLICENSED"
+}

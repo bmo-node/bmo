@@ -7,6 +7,15 @@
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/@lmig/bmo-es6-require/-/@lmig/bmo-es6-require-1.0.0.tgz#37d15dd01aa069916bab4ec6b5bbe792a7b07fab"
   integrity sha1-N9Fd0BqgaZFrq07Gtbvnkqewf6s=
 
+"@lmig/bmo-injector@^0.1.3":
+  version "0.1.3"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/@lmig/bmo-injector/-/@lmig/bmo-injector-0.1.3.tgz#e7da98d688f60cb0945586c0f6645575c75e5baa"
+  integrity sha1-59qY1oj2DLCUVYbA9mRVdcdeW6o=
+  dependencies:
+    esprima "^4.0.1"
+    esquery "^1.0.1"
+    lodash "^4.17.15"
+
 "@nodelib/fs.scandir@2.1.1":
   version "2.1.1"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/@nodelib/fs.scandir/-/fs.scandir-2.1.1.tgz#7fa8fed654939e1a39753d286b48b4836d00e0eb"
@@ -436,6 +445,23 @@ escape-string-regexp@^1.0.5:
 esm@^3.2.25:
   version "3.2.25"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/esm/-/esm-3.2.25.tgz#342c18c29d56157688ba5ce31f8431fbb795cc10"
+
+esprima@^4.0.1:
+  version "4.0.1"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
+  integrity sha1-E7BM2z5sXRnfkatph6hpVhmwqnE=
+
+esquery@^1.0.1:
+  version "1.0.1"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/esquery/-/esquery-1.0.1.tgz#406c51658b1f5991a5f9b62b1dc25b00e3e5c708"
+  integrity sha1-QGxRZYsfWZGl+bYrHcJbAOPlxwg=
+  dependencies:
+    estraverse "^4.0.0"
+
+estraverse@^4.0.0:
+  version "4.3.0"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/estraverse/-/estraverse-4.3.0.tgz#398ad3f3c5a24948be7725e83d11a7de28cdbd1d"
+  integrity sha1-OYrT88WiSUi+dyXoPRGn3ijNvR0=
 
 execa@^0.7.0:
   version "0.7.0"
