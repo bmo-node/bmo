@@ -4,9 +4,11 @@ export default () =>
 		(fromObject) => {
 			const value = {};
 			each(modelMap, (valueKey, toKey) => {
-				let newValue = get(fromObject, valueKey);
-				if (isFunction(newValue)) {
-					newValue = newValue(fromObject);
+				let newValue;
+				if (isFunction(valueKey)) {
+					newValue = valueKey(fromObject);
+				} else {
+					newValue = get(fromObject, valueKey);
 				}
 				set(value, toKey, newValue);
 			});

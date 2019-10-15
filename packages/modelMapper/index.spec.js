@@ -9,13 +9,14 @@ const input = {
 };
 
 const functionMap = {
-	bar: 'thing',
+	foo: 'bar',
 	'baz-fuz': (currentValue) => currentValue.bar
 };
 const expectedFunction = {
 	foo: input.bar,
 	'baz-fuz': input.bar
 };
+
 const expected = {
 	foo: input.bar,
 	baz: {
@@ -27,6 +28,6 @@ describe('modelMapper', () => {
 		expect(modelMapper()(mockMap)(input)).toEqual(expected);
 	});
 	it('should use the function to create the value if the value is a function', () => {
-		expect(modelMapper()(mockMap)(functionMap)).toEqual(expectedFunction);
+		expect(modelMapper()(functionMap)(input)).toEqual(expectedFunction);
 	});
 });
