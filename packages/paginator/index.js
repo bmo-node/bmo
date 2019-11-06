@@ -29,3 +29,4 @@ export default ({
 		last = undefined;
 	}
 	return { next, prev, self, last };
+};
