@@ -108,7 +108,7 @@ describe('extractDependencies', () => {
 			const otherDependency = ({ dependencies }) => {
 				const bar = [...foo];
 			};
-			expect(async () => await extractDependencies(otherDependency, dependenciesKey)).not.toThrow();
+			expect(async () => extractDependencies(otherDependency, dependenciesKey)).not.toThrow();
 		});
 	});
 
