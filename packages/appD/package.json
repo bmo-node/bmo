@@ -1,6 +1,6 @@
 {
   "name": "@lmig/bmo-app-dynamics",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "support for AppDynamics",
   "main": "index.js",
   "scripts": {
