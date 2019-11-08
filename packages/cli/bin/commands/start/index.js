@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 import commander from 'commander';
 import dev from './dev';
-import release from './release';
+import { fork } from 'child_process';
 import logger from '../../../logger';
+const esm = require.resolve('esm');
 
 function collect (value, previous) {
 	return previous.concat([value]);
@@ -21,7 +22,7 @@ try {
 		console.log('starting dev...');
 		dev({ args: commander, cwd });
 	} else {
-		release({ args: commander, cwd });
+		fork(`${__dirname}/staticServer.js`, { cwd, execArgv: [ '-r', esm ] });
 	}
 } catch (e) {
 	console.error('Unable to load configuration. Ensure that a config directory is in the current directory');
