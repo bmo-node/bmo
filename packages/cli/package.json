@@ -1,6 +1,6 @@
 {
   "name": "@lmig/bmo-cli",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "",
   "main": "index.js",
   "scripts": {},
@@ -11,7 +11,6 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@lmig/bmo-es6-require": "~1.0.0",
-    "@lmig/bmo-http-server": "^0.2.13",
     "chalk": "^2.4.2",
     "commander": "^3.0.0",
     "esm": "^3.2.25",
