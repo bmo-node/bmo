@@ -7,7 +7,6 @@ function collect (value, previous) {
 }
 
 export default ({ dependencies: { logger } }) => {
-	console.log(logger);
 	return () => {
 		console.log('starting server....');
 		const cwd = process.cwd();
