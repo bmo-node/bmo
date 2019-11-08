@@ -52,7 +52,6 @@ export default class HttpServer {
 		const packagePath = await pkgup();
 		this._pkg = require(packagePath);
 		this.config.pkg = this._pkg;
-		console.log('before inejction')
 		await this._injectDependencies();
 		this._loadMiddleware();
 		this._loadRoutes();
