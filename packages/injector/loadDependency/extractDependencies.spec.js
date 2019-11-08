@@ -102,6 +102,14 @@ describe('extractDependencies', () => {
 			const dependencies = await extractDependencies(otherDependency, dependenciesKey);
 			expect(dependencies).toEqual([]);
 		});
+
+		it('Should parse code that uses the ... operator', async () => {
+			const foo = [];
+			const otherDependency = ({ dependencies }) => {
+				const bar = [...foo];
+			};
+			expect(async () => extractDependencies(otherDependency, dependenciesKey)).not.toThrow();
+		});
 	});
 
 	describe('Error cases', () => {
