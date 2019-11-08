@@ -23,7 +23,8 @@
     "postinstall": "lerna bootstrap && if-env CI=true && echo 'ci skipping link' || npm run link:cli",
     "link:cli": "echo \"linking cli\" && cd ./packages/cli && yarn link",
     "snyk:test": "snyk test --org=liberty-mutual --severity-threshold=medium",
-    "snyk:wizard": "snyk wizard"
+    "snyk:wizard": "snyk wizard",
+    "patch:version": "lerna exec -- npm version patch"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

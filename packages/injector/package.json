@@ -1,14 +1,17 @@
 {
   "name": "@lmig/bmo-injector",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "dependency injector for bmo",
   "main": "index.js",
-  "files":["**/*.js","!*.spec.js"],
+  "files": [
+    "**/*.js",
+    "!*.spec.js"
+  ],
   "scripts": {},
   "author": "tsteele",
   "license": "UNLICENSED",
   "dependencies": {
-    "esprima": "^4.0.1",
+    "espree": "^6.1.2",
     "esquery": "^1.0.1",
     "lodash": "^4.17.15"
   }

@@ -1,6 +1,6 @@
 {
   "name": "@lmig/bmo-http-server",
-  "version": "0.2.10",
+  "version": "0.2.13",
   "description": "",
   "main": "index.js",
   "author": "tsteele",
@@ -8,7 +8,7 @@
   "dependencies": {
     "@hapi/joi": "15.1.1",
     "@lmig/bmo-es6-require": "~1.0.0",
-    "@lmig/bmo-injector": "^0.1.3",
+    "@lmig/bmo-injector": "^0.2.0",
     "chalk": "^2.4.2",
     "eureka-client": "^1.1.0",
     "extendable-error": "^0.1.5",
