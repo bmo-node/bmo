@@ -1,6 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
+
 export default ({ config: { appDEnabled = false } }) => {
 	if (appDEnabled) {
+		console.log('Configuring AppDynamics');
 		require('appdynamics').profile({
 			controllerHostName: process.env.APPDYNAMICS_CONTROLLER_HOST_NAME,
 			controllerPort: 443,
