@@ -1,8 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import appdynamics from 'appdynamics'; // appdynamics needs to be installed globally when running
+
 export default ({ config: { appDEnabled = false } }) => {
 	if (appDEnabled) {
-		appdynamics.profile({
+		console.log('Configuring AppDynamics');
+		require('appdynamics').profile({
 			controllerHostName: process.env.APPDYNAMICS_CONTROLLER_HOST_NAME,
 			controllerPort: 443,
 			controllerSslEnabled: true,
