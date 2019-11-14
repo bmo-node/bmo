@@ -1,0 +1,15 @@
+{
+  "name": "@lmig/bmo-config",
+  "version": "0.0.1",
+  "description": "loads configuration based on the NODE_ENV",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tsteele",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@lmig/bmo-es6-require": "^1.0.1",
+    "lodash": "^4.17.15"
+  }
+}

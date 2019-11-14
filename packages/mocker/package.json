@@ -1,0 +1,16 @@
+{
+  "name": "@lmig/bmo-mocker",
+  "version": "0.1.0",
+  "description": "utility for testing bmo modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@lmig/bmo-es6-require": "^1.0.1",
+    "@lmig/bmo-injector": "^0.2.0",
+    "@lmig/bmo-config": "^0.1.0"
+  }
+}
