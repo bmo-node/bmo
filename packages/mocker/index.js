@@ -1,7 +1,7 @@
 import inject, { extract } from '@lmig/bmo-injector';
 import es6Require from '@lmig/bmo-es6-require';
 import { set, get, has, flatten, merge } from 'lodash';
-import { load } from '@lmig/bmo-config';
+import { load as loadConfig } from '@lmig/bmo-config';
 // This will probably break with circular dependencies...
 const getDependencies = (module, dependencies) => {
 	let deps = extract(module);
@@ -22,7 +22,7 @@ const getDependencyModuleName = (modulePath, dependencies) => {
 		moduleName = s.join('.');
 	}
 	if (moduleName.length === 0) {
-		throw new Error(`No dependency in path ${d} found`);
+		throw new Error(`No dependency in path ${moduleName} found`);
 	}
 	return moduleName;
 };
@@ -45,7 +45,7 @@ export default ({ config: userConfig = {}, dependencies = {}, mocks = {} } = {})
 			return this;
 		},
 		async build (module) {
-			const appConfig = await (es6Require(`${process.cwd()}/config`))();
+			const appConfig = await loadConfig(`${process.cwd()}/config`);
 			const config = merge({}, appConfig, userConfig);
 			const deps = getDependencies(module, dependencies);
 			const bundle = {};

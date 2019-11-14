@@ -1,6 +1,5 @@
 import fs from 'fs';
 import dotenv from 'dotenv';
-import es6require from '@lmig/bmo-es6-require';
 import { load } from '@lmig/bmo-config';
 import server from './server';
 dotenv.config();
