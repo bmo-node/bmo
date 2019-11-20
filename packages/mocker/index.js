@@ -5,7 +5,7 @@ import { load as loadConfig } from '@lmig/bmo-config';
 
 export default ({ config: userConfig = {}, dependencies: userDeps = {}, mocks = {} } = {}) => {
 	const appDeps = es6Require(`${process.cwd()}/dependencies`);
-	const dependencies = merge({}, userDeps, appDeps);
+	const dependencies = merge({}, appDeps, userDeps);
 	const logger = {
 		info: console.log,
 		warn: console.warn,
