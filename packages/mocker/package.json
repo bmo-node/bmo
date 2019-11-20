@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {  },
   "author": "",
-  "license": "ISC",
+  "license": "Apache 2.0",
   "dependencies": {
     "@lmig/bmo-config": "^0.1.0",
     "@lmig/bmo-es6-require": "^1.0.1",
