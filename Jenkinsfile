@@ -46,7 +46,7 @@ timestamps
         stage("\test")
           {
             checkpoint "Test"
-            sh 'CI=true NO_PROXY="localhost,127.0.0.1,*.lmig.com,*.lm.lmig.com,*.libertyec.com,192.168.99.100" HTTPS_PROXY="http://fusion-proxy.lmig.com:80" HTTP_PROXY="http://fusion-proxy.lmig.com:80" npm test'
+            sh 'SKIP_LINK=true NO_PROXY="localhost,127.0.0.1,*.lmig.com,*.lm.lmig.com,*.libertyec.com,192.168.99.100" HTTPS_PROXY="http://fusion-proxy.lmig.com:80" HTTP_PROXY="http://fusion-proxy.lmig.com:80" npm test'
           }
 
         stage("Security Audit") {
