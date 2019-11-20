@@ -27,38 +27,38 @@ timestamps
           currentBuild.displayName = "${appName}_${appVersion}"
         }
 
-        stage("yarn install")
+        stage("install")
           {
-            sh 'CI=true yarn install --ignore-engines --pure-lockfile --update-checksums'
+            sh 'npm cache clear --force && CI=true yarn install --ignore-engines --update-checksums'
           }
 
-        stage("yarn run build")
+        stage("build")
           {
             sh 'yarn run build'
           }
 
-        stage("yarn lint")
+        stage("lint")
           {
             checkpoint "Lint"
-            sh 'yarn lint'
+            sh 'yarn run lint'
           }
 
-        stage("yarn test")
+        stage("test")
           {
             checkpoint "Test"
-            sh 'CI=true NO_PROXY="localhost,127.0.0.1,*.lmig.com,*.lm.lmig.com,*.libertyec.com,192.168.99.100" HTTPS_PROXY="http://fusion-proxy.lmig.com:80" HTTP_PROXY="http://fusion-proxy.lmig.com:80" yarn test'
+            sh 'SKIP_LINK=true NO_PROXY="localhost,127.0.0.1,*.lmig.com,*.lm.lmig.com,*.libertyec.com,192.168.99.100" HTTPS_PROXY="http://fusion-proxy.lmig.com:80" HTTP_PROXY="http://fusion-proxy.lmig.com:80" yarn test'
           }
 
         stage("Security Audit") {
             withCredentials([string(credentialsId: 'help_snyk_token', variable: 'SNYK_TOKEN')]) {
               withEnv(["SNYK_TOKEN=${SNYK_TOKEN}","http-proxy=http://vxpit-putil001.lmig.com:3128","https_proxy=http://vxpit-putil001.lmig.com:3128"]){
-                sh "yarn snyk:test"
+                sh "yarn run snyk:test"
               }
             }
           }
           if (env.BRANCH_NAME == 'develop') {
           stage("publish"){
-            sh "yarn publish:packages"
+            sh "yarn run publish:packages"
           }
           // stage("publish"){
           //   sh "echo \"publishing packages\""

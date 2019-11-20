@@ -3,5 +3,10 @@
     "packages/*"
   ],
   "npmClient":"yarn",
-  "version": "independent"
+  "version": "independent",
+  "command":{
+    "bootstrap": {
+      "npmClientArgs": ["--update-checksums"]
+    }
+  }
 }
