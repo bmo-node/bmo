@@ -46,7 +46,7 @@ export default {
     },
     disableIFrame(){
       this.refresh = false;
-      window.removeEventListener('message', this.listener)
+      window.removeEventListener(events.MESSAGE, this.listener)
     }
   }
 }
