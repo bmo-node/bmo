@@ -1,6 +1,6 @@
 {
   "name": "@lmig/bmo-vue-token",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Retrieving authorized tokens from the Auth Service. Supports Vue only",
   "main": "TokenLoader.vue",
   "scripts": {
@@ -9,7 +9,7 @@
   "author": "rsusai",
   "license": "UNLICENSED",
   "dependencies": {
-    "core-js": "^2.6.5",
+    "core-js": "^3.4.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {

@@ -12,6 +12,8 @@ describe('TokenLoader', () => {
 	};
 	const onAuthenticated = jest.fn();
 	global.addEventListener = jest.fn((_, cb) => cb(event));
+	global.setTimeout = jest.fn()
+		.mockImplementationOnce((f) => f());
 	it('calls onAuthenticated with the token from the event', () => {
 		const wrapper = shallowMount(TokenLoader, {
 			propsData: {
@@ -20,6 +22,18 @@ describe('TokenLoader', () => {
 			}
 		});
 		expect(onAuthenticated).toHaveBeenCalledWith(token);
+		wrapper.destroy();
+	});
+	it('starts a timer if an interval time is passed', () => {
+		const interval = 1000;
+		const wrapper = shallowMount(TokenLoader, {
+			propsData: {
+				host,
+				onAuthenticated,
+				interval
+			}
+		});
+		expect(global.setTimeout).toHaveBeenCalledWith(wrapper.vm.enableIFrame, interval);
 		wrapper.destroy();
 	});
 });
