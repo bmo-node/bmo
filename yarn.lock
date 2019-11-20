@@ -5620,6 +5620,11 @@ jest-snapshot@^24.9.0:
     pretty-format "^24.9.0"
     semver "^6.2.0"
 
+jest-transform-stub@^2.0.0:
+  version "2.0.0"
+  resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/jest-transform-stub/-/jest-transform-stub-2.0.0.tgz#19018b0851f7568972147a5d60074b55f0225a7d"
+  integrity sha1-GQGLCFH3VolyFHpdYAdLVfAiWn0=
+
 jest-util@^24.9.0:
   version "24.9.0"
   resolved "https://pi-artifactory.lmig.com/artifactory/api/npm/npm/jest-util/-/jest-util-24.9.0.tgz#7396814e48536d2e85a37de3e4c431d7cb140162"

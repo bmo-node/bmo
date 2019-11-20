@@ -22,7 +22,7 @@
     "publish:packages": "lerna publish from-package --graph-type all --yes --registry https://pi-artifactory.lmig.com/artifactory/api/npm/npm",
     "postinstall": "lerna bootstrap && if-env CI=true && echo 'ci skipping link' || npm run link:cli",
     "link:cli": "echo \"linking cli\" && cd ./packages/cli && yarn link",
-    "bootstrap":"lerna bootstrap",
+    "bootstrap": "lerna bootstrap",
     "snyk:test": "snyk test --org=liberty-mutual --severity-threshold=medium",
     "snyk:wizard": "snyk wizard",
     "patch:version": "lerna exec -- npm version patch"
@@ -51,6 +51,7 @@
     "if-env": "^1.0.4",
     "jest": "^24.9.0",
     "jest-mock-process": "^1.2.0",
+    "jest-transform-stub": "^2.0.0",
     "joi": "^14.3.1",
     "lerna": "3.16.4",
     "nodemon": "^1.19.1",
