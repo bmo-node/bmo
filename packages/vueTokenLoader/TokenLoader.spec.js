@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import TokenLoader from './TokenLoader';
+import TokenLoader, { events as tokenEvents } from '.';
 
 describe('TokenLoader', () => {
 	const host = 'host';
@@ -21,7 +21,7 @@ describe('TokenLoader', () => {
 				onAuthenticated
 			}
 		});
-		expect(onAuthenticated).toHaveBeenCalledWith(token);
+		expect(wrapper.emitted(tokenEvents.ONAUTHENTICATED)).toBeTruthy();
 		wrapper.destroy();
 	});
 	it('starts a timer if an interval time is passed', () => {

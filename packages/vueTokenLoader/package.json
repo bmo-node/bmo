@@ -1,6 +1,6 @@
 {
   "name": "@lmig/bmo-vue-token",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Retrieving authorized tokens from the Auth Service. Supports Vue only",
   "main": "TokenLoader.vue",
   "scripts": {
@@ -35,7 +35,6 @@
     ],
     "transform": {
       "^.+\\.vue$": "vue-jest",
-      ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
       "^.+\\.jsx?$": "babel-jest"
     },
     "transformIgnorePatterns": [
@@ -44,9 +43,6 @@
     "moduleNameMapper": {
       "^@/(.*)$": "<rootDir>/src/$1"
     },
-    "snapshotSerializers": [
-      "jest-serializer-vue"
-    ],
     "testURL": "http://localhost/",
     "watchPlugins": [
       "jest-watch-typeahead/filename",
