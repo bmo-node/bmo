@@ -29,7 +29,7 @@ timestamps
 
         stage("install")
           {
-            sh 'npm cache verify && CI=true npm install --ignore-engines'
+            sh 'npm cache clean --force && CI=true npm install --ignore-engines'
           }
 
         stage("build")
