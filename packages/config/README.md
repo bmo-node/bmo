@@ -29,7 +29,7 @@ console.log(config)
 #API
 
 ```
-const config = async load(directory)
+const config = await load(directory)
 
 directory - string - The directory to look for configs to load.
 returns - a config object with the merged config values.
