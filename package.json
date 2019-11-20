@@ -20,7 +20,7 @@
     "selenium": "node ./scripts/postinstall",
     "test": "jest",
     "publish:packages": "lerna publish from-package --graph-type all --yes --registry https://pi-artifactory.lmig.com/artifactory/api/npm/npm",
-    "postinstall": "lerna bootstrap --no-ci && link:cli",
+    "postinstall": "lerna bootstrap --no-ci && npm run link:cli",
     "link:cli": "if-env CI=true && echo 'ci skipping link' || echo \"linking cli\" && cd ./packages/cli && npm link",
     "bootstrap": "lerna bootstrap",
     "snyk:test": "snyk test --org=liberty-mutual --severity-threshold=medium",
