@@ -12,7 +12,8 @@ This component requires two props to be passed to it: a host url and an onAuthen
   <div id="app">
     <div v-if="!token">
       <TokenLoader 
-        host="https://auth-service-develop.np.uscm.libertyec.com"   :onAuthenticated="onAuthenticated"
+        host="https://auth-service-develop.np.uscm.libertyec.com"
+        :onAuthenticated="onAuthenticated"
         :interval="<desired refresh>" //this is an optional prop
       />
     </div>
