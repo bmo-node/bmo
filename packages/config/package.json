@@ -1,6 +1,6 @@
 {
   "name": "@lmig/bmo-config",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "loads configuration based on the NODE_ENV",
   "main": "index.js",
   "scripts": {

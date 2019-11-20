@@ -3,41 +3,6 @@ import es6Require from '@lmig/bmo-es6-require';
 import { set, get, has, flatten, merge, isUndefined } from 'lodash';
 import { load as loadConfig } from '@lmig/bmo-config';
 
-// This will probably break with circular dependencies...
-const getDependencies = (module, dependencies, found = {}) => {
-	let deps = extract(module);
-	if (found[module]) {
-		return [];
-	}
-	found[module] = true;
-	const subdeps = deps.map((d) => {
-		const moduleName = getDependencyModuleName(d, dependencies);
-		return getDependencies(get(dependencies, moduleName), dependencies, found);
-	});
-	deps = deps.concat(subdeps);
-	deps = flatten(deps);
-	return deps;
-};
-
-const getDependencyModuleName = (modulePath, dependencies) => {
-	let moduleName = modulePath;
-	while (!has(dependencies, moduleName) && moduleName.length > 0) {
-		const s = moduleName.split('.');
-		s.pop();
-		if (s.length > 1) {
-			moduleName = s.join('.');
-		} else if (s[0]) {
-			moduleName = s[0];
-		} else {
-			moduleName = '';
-		}
-	}
-	if (moduleName.length === 0) {
-		throw new Error(`No dependency in path ${modulePath} found`);
-	}
-	return moduleName;
-};
-
 export default ({ config: userConfig = {}, dependencies: userDeps = {}, mocks = {} } = {}) => {
 	const appDeps = es6Require(`${process.cwd()}/dependencies`);
 	const dependencies = merge({}, userDeps, appDeps);
@@ -79,4 +44,39 @@ export default ({ config: userConfig = {}, dependencies: userDeps = {}, mocks = 
 			}
 		}
 	};
+};
+
+// This will probably break with circular dependencies...
+const getDependencies = (module, dependencies, found = {}) => {
+	let deps = extract(module);
+	if (found[module]) {
+		return [];
+	}
+	found[module] = true;
+	const subdeps = deps.map((d) => {
+		const moduleName = getDependencyModuleName(d, dependencies);
+		return getDependencies(get(dependencies, moduleName), dependencies, found);
+	});
+	deps = deps.concat(subdeps);
+	deps = flatten(deps);
+	return deps;
+};
+
+const getDependencyModuleName = (modulePath, dependencies) => {
+	let moduleName = modulePath;
+	while (!has(dependencies, moduleName) && moduleName.length > 0) {
+		const s = moduleName.split('.');
+		s.pop();
+		if (s.length > 1) {
+			moduleName = s.join('.');
+		} else if (s[0]) {
+			moduleName = s[0];
+		} else {
+			moduleName = '';
+		}
+	}
+	if (moduleName.length === 0) {
+		throw new Error(`No dependency in path ${modulePath} found`);
+	}
+	return moduleName;
 };
