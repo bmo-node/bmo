@@ -81,9 +81,6 @@
     "projects": [
       "<rootDir>/packages/*"
     ],
-    "transformIgnorePatterns": [
-      "/node_modules/(?!@lmig)"
-    ],
     "transform": {
       "\\.m?js$": "babel-jest"
     }
