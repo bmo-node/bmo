@@ -4,7 +4,7 @@ This module implements a Vue Component that retrieves a valid token from the Aut
 
 The component implements an iFrame that listens for an event coming from the Auth Service.
 
-This component requires two props to be passed to it: a host url and a function to be called on the onAuthenticated event.  You can also add an optional third prop to set an interval at which the component will automatically retrieve a new token.
+This component requires only one prop to be passed to it: a host url.  You will need a function to be called on the onAuthenticated event, and you can also add an optional third prop to set the interval at which the component will automatically retrieve a new token.
 
 ```
 // App.vue
