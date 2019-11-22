@@ -1,6 +1,6 @@
 {
   "name": "@lmig/bmo-vue-token",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Retrieving authorized tokens from the Auth Service. Supports Vue only",
   "main": "TokenLoader.vue",
   "scripts": {
@@ -8,21 +8,22 @@
   },
   "author": "rsusai",
   "license": "UNLICENSED",
-  "dependencies": {
-    "core-js": "^2.6.5",
+  "peerDependencies": {
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.11.0",
-    "@vue/cli-plugin-eslint": "^3.11.0",
-    "@vue/cli-plugin-unit-jest": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
+    "@vue/cli-plugin-babel": "^4.0.5",
+    "@vue/cli-plugin-eslint": "^4.0.5",
+    "@vue/cli-plugin-unit-jest": "^4.0.5",
+    "@vue/cli-service": "^4.0.5",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "core-js": "^3.4.1",
+    "eslint": "^6.6.0",
+    "eslint-plugin-vue": "^6.0.1",
+    "vue": "^2.6.10",
     "vue-template-compiler": "^2.6.10"
   },
   "jest": {
@@ -34,7 +35,6 @@
     ],
     "transform": {
       "^.+\\.vue$": "vue-jest",
-      ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
       "^.+\\.jsx?$": "babel-jest"
     },
     "transformIgnorePatterns": [
@@ -43,9 +43,6 @@
     "moduleNameMapper": {
       "^@/(.*)$": "<rootDir>/src/$1"
     },
-    "snapshotSerializers": [
-      "jest-serializer-vue"
-    ],
     "testURL": "http://localhost/",
     "watchPlugins": [
       "jest-watch-typeahead/filename",

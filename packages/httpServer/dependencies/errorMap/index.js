@@ -2,6 +2,7 @@ import httpStatusCodes from 'http-status-codes';
 import { each } from 'lodash';
 const {
 	BAD_REQUEST,
+	NOT_FOUND,
 	INTERNAL_SERVER_ERROR,
 	UNAUTHORIZED,
 	FORBIDDEN
@@ -14,10 +15,12 @@ export default ({
 	const {
 		Validation,
 		Unauthenticated,
-		Unauthorized
+		Unauthorized,
+		NotFound
 	} = errors;
 	const map = {
 		[BAD_REQUEST]: [Validation],
+		[NOT_FOUND]: [NotFound],
 		// The status code for unauthorized really means unauthenticated
 		[UNAUTHORIZED]: [Unauthenticated],
 		[FORBIDDEN]: [Unauthorized]
