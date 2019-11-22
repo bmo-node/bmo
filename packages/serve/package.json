@@ -9,8 +9,15 @@
   "author": "tsteele",
   "license": "UNLICENSED",
   "dependencies": {
+    "@lmig/bmo-config": "^0.1.0",
     "@lmig/bmo-http-server": "^0.2.10",
-    "commander": "^3.0.1",
-    "esm": "^3.2.25"
+    "chalk": "^3.0.0",
+    "commander": "^4.0.1",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.0"
   }
 }

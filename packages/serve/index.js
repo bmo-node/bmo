@@ -1,4 +1,3 @@
-import path from 'path';
 import serve from './serve';
 export default {
 	commands: {

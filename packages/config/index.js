@@ -1,4 +1,5 @@
 import fs from 'fs';
+import chalk from 'chalk';
 import es6Require from '@lmig/bmo-es6-require';
 import { get, has, merge, isFunction } from 'lodash';
 const env = process.env.NODE_ENV;
@@ -14,7 +15,7 @@ const loadConfigFile = async (path) => {
 		}
 		return config;
 	} else {
-		console.warn(`File: ${path} not found.`);
+		console.log(chalk.yellow(`Warning File: ${path} not found.`));
 	}
 };
 

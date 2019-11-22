@@ -56,7 +56,6 @@ export default async () => {
 
 		CACHED_EXTENSIONS = transform(modules, (accumulator, value, key) => {
 			if (value.match(/bmo-extension/gim)) {
-				console.log(value);
 				const modulePath = path.dirname(value);
 				const pkg = es6Require(value);
 				if (accumulator[pkg.name]) {
