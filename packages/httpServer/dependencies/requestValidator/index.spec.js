@@ -10,7 +10,7 @@ const schema = joi
 describe('Request validator', () => {
 	it('Should error when the request body does not match the schema', () => {
 		const testValidator = validator()(schema);
-		const ctx = { request: { body: { notName: 'test' } }};
+		const ctx = { request: { body: { notName: 'test' } } };
 		try {
 			testValidator(ctx, () => {});
 		} catch (e) {
@@ -27,7 +27,7 @@ describe('Request validator', () => {
 	it('Should call next when the body is valid', () => {
 		const testValidator = validator()(schema);
 		const next = jest.fn();
-		testValidator({request: { body: { name: 'test' } }}, next);
+		testValidator({ request: { body: { name: 'test' } } }, next);
 		expect(next).toHaveBeenCalled();
 	});
 });
