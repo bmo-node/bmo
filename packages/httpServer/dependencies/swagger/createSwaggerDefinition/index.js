@@ -1,6 +1,5 @@
-import { each, set, isEmpty } from 'lodash';
+import { each, set } from 'lodash';
 import joi2Swagger from 'joi-to-swagger';
-import httpMethods from 'http-methods-enum';
 import httpStatus from 'http-status-codes';
 
 const PATH_DELIMITER = '/';
@@ -10,7 +9,6 @@ const SCHEMA_TYPES = {
 	REQUEST_BODY: 'requestBody'
 };
 const { REQUEST_BODY, RESPONSE_BODY } = SCHEMA_TYPES;
-const { GET, PUT, POST } = httpMethods;
 const { OK, CREATED, BAD_REQUEST, INTERNAL_SERVER_ERROR, UNAUTHORIZED } = httpStatus;
 const OPEN_API_VERSION = '3.0.0';
 export default () => (routes, { title, description, contact, version }) => {
