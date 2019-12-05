@@ -11,6 +11,16 @@ export const error = (ctx, next) => {
 };
 
 export default ({ dependencies: { routes } }) => {
-	routes.push({ method: GET, path: '/health', handler });
-	routes.push({ method: GET, path: '/error', handler: error });
+	routes.push({
+		method: GET,
+		name: 'Health Check',
+		path: '/health',
+		handler
+	});
+	routes.push({
+		method: GET,
+		name: 'Get Error',
+		path: '/error',
+		handler: error
+	});
 };

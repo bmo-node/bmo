@@ -1,6 +1,8 @@
 import { each, set, isEmpty } from 'lodash';
 import joi2Swagger from 'joi-to-swagger';
 import httpMethods from 'http-methods-enum';
+import httpStatus from 'http-status-codes';
+
 const PATH_DELIMITER = '/';
 const PARAM_DELIMITER = ':';
 const SCHEMA_TYPES = {
@@ -9,6 +11,7 @@ const SCHEMA_TYPES = {
 };
 const { REQUEST_BODY, RESPONSE_BODY } = SCHEMA_TYPES;
 const { GET, PUT, POST } = httpMethods;
+const { OK, CREATED, BAD_REQUEST, INTERNAL_SERVER_ERROR, UNAUTHORIZED } = httpStatus;
 const OPEN_API_VERSION = '3.0.0';
 export default () => (routes, { title, description, contact, version }) => {
 	const components = getComponents(routes, '', {});
@@ -25,6 +28,7 @@ export default () => (routes, { title, description, contact, version }) => {
 		components
 	};
 };
+
 const simplePathParam = (name) => ({
 	name,
 	in: 'path',
@@ -65,30 +69,33 @@ const jsonSchema = (schema, description) => ({
 	}
 });
 const DEFAULT_RESPONSES = {
-	400: {},
-	401: {},
-	500: {}
+	[BAD_REQUEST]: {},
+	[UNAUTHORIZED]: {},
+	[INTERNAL_SERVER_ERROR]: {}
 };
+
 const requestBody = (schema) => `${schema}-${REQUEST_BODY}`;
+
 const responseBody = (schema) => `${schema}-${RESPONSE_BODY}`;
+
 const formatters = {
 	get: (schema) => ({
 		responses: {
-			200: jsonSchema(`${GET}-${responseBody(schema)}`),
+			[OK]: jsonSchema(`${responseBody(schema)}`),
 			...DEFAULT_RESPONSES
 		}
 	}),
 	put: (schema) => ({
-		requestBody: jsonSchema(`${PUT}-${requestBody(schema)}`),
+		requestBody: jsonSchema(`${requestBody(schema)}`),
 		responses: {
-			200: jsonSchema(`${PUT}-${responseBody(schema)}`),
+			[OK]: jsonSchema(`${responseBody(schema)}`),
 			...DEFAULT_RESPONSES
 		}
 	}),
 	post: (schema) => ({
-		requestBody: jsonSchema(`${POST}-${requestBody(schema)}`),
+		requestBody: jsonSchema(`${requestBody(schema)}`),
 		responses: {
-			201: jsonSchema(`${POST}-${responseBody(schema)}`),
+			[CREATED]: jsonSchema(`${responseBody(schema)}`),
 			...DEFAULT_RESPONSES
 		}
 	})
@@ -104,7 +111,7 @@ const getPathDefinition = (route, components) => {
 	const { path } = route;
 	const parameters = getPathParams(path);
 	const formattedPath = formatPathParams(path);
-	const schemaName = getComponentName(path);
+	const schemaName = getComponentName(route);
 	const method = route.method.toLowerCase();
 	let schemaDef = {};
 	if (route.schema) {
@@ -113,7 +120,7 @@ const getPathDefinition = (route, components) => {
 	return {
 		key: `${formattedPath}.${method}`,
 		value: {
-			summary: `${method} ${schemaName}`,
+			summary: `${schemaName}`,
 			parameters,
 			...schemaDef
 		}
@@ -132,21 +139,17 @@ const getPaths = (routes, components) => {
 	return paths;
 };
 
-const getComponentName = (path) => {
-	return path.split(PATH_DELIMITER)
-		.filter((v) => !isEmpty(v) && !/:|{|}/.test(v))
-		.splice(-2)
-		.join('-');
+const getComponentName = (route) => {
+	return route.name ? route.name : `${route.method}-${route.path.replace(/\//gi, '-')}`;
 };
 
 const getComponents = (routes, parentPath, aggregate = {}) => {
 	each(routes, (route, key) => {
 		if (route.schema) {
-			const { path } = route;
-			const componentName = getComponentName(path);
+			const componentName = getComponentName(route);
 			each(route.schema, (schema, type) => {
 				const { swagger } = joi2Swagger(schema, aggregate);
-				set(aggregate, `schemas.${route.method}-${componentName}-${type}`, swagger);
+				set(aggregate, `schemas.${componentName}-${type}`, swagger);
 			});
 		}
 	});
