@@ -7,11 +7,6 @@
     "node": ">=10.x"
   },
   "scripts": {
-    "start:dev": "run-p start:server:dev start:client:dev",
-    "start:client:dev": "cd ./packages/node_modules/@bmo/client && yarn run serve",
-    "start": "node dist/packages/node_modules/@bmo/server",
-    "start:local": "yarn run build && node dist/packages/node_modules/@bmo/server",
-    "start:server:dev": "nodemon --config ./nodemon.json -r ./scripts/babelRegister ./packages/node_modules/@bmo/server",
     "prebuild": "rimraf build",
     "build": "lerna run build",
     "lint": "eslint .",
