@@ -1,0 +1,33 @@
+#vim
+## Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+## Session
+Session.vim
+
+## Temporary
+.netrwhist
+*~
+## Auto-generated tag files
+tags
+## Persistent undo
+[._]*.un~
+
+build
+build-dev
+node_modules
+.tags*
+.idea
+*.log
+coverage
+*.iml
+!packages/node_modules
+packages/package-lock.json
+packages/yarn.lock
+!scripts/build
+package-lock.json
+yarn.lock

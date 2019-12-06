@@ -1,0 +1,32 @@
+{
+  "name": "@lmig/bmo-http-server",
+  "version": "0.3.0",
+  "description": "",
+  "main": "index.js",
+  "author": "tsteele",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@hapi/joi": "15.1.1",
+    "@lmig/bmo-es6-require": "~1.0.0",
+    "@lmig/bmo-injector": "^0.2.0",
+    "chalk": "^2.4.2",
+    "eureka-client": "^1.1.0",
+    "extendable-error": "^0.1.5",
+    "http-methods-enum": "^0.1.1",
+    "http-status-codes": "^1.3.2",
+    "ip": "^1.1.5",
+    "joi-to-swagger": "^3.1.0",
+    "koa": "2.8.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-helmet": "5.1.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "lodash": "^4.17.11",
+    "pino": "^5.13.3",
+    "pino-http": "^4.3.0",
+    "pkg-up": "^3.1.0"
+  },
+  "devDependencies": {
+    "jest-mock-process": "^1.2.0"
+  }
+}

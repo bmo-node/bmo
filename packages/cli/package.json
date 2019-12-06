@@ -1,0 +1,31 @@
+{
+  "name": "@lmig/bmo-cli",
+  "version": "0.2.9",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "bin": {
+    "bmo": "bin/index.js"
+  },
+  "author": "tsteele",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@lmig/bmo-es6-require": "~1.0.0",
+    "@lmig/bmo-config": "^0.1.0",
+    "chalk": "^2.4.2",
+    "commander": "^3.0.0",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "execa": "^2.0.4",
+    "fs-extra": "^8.1.0",
+    "globby": "^10.0.1",
+    "http-methods-enum": "^0.1.1",
+    "inquirer": "6.5.1",
+    "lodash": "^4.17.15",
+    "nodemon": "^1.19.1",
+    "pkg-up": "^3.1.0"
+  },
+  "peerDependencies": {
+    "@lmig/bmo-http-server": "^0.1.0"
+  }
+}

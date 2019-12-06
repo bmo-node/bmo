@@ -1,0 +1,86 @@
+{
+  "name": "bmo",
+  "version": "0.1.0",
+  "description": "Monorepo for managing packages in the bmo domain. ",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=10.x"
+  },
+  "scripts": {
+    "start:dev": "run-p start:server:dev start:client:dev",
+    "start:client:dev": "cd ./packages/node_modules/@bmo/client && yarn run serve",
+    "start": "node dist/packages/node_modules/@bmo/server",
+    "start:local": "yarn run build && node dist/packages/node_modules/@bmo/server",
+    "start:server:dev": "nodemon --config ./nodemon.json -r ./scripts/babelRegister ./packages/node_modules/@bmo/server",
+    "prebuild": "rimraf build",
+    "build": "lerna run build",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "precommit": "yarn run lint && yarn test && yarn run test:feature",
+    "selenium": "node ./scripts/postinstall",
+    "test": "jest",
+    "publish:packages": "lerna publish from-package --graph-type all --yes --registry https://pi-artifactory.lmig.com/artifactory/api/npm/npm",
+    "postinstall": "lerna bootstrap --no-ci && yarn run link:cli",
+    "link:cli": "if-env CI=true && echo 'ci skipping link' || echo 'linking cli' && cd ./packages/cli && yarn link",
+    "bootstrap": "lerna bootstrap",
+    "snyk:test": "snyk test --org=liberty-mutual --severity-threshold=medium",
+    "snyk:wizard": "snyk wizard",
+    "patch:version": "lerna exec -- npm version patch"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.4.4",
+    "@lmig/eslint-config-cm": "^1.0.6",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.5",
+    "babel-watch": "^7.0.0",
+    "cheerio": "^1.0.0-rc.1",
+    "eslint": "^5.12.0",
+    "eslint-config-i-am-meticulous": "^11.0.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.4.0",
+    "eslint-plugin-vue": "^5.2.2",
+    "fs-extra": "^8.0.1",
+    "globby": "^9.2.0",
+    "if-env": "^1.0.4",
+    "jest": "^24.9.0",
+    "jest-mock-process": "^1.2.0",
+    "joi": "^14.3.1",
+    "lerna": "3.16.4",
+    "nodemon": "^1.19.1",
+    "npm-run-all": "^4.1.5",
+    "rxjs": "^6.5.3",
+    "snyk": "^1.210.0",
+    "vue-jest": "^3.0.5"
+  },
+  "dependencies": {
+    "esm": "^3.2.25",
+    "lodash": "^4.17.15"
+  },
+  "jest": {
+    "reporters": [
+      "default"
+    ],
+    "setupFiles": [
+      "<rootDir>/setupTests.js"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.vue",
+      "**/*.js",
+      "!**/node_modules/**"
+    ],
+    "projects": [
+      "<rootDir>/packages/*"
+    ],
+    "transform": {
+      "\\.m?js$": "babel-jest"
+    }
+  }
+}
