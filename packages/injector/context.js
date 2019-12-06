@@ -1,46 +1,50 @@
-import inject from './inject';
-const isObject = (o) => { return (o instanceof Object && !(o instanceof Array)); };
+import inject from './inject'
+const isObject = o => {
+  return (o instanceof Object && !(Array.isArray(o)))
+}
 
-export default () => new Context();
+export default () => new Context()
 
 class Context {
-	config (config) {
-		this._config = config;
-		return this;
-	}
+  config(config) {
+    this._config = config
+    return this
+  }
 
-	dependencies (dependencies) {
-		this._dependencies = dependencies;
-		return this;
-	}
+  dependencies(dependencies) {
+    this._dependencies = dependencies
+    return this
+  }
 
-	expose (values) {
-		let keys;
-		if (isObject(values)) {
-			keys = Object.keys(values);
-		} else if (Array.isArray(values)) {
-			keys = values;
-		} else if (!values) {
-			this._keys = [];
-		}
-		this._keys = keys;
-		return this;
-	}
+  expose(values) {
+    let keys
+    if (isObject(values)) {
+      keys = Object.keys(values)
+    } else if (Array.isArray(values)) {
+      keys = values
+    } else if (!values) {
+      this._keys = []
+    }
 
-	async build () {
-		this._manifest = await inject(this._config, this._dependencies);
-		return this;
-	}
+    this._keys = keys
+    return this
+  }
 
-	module () {
-		const keys = this._keys || Object.keys(this._manifest);
-		const exposed = {};
-		keys.forEach((key) => {
-			if (!this._manifest.dependencies[key]) {
-				throw new Error(`Unknown key ${key}`);
-			}
-			exposed[key] = this._manifest.dependencies[key];
-		});
-		return exposed;
-	}
+  async build() {
+    this._manifest = await inject(this._config, this._dependencies)
+    return this
+  }
+
+  module() {
+    const keys = this._keys || Object.keys(this._manifest)
+    const exposed = {}
+    keys.forEach(key => {
+      if (!this._manifest.dependencies[key]) {
+        throw new Error(`Unknown key ${key}`)
+      }
+
+      exposed[key] = this._manifest.dependencies[key]
+    })
+    return exposed
+  }
 }

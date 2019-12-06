@@ -1,138 +1,145 @@
-import path from 'path';
-import Koa from 'koa';
-import Router from 'koa-router';
-import pkgup from 'pkg-up';
-import { has, get, merge, transform } from 'lodash';
-import fs from 'fs';
-import es6Require from '@lmig/bmo-es6-require';
-import injectDependencies from '@lmig/bmo-injector';
-import defaultDependencies from './dependencies';
-import defaultConfig from './defaultConfig';
-import loadRoute from './loadRoute';
+import path from 'path'
+import fs from 'fs'
+import Koa from 'koa'
+import Router from 'koa-router'
+import pkgup from 'pkg-up'
+import { has, get, merge, transform } from 'lodash'
+import es6Require from '@b-mo/es6-require'
+import injectDependencies from '@b-mo/injector'
+import defaultDependencies from './dependencies'
+import defaultConfig from './defaultConfig'
+import loadRoute from './loadRoute'
 
-const paths = (dir) => ({
-	dependencies: path.resolve(dir, './dependencies'),
-	routes: path.resolve(dir, './routes'),
-	middleware: path.resolve(dir, './middleware'),
-	views: path.resolve(dir, './views'),
-	index: path.resolve(dir, './index.js')
-});
+const paths = dir => ({
+  dependencies: path.resolve(dir, './dependencies'),
+  routes: path.resolve(dir, './routes'),
+  middleware: path.resolve(dir, './middleware'),
+  views: path.resolve(dir, './views'),
+  index: path.resolve(dir, './index.js')
+})
 
-const middlewareKey = 'middleware';
+const middlewareKey = 'middleware'
 export default class HttpServer {
-	constructor (config) {
-		this._app = new Koa();
-		this.config = merge({}, defaultConfig, config);
-	}
+  constructor(config) {
+    this._app = new Koa()
+    this.config = merge({}, defaultConfig, config)
+  }
 
-	get app () {
-		return this._app;
-	}
+  get app() {
+    return this._app
+  }
 
-	get baseDir () {
-		return this.config.baseDir || process.cwd();
-	}
+  get baseDir() {
+    return this.config.baseDir || process.cwd()
+  }
 
-	get paths () {
-		if (!this._paths) {
-			this._paths = paths(this.baseDir);
-		}
-		return this._paths;
-	}
+  get paths() {
+    if (!this._paths) {
+      this._paths = paths(this.baseDir)
+    }
 
-	get port () {
-		return this.config.server.port;
-	}
+    return this._paths
+  }
 
-	async start () {
-		if (this._started) {
-			throw new Error(`Cannot start same server twice.`);
-		}
-		this._started = true;
-		const packagePath = await pkgup();
-		this._pkg = require(packagePath);
-		this.config.pkg = this._pkg;
-		await this._injectDependencies();
-		this._loadMiddleware();
-		this._loadRoutes();
-		this._loadStatic();
-		await this.app.listen(this.port);
-	}
+  get port() {
+    return this.config.server.port
+  }
 
-	_getDependencyConstructors () {
-		if (fs.existsSync(this.paths.dependencies)) {
-			return es6Require(this.paths.dependencies);
-		}
-		return {};
-	}
+  async start() {
+    if (this._started) {
+      throw new Error('Cannot start same server twice.')
+    }
 
-	_getRouteConstructors () {
-		if (fs.existsSync(this.paths.routes)) {
-			return es6Require(this.paths.routes);
-		}
-		return () => [];
-	}
+    this._started = true
+    const packagePath = await pkgup()
+    this._pkg = require(packagePath)
+    this.config.pkg = this._pkg
+    await this._injectDependencies()
+    this._loadMiddleware()
+    this._loadRoutes()
+    this._loadStatic()
+    await this.app.listen(this.port)
+  }
 
-	_getLocalPath (module) {
-		return require.resolve(`${module}`, {
-			paths: [`${process.cwd()}/node_modules/`]
-		});
-	}
-	_getModules () {
-		if (this._pkg.bmo) {
-			const modules = get(this._pkg.bmo, 'modules', {});
-			return transform(modules, (agg, value, key) => {
-				console.log(`Loading module ${key} as ${value}`);
+  _getDependencyConstructors() {
+    if (fs.existsSync(this.paths.dependencies)) {
+      return es6Require(this.paths.dependencies)
+    }
 
-				const val = es6Require(this._getLocalPath(key));
-				const modPackage = es6Require(this._getLocalPath(`${key}/package.json`));
-				if (get(modPackage, 'bmo.module')) {
-					agg[value] = val;
-				} else {
-					agg[value] = () => val;
-				}
-			}, {});
-		}
-		return {};
-	}
+    return {}
+  }
 
-	async _injectDependencies () {
-		const dependencies = this._getDependencyConstructors();
-		const routes = this._getRouteConstructors();
-		const externalModules = this._getModules();
-		const allDependencies = merge({}, defaultDependencies, dependencies, { routes }, externalModules);
-		allDependencies.middleware = [].concat(
-			get(defaultDependencies, middlewareKey, []),
-			get(dependencies, middlewareKey, [])
-		);
-		this.manifest = await injectDependencies(this.config, allDependencies);
-	}
+  _getRouteConstructors() {
+    if (fs.existsSync(this.paths.routes)) {
+      return es6Require(this.paths.routes)
+    }
 
-	_loadRoutes () {
-		const routes = get(this, 'manifest.dependencies.routes', []);
-		routes.forEach((route) => this._loadRoute(route));
-	}
+    return () => []
+  }
 
-	_loadRoute (route) {
-		const router = loadRoute(route,
-			this.manifest.dependencies.requestValidator,
-			Router);
-		this.app.use(router.routes(), router.allowedMethods());
-	}
+  _getLocalPath(module) {
+    return require.resolve(`${module}`, {
+      paths: [ `${process.cwd()}/node_modules/` ]
+    })
+  }
 
-	_loadMiddleware () {
-		const { middleware } = this.manifest.dependencies;
-		middleware.forEach(mw => {
-			if (has(mw, 'use') && !mw.use) {
-				return;
-			}
-			this.app.use(mw);
-		});
-	}
+  _getModules() {
+    if (this._pkg.bmo) {
+      const modules = get(this._pkg.bmo, 'modules', {})
+      return transform(modules, (agg, value, key) => {
+        console.log(`Loading module ${key} as ${value}`)
 
-	_loadStatic () {
-		const { serveStatic } = this.manifest.dependencies;
-		const staticPaths = get(this, 'config.server.static', []);
-		staticPaths.forEach((path) => this.app.use(serveStatic({ path })));
-	}
+        const val = es6Require(this._getLocalPath(key))
+        const modPackage = es6Require(this._getLocalPath(`${key}/package.json`))
+        if (get(modPackage, 'bmo.module')) {
+          agg[value] = val
+        } else {
+          agg[value] = () => val
+        }
+      }, {})
+    }
+
+    return {}
+  }
+
+  async _injectDependencies() {
+    const dependencies = this._getDependencyConstructors()
+    const routes = this._getRouteConstructors()
+    const externalModules = this._getModules()
+    const allDependencies = merge({}, defaultDependencies, dependencies, { routes }, externalModules)
+    allDependencies.middleware = [].concat(
+      get(defaultDependencies, middlewareKey, []),
+      get(dependencies, middlewareKey, [])
+    )
+    this.manifest = await injectDependencies(this.config, allDependencies)
+  }
+
+  _loadRoutes() {
+    const routes = get(this, 'manifest.dependencies.routes', [])
+    routes.forEach(route => this._loadRoute(route))
+  }
+
+  _loadRoute(route) {
+    const router = loadRoute(route,
+      this.manifest.dependencies.requestValidator,
+      Router)
+    this.app.use(router.routes(), router.allowedMethods())
+  }
+
+  _loadMiddleware() {
+    const { middleware } = this.manifest.dependencies
+    middleware.forEach(mw => {
+      if (has(mw, 'use') && !mw.use) {
+        return
+      }
+
+      this.app.use(mw)
+    })
+  }
+
+  _loadStatic() {
+    const { serveStatic } = this.manifest.dependencies
+    const staticPaths = get(this, 'config.server.static', [])
+    staticPaths.forEach(path => this.app.use(serveStatic({ path })))
+  }
 }

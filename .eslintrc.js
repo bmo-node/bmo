@@ -1,18 +1,49 @@
-
 module.exports = {
-  extends: ['@lmig/eslint-config-cm'],
-  parser: 'babel-eslint',
-  env: {
-    jest: true,
-    node: true,
-  },
-  rules: {
-    'semi':['error','always'],
-    'callback-return':['error',['cb']],
-    'no-tabs': ['error', { allowIndentationTabs: true }],
-    'linebreak-style': ['error', 'unix'],
-    'import/no-extraneous-dependencies': ['error', {
-      devDependencies: true,
-    }],
-  }
+    'env': {
+        'browser': true,
+        'es6': true,
+        'node': true,
+        'jest': true
+    },
+    'extends': ['eslint:recommended','xo-space'],
+    'globals': {
+        'Atomics': 'readonly',
+        'SharedArrayBuffer': 'readonly',
+    },
+    'parserOptions': {
+        'ecmaVersion': 2018,
+        'sourceType': 'module'
+    },
+    'overrides':[
+        {
+            "files": ["**/**.spec.js"],
+            "rules": {
+                "max-nested-callbacks": "off"
+            }
+        }
+    ],
+    'rules': {
+        'indent': [
+            'error',
+            2
+        ],
+        'linebreak-style': [
+            'error',
+            'unix'
+        ],
+        'quotes': [
+            'error',
+            'single'
+        ],
+        'semi': [
+            'error',
+            'never'
+        ],
+        'object-curly-spacing': ['error', 'always', {
+             "arraysInObjects": false,
+             "objectsInObjects": false
+         }],
+         'array-bracket-spacing': ["error", "always"],
+         'no-negated-condition':0
+    }
 }

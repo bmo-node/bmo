@@ -1,9 +1,9 @@
 {
-  "name": "@lmig/bmo-es6-require",
-  "version": "1.0.1",
+  "name": "@b-mo/es6-require",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {},
   "author": "tsteele",
-  "license": "UNLICENSED"
+  "license": "Apache-2.0"
 }

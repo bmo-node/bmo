@@ -1,16 +1,14 @@
 {
-  "name": "@lmig/bmo-extension-serve",
-  "version": "0.1.0",
-  "description": "serves a bmo application",
+  "name": "@b-mo/extension-serve",
+  "version": "0.3.0",
+  "description": "A batteries included http framework. ",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "author": "tsteele",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "dependencies": {
-    "@lmig/bmo-config": "^0.1.0",
-    "@lmig/bmo-http-server": "^0.2.10",
+    "@b-mo/config": "^0.2.0",
+    "@b-mo/http-server": "^0.3.0",
     "chalk": "^3.0.0",
     "commander": "^4.0.1",
     "dotenv": "^8.2.0",

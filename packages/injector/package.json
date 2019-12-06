@@ -1,6 +1,6 @@
 {
-  "name": "@lmig/bmo-injector",
-  "version": "0.2.1",
+  "name": "@b-mo/injector",
+  "version": "0.3.0",
   "description": "dependency injector for bmo",
   "main": "index.js",
   "files": [
@@ -9,7 +9,7 @@
   ],
   "scripts": {},
   "author": "tsteele",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "dependencies": {
     "espree": "^6.1.2",
     "esquery": "^1.0.1",
