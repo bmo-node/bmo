@@ -47,7 +47,7 @@ describe('Load route', () => {
       r.schema = {
         requestBody: schema
       }
-      r.handler = [mockMw, r.handler]
+      r.handler = [ mockMw, r.handler ]
       loadRoute(r, mockValidator, MockRouter)
       expect(mockValidator).toHaveBeenCalledWith(schema)
     })
@@ -56,7 +56,7 @@ describe('Load route', () => {
       r.schema = {
         requestBody: schema
       }
-      r.handler = [mockMw, r.handler]
+      r.handler = [ mockMw, r.handler ]
       const validatorMw = jest.fn()
       mockValidator.mockImplementation(() => validatorMw)
       const router = loadRoute(r, mockValidator, MockRouter)
@@ -64,13 +64,13 @@ describe('Load route', () => {
     })
     it('Should load the route', () => {
       const r = mockRoute()
-      r.handler = [mockMw, r.handler]
+      r.handler = [ mockMw, r.handler ]
       const router = loadRoute(r, mockValidator, MockRouter)
       expect(router.get).toHaveBeenCalledWith(r.path, r.handler[1])
     })
     it('Should use the middleware', () => {
       const r = mockRoute()
-      r.handler = [mockMw, r.handler]
+      r.handler = [ mockMw, r.handler ]
       const router = loadRoute(r, mockValidator, MockRouter)
       expect(router.use).toHaveBeenCalledWith(r.path, mockMw)
     })

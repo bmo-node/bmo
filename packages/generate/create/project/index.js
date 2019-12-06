@@ -4,17 +4,17 @@ import templates from './templates'
 const yarn = 'yarn'
 const npm = 'npm'
 const install = 'install'
-const packageManagers = [yarn, npm]
+const packageManagers = [ yarn, npm ]
 
 const shell = true
 const installCmds = {
   [yarn]: () => {
-    const cmd = execa(yarn, [install], { shell })
+    const cmd = execa(yarn, [ install ], { shell })
     cmd.stdout.pipe(process.stdout)
     return cmd
   },
   [npm]: () => {
-    const cmd = execa(npm, [install], { shell })
+    const cmd = execa(npm, [ install ], { shell })
     cmd.stdout.pipe(process.stdout)
     return cmd
   }

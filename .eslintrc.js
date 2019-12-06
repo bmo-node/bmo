@@ -43,7 +43,10 @@ module.exports = {
              "arraysInObjects": false,
              "objectsInObjects": false
          }],
-         'array-bracket-spacing': ["error", "always"],
+         'array-bracket-spacing': ["error", "always", {
+            "objectsInArrays": false,
+            "arraysInArrays": true
+        }],
          'no-negated-condition':0
     }
 }

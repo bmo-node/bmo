@@ -5,7 +5,7 @@ export default {
     namespace: 'dependencies'
   },
   pino: {
-    redact: ['req.headers.authorization']
+    redact: [ 'req.headers.authorization' ]
   },
   server: {
     port: process.env.PORT || 3000,

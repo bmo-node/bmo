@@ -9,7 +9,7 @@ jest.mock('./loadRoute')
 jest.mock('@b-mo/es6-require')
 jest.mock('koa')
 const requestValidator = jest.fn()
-const routes = [ {}, {} ]
+const routes = [{}, {}]
 const middleware = [ () => {} ]
 const mockManifest = {
   config: {},

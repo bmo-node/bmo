@@ -4,7 +4,7 @@ import dev from './dev'
 const esm = require.resolve('esm')
 
 function collect(value, previous) {
-  return previous.concat([value])
+  return previous.concat([ value ])
 }
 
 export default () => {
@@ -22,7 +22,7 @@ export default () => {
       dev({ args: commander, cwd })
     } else {
       const args = commander.rawArgs.slice(2)
-      fork(`${__dirname}/staticServer.js`, args, { cwd, execArgv: ['-r', esm] })
+      fork(`${__dirname}/staticServer.js`, args, { cwd, execArgv: [ '-r', esm ]})
     }
   } catch (error) {
     console.error('Unable to load configuration. Ensure that a config directory is in the current directory')

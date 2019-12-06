@@ -20,7 +20,7 @@ export default async ({
   const { description, version } = config.pkg
   const title = config.pkg.name
   const contact = config.pkg.author
-  const swaggerDef = createSwaggerDefinition([...routes], { title, description, contact, version })
+  const swaggerDef = createSwaggerDefinition([ ...routes ], { title, description, contact, version })
   const docsRoute = {
     path: urls.docs,
     method: GET,

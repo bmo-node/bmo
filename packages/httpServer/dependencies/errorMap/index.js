@@ -19,11 +19,11 @@ export default ({
     NotFound
   } = errors
   const map = {
-    [BAD_REQUEST]: [Validation],
-    [NOT_FOUND]: [NotFound],
+    [BAD_REQUEST]: [ Validation ],
+    [NOT_FOUND]: [ NotFound ],
     // The status code for unauthorized really means unauthenticated
-    [UNAUTHORIZED]: [Unauthenticated],
-    [FORBIDDEN]: [Unauthorized]
+    [UNAUTHORIZED]: [ Unauthenticated ],
+    [FORBIDDEN]: [ Unauthorized ]
   }
   return {
     get _map() {

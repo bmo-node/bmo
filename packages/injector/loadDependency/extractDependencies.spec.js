@@ -8,28 +8,28 @@ describe('extractDependencies', () => {
       const fooDependency = () => ({})
       const otherDependency = ({ dependencies: { submodule: { fooDependency }}}) => fooDependency
       const dependencies = await extractDependencies(otherDependency, dependenciesKey)
-      expect(dependencies).toEqual(['submodule.fooDependency'])
+      expect(dependencies).toEqual([ 'submodule.fooDependency' ])
     })
 
     it('Should extract the dependencies from the submodule', async () => {
       const fooDependency = () => ({})
       const otherDependency = ({ dependencies: { submodule: { fooDependency }}}) => fooDependency
       const dependencies = await extractDependencies(otherDependency, dependenciesKey)
-      expect(dependencies).toEqual(['submodule.fooDependency'])
+      expect(dependencies).toEqual([ 'submodule.fooDependency' ])
     })
 
     it('Should extract the dependencies from the sub-submodule', async () => {
       const fooDependency = () => ({})
       const otherDependency = ({ dependencies: { submodule: { subsub: { fooDependency }}}}) => fooDependency
       const dependencies = await extractDependencies(otherDependency, dependenciesKey)
-      expect(dependencies).toEqual(['submodule.subsub.fooDependency'])
+      expect(dependencies).toEqual([ 'submodule.subsub.fooDependency' ])
     })
 
     it('Should extract the dependencies from the array submodule', async () => {
       const fooDependency = () => ({})
       const otherDependency = ({ dependencies: { submodules: { 1: { fooDependency }}}}) => fooDependency
       const dependencies = await extractDependencies(otherDependency, dependenciesKey)
-      expect(dependencies).toEqual(['submodules.1.fooDependency'])
+      expect(dependencies).toEqual([ 'submodules.1.fooDependency' ])
     })
 
     it('Should allow a reference to itself', async () => {
@@ -65,7 +65,7 @@ describe('extractDependencies', () => {
       }
 
       const dependencies = await extractDependencies(dep, dependenciesKey)
-      expect(dependencies).toEqual(['foo'])
+      expect(dependencies).toEqual([ 'foo' ])
     })
 
     it('Should support anonymous functions', async () => {
@@ -74,7 +74,7 @@ describe('extractDependencies', () => {
       }
 
       const dependencies = await extractDependencies(dep, dependenciesKey)
-      expect(dependencies).toEqual(['foo'])
+      expect(dependencies).toEqual([ 'foo' ])
     })
 
     it('Should support named functions', async () => {
@@ -83,7 +83,7 @@ describe('extractDependencies', () => {
       }
 
       const dependencies = await extractDependencies(dep, dependenciesKey)
-      expect(dependencies).toEqual(['foo'])
+      expect(dependencies).toEqual([ 'foo' ])
     })
 
     it('Should support no dependencies', async () => {
@@ -113,7 +113,7 @@ describe('extractDependencies', () => {
     it('Should parse code that uses the ... operator', async () => {
       const foo = []
       const otherDependency = ({ dependencies }) => {
-        const bar = [...foo]
+        const bar = [ ...foo ]
       }
 
       expect(async () => extractDependencies(otherDependency, dependenciesKey)).not.toThrow()

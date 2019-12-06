@@ -2,7 +2,7 @@ import commander from 'commander'
 import release from './release'
 
 function collect(value, previous) {
-  return previous.concat([value])
+  return previous.concat([ value ])
 }
 
 commander

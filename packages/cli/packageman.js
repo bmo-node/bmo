@@ -5,18 +5,18 @@ const yarn = 'yarn'
 const npm = 'npm'
 const install = 'install'
 const add = 'add'
-const packageManagers = [yarn, npm]
+const packageManagers = [ yarn, npm ]
 const shell = true
 const isYarn = fs.existsSync('yarn.lock')
 
 const installCmds = {
   [yarn]: () => {
-    const cmd = execa(yarn, [install], { shell })
+    const cmd = execa(yarn, [ install ], { shell })
     cmd.stdout.pipe(process.stdout)
     return cmd
   },
   [npm]: () => {
-    const cmd = execa(npm, [install], { shell })
+    const cmd = execa(npm, [ install ], { shell })
     cmd.stdout.pipe(process.stdout)
     return cmd
   }
@@ -24,12 +24,12 @@ const installCmds = {
 
 const addCommands = {
   [yarn]: pkg => {
-    const cmd = execa(yarn, [add, pkg], { shell })
+    const cmd = execa(yarn, [ add, pkg ], { shell })
     cmd.stdout.pipe(process.stdout)
     return cmd
   },
   [npm]: pkg => {
-    const cmd = execa(npm, [install, pkg], { shell })
+    const cmd = execa(npm, [ install, pkg ], { shell })
     cmd.stdout.pipe(process.stdout)
     return cmd
   }

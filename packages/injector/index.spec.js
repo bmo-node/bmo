@@ -39,7 +39,7 @@ describe('load dependencies', () => {
 
   it('Should inject dependencies declared in arrays', async () => {
     const tm = {}
-    const submodules = [() => tm]
+    const submodules = [ () => tm ]
     const manifest = await inject({}, { submodules })
     expect(manifest.dependencies.submodules[0]).toEqual(tm)
   })

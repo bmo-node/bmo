@@ -65,7 +65,7 @@ const manifest = () => ({
     }
   },
   dependencies: {
-    routes: [...testRoutes()],
+    routes: [ ...testRoutes() ],
     createSwaggerDefinition: createSwaggerDefinition()
   }
 })
