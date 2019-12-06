@@ -1,4 +1,4 @@
-#!/bin/sh
-":" //# comment; exec /usr/bin/env node -r esm "$0" "$@"
+#!/usr/bin/env node
+/* eslint-disable-next-line no-global-assign */
+require = require('esm')(module, {})
 require('./cli')
-// DO NOT LINT THIS FILE! THE SHEBANG WILL BREAK!
