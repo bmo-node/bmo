@@ -3,5 +3,13 @@
     "packages/*"
   ],
   "npmClient":"npm",
-  "version": "independent"
+  "version": "independent",
+  "command":{
+    "bootstrap": {
+      "npmClientArgs": [
+        "--no-package-lock"
+      ]
+    }
+  }
+
 }
