@@ -59,7 +59,6 @@ const loadExt = async () => {
       console.log(`Loading module ${value}`)
       const modulePath = path.dirname(value)
       const pkg = es6Require(value)
-      console.log(pkg)
       if (accumulator[pkg.name]) {
         if (isLocalModule(modulePath)) {
           console.log(`Loading local module ${pkg.name} over global version`)

@@ -88,7 +88,6 @@ export default class HttpServer {
       const modules = get(this._pkg.bmo, 'modules', {})
       return transform(modules, (agg, value, key) => {
         console.log(`Loading module ${key} as ${value}`)
-
         const val = es6Require(this._getLocalPath(key))
         const modPackage = es6Require(this._getLocalPath(`${key}/package.json`))
         if (get(modPackage, 'bmo.module')) {
