@@ -57,5 +57,3 @@ The result will be that when a user invokes `bmo myCommand` your custom extensio
 
 
 
-
-

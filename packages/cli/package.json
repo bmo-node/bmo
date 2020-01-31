@@ -1,5 +1,5 @@
 {
-  "name": "@lmig/bmo-cli",
+  "name": "@b-mo/cli",
   "version": "0.3.0",
   "description": "",
   "main": "index.js",

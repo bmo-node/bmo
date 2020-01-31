@@ -3,7 +3,7 @@
 This package encapsulates our configuration loading algorithm. Its fairly basic:
 given a directory load the `index.js` and `${NODE_ENV}.config.js` if they exist.
 
-If either module is a function (async or sync) call it and merge the resulting object with the environment
+If either module is a function (async or sync) call it and merge the resulting object with then environment
 configuration taking priority.
 
 

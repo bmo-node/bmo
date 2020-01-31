@@ -14,7 +14,8 @@
     "publish:packages": "lerna publish from-package --graph-type all --yes --registry https://pi-artifactory.lmig.com/artifactory/api/npm/npm",
     "postinstall": "lerna bootstrap --no-ci && npm run link:cli",
     "link:cli": "if-env CI=true && echo 'ci skipping link' || echo 'linking cli' && cd ./packages/cli && npm link",
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "update:docs":"node -r esm ./scripts/copyPackageDocs.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.4",
@@ -50,7 +51,7 @@
       "default"
     ],
     "setupFiles": [
-      "<rootDir>/setupTests.js"
+      "<rootDir>/scripts/setupTests.js"
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [
