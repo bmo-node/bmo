@@ -10,6 +10,13 @@ export default program => (cmd, key) => {
     program
       .command(cmd.format)
       .description(cmd.description)
-      .action(cmd.action)
+
+    if (cmd.options) {
+      command.options.forEach(opt => {
+        program.option(opt.format, opt.description)
+      })
+    }
+
+    program.action(cmd.action)
   }
 }
