@@ -4,9 +4,9 @@ import injectDependencies from '@b-mo/injector'
 import loadRoute from './loadRoute'
 
 const testConfig = { thing: 'thing' }
-jest.mock('@lmig/bmo-injector')
+jest.mock('@b-mo/injector')
 jest.mock('./loadRoute')
-jest.mock('@lmig/bmo-es6-require')
+jest.mock('@b-mo/es6-require')
 jest.mock('koa')
 const requestValidator = jest.fn()
 const routes = [{}, {}]
