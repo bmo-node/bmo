@@ -1,16 +1,28 @@
-import { OK } from 'http-status-codes'
-import httpMethods from 'http-methods-enum'
-const { GET } = httpMethods
-export const handler = ctx => {
-  ctx.body = { health: 'OK' }
-  ctx.status = OK
-}
+export default ({
+  dependencies: {
+    routes,
+    http: {
+      status: {
+        OK
+      },
+      methods: {
+        GET
+      }
+    }
+  }
+}) => {
+  const handler = (ctx, next) => {
+    ctx.body = {
+      status: 'OK',
+      healthy: true
+    }
+    ctx.status = OK
+  }
 
-export const error = () => {
-  throw new Error('You get an error!')
-}
+  const error = (ctx, next) => {
+    throw new Error('You get an error!')
+  }
 
-export default ({ dependencies: { routes }}) => {
   routes.push({
     method: GET,
     name: 'Health Check',

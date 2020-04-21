@@ -1,22 +1,22 @@
 export const SIGNALS = [
-  'SIGINT',
-  'SIGTERM'
-]
+	'SIGINT',
+	'SIGTERM'
+];
 
 export default ({
-  config: {
-    events: {
-      shutdown
-    }
-  },
-  dependencies: {
-    events
-  }
+	config: {
+		events: {
+			shutdown
+		}
+	},
+	dependencies: {
+		events
+	}
 }) => {
-  SIGNALS.forEach(signal => {
-    process.on(signal, async () => {
-      events.emit(shutdown)
-      process.exit(0)
-    })
-  })
-}
+	SIGNALS.forEach((signal) => {
+		process.on(signal, async () => {
+			events.emit(shutdown);
+			process.exit(0);
+		});
+	});
+};

@@ -1,5 +1,4 @@
 import fs from 'fs'
-import chalk from 'chalk'
 import es6Require from '@b-mo/es6-require'
 import { get, has, merge, isFunction } from 'lodash'
 const env = process.env.NODE_ENV
@@ -17,7 +16,7 @@ const loadConfigFile = async path => {
     return config
   }
 
-  console.log(chalk.yellow(`Warning File: ${path} not found.`))
+  console.warn(`File: ${path} not found.`)
 }
 
 const load = async basePath => {

@@ -8,7 +8,7 @@ Those folders should contain your bmo config and your dependency modules.
 #Example usage
 
 ```
-import mocker from '@b-mo/mocker';
+import mocker from '@lmig/bmo-mocker';
 import fooModule from '.';
 
 const container = mocker();
@@ -26,6 +26,15 @@ const container = mocker({ config, dependencies })
 config - An object containing values you wish to override in your test configuration.
 dependencies - A set of modules to use as dependencies instead of the default ones.
 returns an IOC container for building your test modules.
+
+```
+
+```
+container.extend(package)
+
+either an object with a dependencies key or the name of a package
+that exposes a dependencies property. The dependencies will be included
+when the container is built.
 
 ```
 

@@ -1,13 +1,10 @@
-import path from 'path'
 import execa from 'execa'
 import es6Require from '@b-mo/es6-require'
 import { transform, flattenDeep } from 'lodash'
 import fs from 'fs-extra'
+import path from 'path'
 import globby from 'globby'
-const extensionPrefixes = [
-  /bmo-extension/gim,
-  /@b-mo\/extension/gim
-]
+
 const getTopLevelPackages = async dir => {
   const packages = await globby(`${dir}/*/**/package.json`)
   return packages.filter(pkg => !/node_modules/gi.test(pkg.replace(dir, '')))
@@ -44,46 +41,41 @@ const isLocalModule = path => {
   return path.includes(process.cwd())
 }
 
-const loadExt = async () => {
-  const isYarn = await fs.exists('yarn.lock')
-  const loaders = [ getNPMGlobalModules(), getLocalModules() ]
-  if (isYarn) {
-    loaders.push(getYarnGlobalModules())
-    loaders.push(getYarnLinkedModules())
-  }
-
-  /* eslint-disable require-atomic-updates */
-  const modules = flattenDeep((await Promise.all(loaders)))
-  return transform(modules, (accumulator, value) => {
-    if (extensionPrefixes.some(prefix => prefix.test(value))) {
-      console.log(`Loading module ${value}`)
-      const modulePath = path.dirname(value)
-      const pkg = es6Require(value)
-      if (accumulator[pkg.name]) {
-        if (isLocalModule(modulePath)) {
-          console.log(`Loading local module ${pkg.name} over global version`)
-          accumulator[pkg.name] = es6Require(modulePath)
-        }
-      } else {
-        accumulator[pkg.name] = es6Require(modulePath)
-      }
-    }
-
-    return accumulator
-  }, {})
-}
-
 let CACHED_EXTENSIONS
 export default async () => {
-  if (!CACHED_EXTENSIONS) {
-    try {
-      CACHED_EXTENSIONS = await loadExt()
-    } catch (error) {
-      console.log('There was an error getting your dependencies')
-      console.error(error)
-      throw error
-    }
+  if (CACHED_EXTENSIONS) {
+    return CACHED_EXTENSIONS
   }
 
-  return CACHED_EXTENSIONS
+  try {
+    const isYarn = await fs.exists('yarn.lock')
+    const loaders = [ getNPMGlobalModules(), getLocalModules() ]
+    if (isYarn) {
+      loaders.push(getYarnGlobalModules())
+      loaders.push(getYarnLinkedModules())
+    }
+
+    const modules = flattenDeep((await Promise.all(loaders)))
+
+    CACHED_EXTENSIONS = transform(modules, (accumulator, value, key) => {
+      if (value.match(/bmo-extension/gim)) {
+        const modulePath = path.dirname(value)
+        const pkg = es6Require(value)
+        if (accumulator[pkg.name]) {
+          if (isLocalModule(modulePath)) {
+            console.log(`Loading local module ${pkg.name} over global version`)
+            accumulator[pkg.name] = es6Require(modulePath)
+          }
+        } else {
+          accumulator[pkg.name] = es6Require(modulePath)
+        }
+      }
+
+      return accumulator
+    }, {})
+    return CACHED_EXTENSIONS
+  } catch (e) {
+    console.log('There was an error getting your dependencies')
+    console.error(e)
+  }
 }

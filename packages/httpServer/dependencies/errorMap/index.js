@@ -1,15 +1,16 @@
-import httpStatusCodes from 'http-status-codes'
 import { each } from 'lodash'
-const {
-  BAD_REQUEST,
-  NOT_FOUND,
-  INTERNAL_SERVER_ERROR,
-  UNAUTHORIZED,
-  FORBIDDEN
-} = httpStatusCodes
 export default ({
   dependencies: {
-    errors
+    errors,
+    http: {
+      status: {
+        BAD_REQUEST,
+        NOT_FOUND,
+        INTERNAL_SERVER_ERROR,
+        UNAUTHORIZED,
+        FORBIDDEN
+      }
+    }
   }
 }) => {
   const {
@@ -40,8 +41,10 @@ export default ({
     getErrorStatus: error => {
       let errorCode = INTERNAL_SERVER_ERROR
       each(map, (types, code) => {
+        /* This will be a string since the typeof check is against another typeof check */
+        /* eslint-disable-next-line valid-typeof */
         if (types.some(t => error instanceof t)) {
-          errorCode = parseInt(code, 0)
+          errorCode = parseInt(code)
         }
       })
       return errorCode

@@ -1,11 +1,12 @@
 import path from 'path'
-import fs from 'fs'
 import Koa from 'koa'
 import Router from 'koa-router'
 import pkgup from 'pkg-up'
-import { has, get, merge, transform } from 'lodash'
+import { has, get, merge } from 'lodash'
+import fs from 'fs'
 import es6Require from '@b-mo/es6-require'
 import injectDependencies from '@b-mo/injector'
+import loadModules from '@b-mo/module-loader'
 import defaultDependencies from './dependencies'
 import defaultConfig from './defaultConfig'
 import loadRoute from './loadRoute'
@@ -77,28 +78,8 @@ export default class HttpServer {
     return () => []
   }
 
-  _getLocalPath(module) {
-    return require.resolve(`${module}`, {
-      paths: [ `${process.cwd()}/node_modules/` ]
-    })
-  }
-
   _getModules() {
-    if (this._pkg.bmo) {
-      const modules = get(this._pkg.bmo, 'modules', {})
-      return transform(modules, (agg, value, key) => {
-        console.log(`Loading module ${key} as ${value}`)
-        const val = es6Require(this._getLocalPath(key))
-        const modPackage = es6Require(this._getLocalPath(`${key}/package.json`))
-        if (get(modPackage, 'bmo.module')) {
-          agg[value] = val
-        } else {
-          agg[value] = () => val
-        }
-      }, {})
-    }
-
-    return {}
+    return loadModules(this._pkg)
   }
 
   async _injectDependencies() {

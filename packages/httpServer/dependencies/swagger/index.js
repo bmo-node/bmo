@@ -1,14 +1,17 @@
-
-import httpMethods from 'http-methods-enum'
-import httpStatus from 'http-status-codes'
 import ui from './ui'
-const { OK } = httpStatus
-const { GET } = httpMethods
 export default async ({
   config,
   dependencies: {
     routes = [],
-    createSwaggerDefinition
+    createSwaggerDefinition,
+    http: {
+      methods: {
+        GET
+      },
+      status: {
+        OK
+      }
+    }
   }
 }) => {
   const {

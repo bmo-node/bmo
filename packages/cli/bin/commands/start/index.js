@@ -1,6 +1,8 @@
-import { fork } from 'child_process'
+#!/usr/bin/env node
 import commander from 'commander'
 import dev from './dev'
+import { fork } from 'child_process'
+import logger from '../../../logger'
 const esm = require.resolve('esm')
 
 function collect(value, previous) {
@@ -13,6 +15,8 @@ commander
   .option('-d, --dev', 'Starts a watch on the base directory to look for changes')
   .option('-s, --serve <folder>', 'Adds a folder to be served statically', collect, [])
 
+logger.warn('bmo start will be deprecated in v0.6.0, you will instead have to install: @b-mo/extension-serve and use that for server capabilities')
+
 const cwd = process.cwd()
 commander.parse(process.argv)
 try {
@@ -23,8 +27,8 @@ try {
     const args = commander.rawArgs.slice(2)
     fork(`${__dirname}/staticServer.js`, args, { cwd, execArgv: [ '-r', esm ]})
   }
-} catch (error) {
+} catch (e) {
   console.error('Unable to load configuration. Ensure that a config directory is in the current directory')
-  console.error(error)
+  console.error(e)
   process.exit(1)
 }

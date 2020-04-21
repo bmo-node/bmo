@@ -1,3 +1,3 @@
 export default async () => ({
-  foo: 'bar'
-})
+	foo: 'bar'
+});

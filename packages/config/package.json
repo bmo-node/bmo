@@ -1,14 +1,13 @@
 {
   "name": "@b-mo/config",
-  "version": "0.2.0",
+  "version": "0.5.0",
   "description": "loads configuration based on the NODE_ENV",
   "main": "index.js",
   "scripts": {},
   "author": "tsteele",
   "license": "Apache-2.0",
   "dependencies": {
-    "@b-mo/es6-require": "^1.0.0",
-    "chalk": "^3.0.0",
+    "@b-mo/es6-require": "^0.5.0",
     "lodash": "^4.17.15"
   }
 }

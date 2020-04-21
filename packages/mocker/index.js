@@ -1,18 +1,32 @@
-import inject, { extract } from '@b-mo/injector'
+import inject, { extract, context } from '@b-mo/injector'
 import es6Require from '@b-mo/es6-require'
-import { set, get, has, flatten, merge, isUndefined } from 'lodash'
+import loadModules from '@b-mo/module-loader'
+import { set, get, has, flatten, merge, isUndefined, isString } from 'lodash'
 import { load as loadConfig } from '@b-mo/config'
 
 export default ({ config: userConfig = {}, dependencies: userDeps = {}, mocks = {}} = {}) => {
   const appDeps = es6Require(`${process.cwd()}/dependencies`)
-  const dependencies = merge({}, appDeps, userDeps)
+  let dependencies = merge({}, appDeps, userDeps)
   const logger = {
     info: console.log,
     warn: console.warn,
     error: console.error
   }
   dependencies.logger = () => logger
+  dependencies.bmo = () => ({ di: { context }})
   return {
+    extend(module) {
+      if (isString(module)) {
+        module = require(require.resolve(module, { paths: [ `${process.cwd()}/node_modules` ]}))
+      }
+
+      if (!module.dependencies) {
+        throw new Error('Module must expose dependencies to be extended')
+      }
+
+      dependencies = merge({}, dependencies, module.dependencies)
+      return this
+    },
     config(path, value) {
       set(userConfig, path, value)
       return this
@@ -22,6 +36,8 @@ export default ({ config: userConfig = {}, dependencies: userDeps = {}, mocks = 
       return this
     },
     async build(module) {
+      const modules = loadModules(`${process.cwd()}`)
+      dependencies = merge({}, modules, dependencies)
       const appConfig = await loadConfig(`${process.cwd()}/config`)
       const config = merge({}, appConfig, userConfig)
       const deps = getDependencies(module, dependencies)
@@ -38,9 +54,9 @@ export default ({ config: userConfig = {}, dependencies: userDeps = {}, mocks = 
         const manifest = await inject(config, { ...bundle, module })
         manifest.dependencies.module.manifest = manifest
         return manifest.dependencies.module
-      } catch (error) {
-        logger.error(error)
-        throw error
+      } catch (e) {
+        logger.error(e)
+        throw e
       }
     }
   }

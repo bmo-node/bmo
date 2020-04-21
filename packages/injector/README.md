@@ -1,4 +1,4 @@
-# BMO DI
+# BMO Injector
 
 The DI or dependency injection that BMO supplies is meant to be totally unobtrusive.
 Simply attach your constructor to the root dependencies export, and deconstruct your modules dependencies
@@ -14,7 +14,7 @@ external dependencies in modules that are then shared through the DI framework.
 Any changes or updates are isolated to the one module, and percolated from that single point.
 
 
-#### Database module Example
+#### Example Module
 
 ```
 export default async ({ config, dependencies :{ connectionPool } }) => ({
@@ -26,39 +26,64 @@ export default async ({ config, dependencies :{ connectionPool } }) => ({
   })
 ```
 
-During application start up BMO has 3 phases, configuration, injection, and running.
-First BMO resolves the config function. After that it instantiates all the dependency modules.
-During this process it inspects each module's constructor to ensure that all of it's dependencies are available.
-It does this by parsing the functions AST. Currently it is well tested using the destructure syntax, It also attempt's to find any
-accesses to the first parameters 'dependencies' key if the destructure syntax is not used.
-Using other syntax may create different AST formats that may not be supported.
 
+### Using the dependency injector
+
+```
+import inject from '@lmig/bmo-injector'
+
+const dependencies = {
+  //... a collection of your modules
+}
+
+const config = {
+  //.... your configuration
+}
+
+// the manifest contains your created bundle
+const manifest = await inject(config, dependencies)
+
+//??
+//profit
+
+```
+
+When the manifest is created the injector traverses your dependency tree injecting each modules dependencies
+eventually ending up with an object with all your build modules.
+
+
+### Sub Contexts
+Sometimes it is useful to be able to create an isolated dependency context within your dependencies.
+The injector supplies a built in module to do this called `context` you can access it in any module being run
+through the dependency injector
+
+
+```
+export default ({
+  config,
+  dependencies:{
+    baz,
+    bmo: { di: { context } }
+  }
+}) => context()
+      .config(config)// sets the config for the context
+      .inherit({
+        baz
+      })
+      .dependencies({ //sets the dependencies for the module
+        foo,
+        bar
+        //... your submodule dependencies
+      })
+      .expose({
+        foo:true,
+      })
+      .module()
+```
 
 ## Known Limitations
 
-### You can only desctructure down to the module level.
-
-Individual objects passed that are not available to destructure from the constructor
-You cannot destructure past your root dependency name. IE
-
-```
-// myDependency.js
-export default ({config, dependencies})=>({
-  foo:()=>{},
-})
-
-
-// otherDependency.js
-
-export default ({config, dependencies:{myDependency:{foo}}})=>{}
-
-```
-
-In this case BMO will throw an error about a missing dependency myDependency.foo. This is because BMO tries to find the constructor at
-myDependency.foo, but its not available until after myDependency has been created.
-
-
-### Any other tools that modify the AST of your code may break dependency injection
+### Any tools that modify the AST of your code may break dependency injection
 
 Using transpilers, minifiers, or uglifiers that modify the AST may or may not work. (probably won't)
 

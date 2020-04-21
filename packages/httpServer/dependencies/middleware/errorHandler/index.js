@@ -1,18 +1,19 @@
 export default ({
-  dependencies: {
-    errorMap
-  }
+	dependencies: {
+		errorMap
+	}
 }) => async (ctx, next) => {
-  try {
-    await next()
-  } catch (error) {
-    ctx.status = errorMap.getErrorStatus(error)
-    if (error.message) {
-      ctx.body = {
-        message: error.message
-      }
-    }
-  }
-
-  return ctx
-}
+	try {
+		// there is no return value not sure what eslint wants here
+		/* eslint-disable-next-line callback-return */
+		await next();
+	} catch (e) {
+		ctx.status = errorMap.getErrorStatus(e);
+		if (e.message) {
+			ctx.body = {
+				message: e.message
+			};
+		}
+	}
+	return ctx;
+};

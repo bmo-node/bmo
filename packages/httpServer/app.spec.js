@@ -1,12 +1,12 @@
+import App from './app'
 import Router from 'koa-router'
 import injectDependencies from '@b-mo/injector'
-import App from './app'
 import loadRoute from './loadRoute'
 
 const testConfig = { thing: 'thing' }
-jest.mock('@b-mo/injector')
+jest.mock('@lmig/bmo-injector')
 jest.mock('./loadRoute')
-jest.mock('@b-mo/es6-require')
+jest.mock('@lmig/bmo-es6-require')
 jest.mock('koa')
 const requestValidator = jest.fn()
 const routes = [{}, {}]
@@ -63,8 +63,8 @@ describe('App', () => {
     await app.start()
     try {
       await app.start()
-    } catch (error) {
-      expect(error).toBeInstanceOf(Error)
+    } catch (e) {
+      expect(e).toBeInstanceOf(Error)
     }
   })
 })
