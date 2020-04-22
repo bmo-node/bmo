@@ -23,10 +23,6 @@ npm install -g @b-mo/cli
 
 From there you can install any of the bmo extensions to add new features to the cli:
 
-- [Serve](/docs/packages/serve) - Allows the user to start up a bmo http server.
-- [Generate](/docs/packages/generate) - Allows the user to create and invoke parameterized templates
-
-
 # Terminology
 
 This is a list of commonly used terms throughout the docs and what they mean in the context of bmo
@@ -38,9 +34,9 @@ This is a list of commonly used terms throughout the docs and what they mean in 
 # Next Steps
 Dig deeper into an individual tool or extension and read the docs!
 
-- [cli](/docs/packages/cli)
-- [config](/docs/packages/config)
-- [es6Require](/docs/packages/es6Require)
-- [httpServer](/docs/packages/httpServer)
-- [injector](/docs/packages/injector)
-- [mocker](/docs/packages/mocker)
+- [cli](/packages/cli/)
+- [config](/packages/config/)
+- [es6Require](/packages/es6Require/)
+- [httpServer](/packages/httpServer)
+- [injector](/packages/injector)
+- [mocker](/packages/mocker)

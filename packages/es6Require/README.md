@@ -4,7 +4,7 @@ This module wraps around require and supports loading es6 modules with a require
 
 
 ```
-import es6Require from '@lmig/bmo-es6-require'
+import es6Require from '@b-mo/es6-require'
 
 const myModule = es6Require('./myEs6Module')
 ```

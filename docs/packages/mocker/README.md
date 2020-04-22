@@ -30,6 +30,15 @@ returns an IOC container for building your test modules.
 ```
 
 ```
+container.extend(package)
+
+either an object with a dependencies key or the name of a package
+that exposes a dependencies property. The dependencies will be included
+when the container is built.
+
+```
+
+```
 container.mock(dependencyName, dependencyValue);
 
 dependencyName - A json path for the mock you wish to set.
@@ -39,7 +48,7 @@ returns the container for chaining
 ```
 
 ```
-container.set(configPath, configValue)
+container.config(configPath, configValue)
 
 configPath - A json path for the value you want to override in the config
 configValue - the value you want instead of the default one.
@@ -53,6 +62,3 @@ module - the base module you would like to be instantiated
 returns the created module with the mocked values instead of the normal dependencies.
 
 ```
-
-TODO:
-Integrate with BMO modules, currently they are only respected by the http server but this module should load them too.

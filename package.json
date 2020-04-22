@@ -15,7 +15,8 @@
     "postinstall": "lerna bootstrap --no-ci && npm run link:cli",
     "link:cli": "if-env CI=true && echo 'ci skipping link' || echo 'linking cli' && cd ./packages/cli && npm link",
     "bootstrap": "lerna bootstrap",
-    "update:docs":"node -r esm ./scripts/copyPackageDocs.js"
+    "update:docs": "node -r esm ./scripts/copyPackageDocs.js",
+    "docs":"docsify serve ./docs"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.4",
@@ -29,6 +30,7 @@
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "babel-watch": "^7.0.0",
+    "docsify": "^4.11.3",
     "eslint": "^6.7.2",
     "eslint-config-i-am-meticulous": "^11.0.0",
     "eslint-config-xo-space": "^0.22.0",

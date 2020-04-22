@@ -18,7 +18,7 @@ Say you have the following directory structure in your project
 
 ```
 process.env.NODE_ENV='test'
-import { load } from '@b-mo/config'
+import { load } from '@b-mo/onfig'
 
 const config = await load(`root/config`)
 

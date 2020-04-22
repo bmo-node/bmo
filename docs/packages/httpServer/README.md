@@ -230,3 +230,22 @@ Additionally any entries in `config.server.staticFiles` will be mounted for serv
 This module creates routes for you app to have open api documentation. This is all based off of the schemas
 that you pass to your route handlers.
 
+Path parameters will be calculated from the path field in your route object.
+```
+path:'api/things/v1/:id', //parameter is id
+```
+
+Query parameters are calculated from the Joi schema assigned to `schema.queryParams`
+```
+schema:{
+  queryParams: joiSchema
+},
+```
+
+Request/response samples are calculated from the Joi schema assigned to `schema.responseBody` and `schema.requestBody`
+```
+schema:{
+  requestBody: joiSchema //ignored for GET methods 
+  responseBody: joiSchema
+},
+```

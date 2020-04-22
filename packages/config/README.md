@@ -1,4 +1,4 @@
-# @lmig/bmo-config
+# @b-mo/config
 
 This package encapsulates our configuration loading algorithm. Its fairly basic:
 given a directory load the `index.js` and `${NODE_ENV}.config.js` if they exist.
@@ -18,7 +18,7 @@ Say you have the following directory structure in your project
 
 ```
 process.env.NODE_ENV='test'
-import { load } from '@lmig/bmo-config'
+import { load } from '@b-mo/onfig'
 
 const config = await load(`root/config`)
 
