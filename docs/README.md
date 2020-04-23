@@ -40,3 +40,7 @@ Dig deeper into an individual tool or extension and read the docs!
 - [httpServer](/packages/httpServer)
 - [injector](/packages/injector)
 - [mocker](/packages/mocker)
+
+OR
+
+Checkout the [Recipes](/recipes/) and get started quick!
