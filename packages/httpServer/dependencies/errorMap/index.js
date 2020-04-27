@@ -41,10 +41,8 @@ export default ({
     getErrorStatus: error => {
       let errorCode = INTERNAL_SERVER_ERROR
       each(map, (types, code) => {
-        /* This will be a string since the typeof check is against another typeof check */
-        /* eslint-disable-next-line valid-typeof */
         if (types.some(t => error instanceof t)) {
-          errorCode = parseInt(code)
+          errorCode = parseInt(code, 0)
         }
       })
       return errorCode

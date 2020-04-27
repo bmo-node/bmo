@@ -1,4 +1,4 @@
-import { get, isFunction } from 'lodash'
+import { get, isFunction, isObject } from 'lodash'
 import extractDependencies from './extractDependencies'
 
 export default (rootModuleName, dependencies, dependencyProperty) => {

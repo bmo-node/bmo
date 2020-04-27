@@ -33,13 +33,14 @@ class Context {
   inherit(modules) {
     this._inherited = Object.keys(modules).reduce((acc, key) => {
       acc[key] = () => modules[key]
+      return acc
     }, {})
   }
 
   async build() {
-  	console.log('BMO injector: \'build\' will be deprecated in the next minor version of this package. Calling \'module\' will automatically build for you.')
-  	await this._build()
-  	return this
+    console.log('BMO injector: \'build\' will be deprecated in the next minor version of this package. Calling \'module\' will automatically build for you.')
+    await this._build()
+    return this
   }
 
   async _build() {
@@ -59,7 +60,7 @@ class Context {
     const keys = (this._keys === undefined) ? [] : Object.keys(this._manifest.dependencies)
     const exposed = {}
     keys.forEach(key => {
-      if (!this._manifest.dependencies.hasOwnProperty(key)) {
+      if (!Object.prototype.hasOwnProperty.call(this._manifest.dependencies, key)) {
         throw new Error(`Unknown key ${key}`)
       }
 

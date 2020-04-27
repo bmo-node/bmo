@@ -26,7 +26,7 @@ describe('errorMap', () => {
       describe(`${code}`, () => {
         each(types, T => {
           it(`Should map type ${typeof T} to ${code}`, () => {
-            expect(mapperInstance.getErrorStatus(new T())).toEqual(parseInt(code))
+            expect(mapperInstance.getErrorStatus(new T())).toEqual(parseInt(code, 0))
           })
         })
       })

@@ -69,7 +69,7 @@ const configParsers = {
 
 const getDependencies = (root, path) => {
   const currentKeyName = root.key.type === 'Literal' ? root.key.value : root.key.name
-  path.length === 0 ? path = currentKeyName : path = `${path}.${currentKeyName}`
+  path = path.length === 0 ? currentKeyName : `${path}.${currentKeyName}`
   if (root.value.type === 'ObjectPattern') {
     return root.value.properties.map(p => getDependencies(p, path))
   }

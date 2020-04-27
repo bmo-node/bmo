@@ -4,7 +4,6 @@ import { routes } from '../../project/templates/config'
 /* eslint-disable no-useless-escape */
 const handler = ({
   method,
-  path,
   additionalPath,
   name,
   version

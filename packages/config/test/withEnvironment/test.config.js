@@ -1,3 +1,3 @@
 export default {
-	baz: 'buz'
-};
+  baz: 'buz'
+}

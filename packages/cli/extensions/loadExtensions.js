@@ -1,6 +1,6 @@
 import execa from 'execa'
 import es6Require from '@b-mo/es6-require'
-import { transform, flattenDeep } from 'lodash'
+import { transform, flattenDeep, memoize } from 'lodash'
 import fs from 'fs-extra'
 import path from 'path'
 import globby from 'globby'
@@ -41,12 +41,7 @@ const isLocalModule = path => {
   return path.includes(process.cwd())
 }
 
-let CACHED_EXTENSIONS
-export default async () => {
-  if (CACHED_EXTENSIONS) {
-    return CACHED_EXTENSIONS
-  }
-
+export default memoize(async () => {
   try {
     const isYarn = await fs.exists('yarn.lock')
     const loaders = [ getNPMGlobalModules(), getLocalModules() ]
@@ -57,7 +52,7 @@ export default async () => {
 
     const modules = flattenDeep((await Promise.all(loaders)))
 
-    CACHED_EXTENSIONS = transform(modules, (accumulator, value, key) => {
+    return transform(modules, (accumulator, value) => {
       if (value.match(/bmo-extension/gim)) {
         const modulePath = path.dirname(value)
         const pkg = es6Require(value)
@@ -73,9 +68,9 @@ export default async () => {
 
       return accumulator
     }, {})
-    return CACHED_EXTENSIONS
   } catch (e) {
     console.log('There was an error getting your dependencies')
     console.error(e)
+    throw e
   }
-}
+})

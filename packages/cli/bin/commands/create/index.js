@@ -33,10 +33,10 @@ const runTemplate = async template => {
   const pkg = require(pkgPath)
   let serverVersion
   try {
-  	serverVersion = (await execa.command(`npm show ${BMO_HTTP} version`)).stdout
-  } catch (e) {
-  	logger.info(`Failed to get latest server version use fallback ${FALLBACK_VERSION}`)
-  	serverVersion = FALLBACK_VERSION
+    serverVersion = (await execa.command(`npm show ${BMO_HTTP} version`)).stdout
+  } catch (err) {
+    logger.info(`Failed to get latest server version use fallback ${FALLBACK_VERSION}`, err)
+    serverVersion = FALLBACK_VERSION
   }
 
   const cliVersion = pkg.version

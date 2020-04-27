@@ -11,7 +11,7 @@ export default ({
     }
   }
 }) => {
-  const handler = (ctx, next) => {
+  const handler = ctx => {
     ctx.body = {
       status: 'OK',
       healthy: true
@@ -19,7 +19,7 @@ export default ({
     ctx.status = OK
   }
 
-  const error = (ctx, next) => {
+  const error = () => {
     throw new Error('You get an error!')
   }
 

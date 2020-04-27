@@ -8,7 +8,6 @@ export default ({ args = {}, cwd }) => {
   let config = {}
   try {
     const configPath = args.configDir || `${cwd}/config`
-    // TODO Escape hatch to change config directory
     if (fs.existsSync(configPath)) {
       config = async () => load(configPath)
     } else {

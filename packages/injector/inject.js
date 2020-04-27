@@ -20,7 +20,7 @@ export default async (config, dependencies) => {
     return formedManifest
   } catch (e) {
     if (e instanceof RangeError) {
-    	throw new Error('Max Call stack exceeded, you probably have a circular dependency in your manifest')
+      throw new Error('Max Call stack exceeded, you probably have a circular dependency in your manifest')
     }
 
     throw e

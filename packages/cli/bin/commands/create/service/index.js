@@ -4,16 +4,11 @@ import templates from './templates'
 // extendable registries
 // extendable eslint options
 //
-const defaultRegistry = 'default'
-const registries = [
-  defaultRegistry
-]
 const yarn = 'yarn'
 const npm = 'npm'
 const install = 'install'
 const packageManagers = [ yarn, npm ]
 
-const shell = true
 const installCmds = {
   [yarn]: () => {
     const cmd = execa(yarn, [ install ])
@@ -70,7 +65,7 @@ export default async ({ name }) => {
       [`${baseDir}/routes/index.js`]: templates.routes.index,
       [`${baseDir}/.gitignore`]: templates.gitIgnore
     },
-    postProcess: async ({ files, answers: { packageManager, eslint }}) => {
+    postProcess: async ({ answers: { packageManager, eslint }}) => {
       await installCmds[packageManager]()
       if (eslint) {
         const cmd = execa.command(`${packageManager} lint:fix`)

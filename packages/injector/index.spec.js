@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars, no-empty-pattern */
 import inject from '.'
 describe('load dependencies', () => {
   it('Should inject dependencies declared by the module', async () => {
@@ -86,16 +87,16 @@ describe('load dependencies', () => {
   })
 
   it('Should allow dependencies to require other dependencies in the same namespace', async () => {
-  	let dep
-  	let barModule = {}
+    let dep
+    let barModule = {}
     const barDependency = ({}) => barModule
     const bazDependency = ({
-    	dependencies: {
-    	faz: {
-    		barDependency
-    	}
+      dependencies: {
+        faz: {
+          barDependency
+        }
       }}) => {
-    	dep = barDependency
+      dep = barDependency
     }
 
     const manifest = await inject({}, { faz: { barDependency, bazDependency }})
@@ -110,22 +111,20 @@ describe('load dependencies', () => {
 
   it('Should allow the same dependency in other dependencies', async () => {
     const manifest = await inject({}, {
-    	barDependency: ({ dependencies: { fooDependency }}) => ({}),
-    	bazDependency: ({ dependencies: { barDependency, fooDependency }}) => ({}),
-    	fooDependency: ({ dependencies: { }}) => ({})
+      barDependency: ({ dependencies: { fooDependency }}) => ({}),
+      bazDependency: ({ dependencies: { barDependency, fooDependency }}) => ({}),
+      fooDependency: ({ dependencies: { }}) => ({})
     })
-    console.log(manifest)
     expect(manifest).toBeDefined()
   })
 
   it('Should allow the same dependency in other dependencies', async () => {
     const manifest = await inject({}, {
-    	fuzDependency: ({ dependencies: { fooDependency, barDependency }}) => ({}),
-    	barDependency: ({ dependencies: { fooDependency }}) => ({}),
-    	bazDependency: ({ dependencies: { barDependency, fooDependency }}) => ({}),
-    	fooDependency: ({ dependencies: { }}) => ({})
+      fuzDependency: ({ dependencies: { fooDependency, barDependency }}) => ({}),
+      barDependency: ({ dependencies: { fooDependency }}) => ({}),
+      bazDependency: ({ dependencies: { barDependency, fooDependency }}) => ({}),
+      fooDependency: ({ dependencies: { }}) => ({})
     })
-    console.log(manifest)
     expect(manifest).toBeDefined()
   })
 })

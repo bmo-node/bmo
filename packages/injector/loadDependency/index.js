@@ -17,10 +17,10 @@ const loadDependency = async (manifest, name, dependency, dependencies, circleCh
   }
 
   if (isFunction(dependency)) {
-  	if (!circleChecked[name]) {
-  		circularDependencyCheck(name, dependencies, dependencyProperty)
+    if (!circleChecked[name]) {
+      circularDependencyCheck(name, dependencies, dependencyProperty)
       circleChecked[name] = true
-  	}
+    }
 
     const deps = extractDependencies(dependency, dependencyProperty)
     await compose(deps.map(dep => async manifest => {
