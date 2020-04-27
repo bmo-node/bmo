@@ -3,9 +3,6 @@
   "version": "0.5.0",
   "description": "loads the modules defined by your configuration",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "tsteele",
   "license": "Apache-2.0",
   "dependencies": {

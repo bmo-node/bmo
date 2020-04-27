@@ -2,7 +2,7 @@
 import commander from 'commander'
 import inquirer from 'inquirer'
 import dependency from './dependency'
-import project from './project'
+import service from './service'
 import resource from './resource'
 import extensions from '../../../extensions'
 import { map } from 'lodash'
@@ -63,7 +63,7 @@ const runTemplate = async template => {
 const run = async () => {
   const ext = await extensions()
   const supportedTemplates = {
-    project,
+    service,
     dependency,
     resource,
     ...ext.templates

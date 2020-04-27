@@ -16,7 +16,7 @@
     "link:cli": "if-env CI=true && echo 'ci skipping link' || echo 'linking cli' && cd ./packages/cli && npm link",
     "bootstrap": "lerna bootstrap",
     "update:docs": "node -r esm ./scripts/copyPackageDocs.js",
-    "docs":"docsify serve ./docs"
+    "docs": "docsify serve ./docs"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.4",
@@ -42,6 +42,7 @@
     "if-env": "^1.0.4",
     "jest": "^24.9.0",
     "jest-mock-process": "^1.2.0",
+    "jest-spec-reporter": "^1.0.12",
     "lerna": "3.19.0",
     "npm-run-all": "^4.1.5",
     "xo": "^0.25.3"
@@ -49,18 +50,19 @@
   "dependencies": {},
   "jest": {
     "reporters": [
-      "default"
+      "default",
+      "jest-spec-reporter"
     ],
     "setupFiles": [
       "<rootDir>/scripts/setupTests.js"
     ],
+    "moduleFileExtensions": [
+      "js"
+    ],
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "packages/**/*.js",
+      "<rootDir>/packages/**/**/*.js",
       "!**/node_modules/**"
-    ],
-    "projects": [
-      "<rootDir>/packages/*"
     ],
     "transform": {
       "\\.m?js$": "babel-jest"

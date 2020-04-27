@@ -6,7 +6,7 @@ First ensure that you have the bmo cli installed globally.
 
 you can use the bmo generators to create the skeleton of your microservice quickly.
 
-You can run `bmo create project <projectName>` To get a project started.
+You can run `bmo create service <serviceName>` To get a new service started.
 
 Once you answer the questions and let your package manager install your dependencies you can start
 adding resources to your service with the following command
@@ -127,10 +127,14 @@ export default ({
 
 ```
 
+Other notes:
+
 the http server comes with request and response logging by default, but you can modify the format by providing new
 serializers to the logger.
 
-You can also provide application level middleware by populating a dependency called 'middleware' with your
+You can provide application level middleware by populating a dependency called 'middleware' with your
 module definitions. Those will be added to the application middleware stack before any of your routes are mounted.
+
+To dig deeper and really get to know how to take full advantage of the bmo http server read the full docs [here](/packages/httpServer/)
 
 
