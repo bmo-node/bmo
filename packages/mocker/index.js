@@ -24,6 +24,10 @@ export default ({ config: userConfig = {}, dependencies: userDeps = {}, mocks = 
         throw new Error('Module must expose dependencies to be extended')
       }
 
+      if (module.defaultConfig) {
+        userConfig = merge({}, module.defaultConfig, userConfig)
+      }
+
       dependencies = merge({}, dependencies, module.dependencies)
       return this
     },
