@@ -135,6 +135,11 @@ serializers to the logger.
 You can provide application level middleware by populating a dependency called 'middleware' with your
 module definitions. Those will be added to the application middleware stack before any of your routes are mounted.
 
+There is no need for babel or other transpilers to use es6 functionality when you are using the bmo cli.
+Applications are launched with [esm](https://www.npmjs.com/package/esm).
+
+When you use the dev flag (-d) the application will be launched with livereload enabled.
+
 To dig deeper and really get to know how to take full advantage of the bmo http server read the full docs [here](/packages/httpServer/)
 
 

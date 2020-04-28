@@ -16,4 +16,13 @@ your services. By consolidating code into modules developers can reduce time spe
 and focus on writing application code.
 
 
-#[Testing](/recipes/testing/)
+# [Testing](/recipes/testing/)
+
+One of the advantages to using dependency injection is having more testable code, but modules with
+many dependencies can be a pain to test. Using the [mocker](/packages/mocker/) allows developers to focus
+on writing tests. Learn how to use the mocking framework to speed up your unit testing.
+
+# [Extensions](/recipes/extensions/)
+
+In this recipe you will learn the ins and outs of extending the BMO cli tool. You will learn how to add new templates
+to it's generation capabilities as well as adding whole new commands!
