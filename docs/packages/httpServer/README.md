@@ -162,9 +162,6 @@ By default bmo ships with some built-in modules.
 The error map module is useful for mapping error types to http status codes.
 The error map controls which status is returned when a handler throws a specific type of error.
 
-
-
-
 #### errors
 
 This module houses errors used by the framework. It exposes an ExtendableError for use in your custom errors
@@ -227,7 +224,7 @@ Additionally any entries in `config.server.staticFiles` will be mounted for serv
 
 #### swagger
 
-This module creates routes for you app to have open api documentation. This is all based off of the schemas
+This module creates routes for your app to have open api documentation. This is all based off of the schemas
 that you pass to your route handlers.
 
 Path parameters will be calculated from the path field in your route object.
@@ -235,7 +232,7 @@ Path parameters will be calculated from the path field in your route object.
 path:'api/things/v1/:id', //parameter is id
 ```
 
-Query parameters are calculated from the Joi schema assigned to `schema.queryParams`
+Query parameters are calculated from the Joi schema assigned to `schema.queryParams` in the route object
 ```
 schema:{
   queryParams: joiSchema
@@ -243,9 +240,10 @@ schema:{
 ```
 
 Request/response samples are calculated from the Joi schema assigned to `schema.responseBody` and `schema.requestBody`
+in the route object
 ```
 schema:{
-  requestBody: joiSchema //ignored for GET methods 
+  requestBody: joiSchema //ignored for GET methods
   responseBody: joiSchema
 },
 ```

@@ -6,7 +6,7 @@ bmo is a collection of packages aimed at supercharging a developers workflow.
 At its core it is an extensible CLI application that allows developers to customize their environment
 for their needs.
 
-# Getting Started
+## Getting Started
 
 To get started ensure that you have node.js >= 10.16 installed.
 
@@ -23,7 +23,7 @@ npm install -g @b-mo/cli
 
 From there you can install any of the bmo extensions to add new features to the cli:
 
-# Terminology
+## Terminology
 
 This is a list of commonly used terms throughout the docs and what they mean in the context of bmo
 
@@ -31,12 +31,13 @@ This is a list of commonly used terms throughout the docs and what they mean in 
 - Modules - Packages or files that are put into Dependencies and run through bmo's dependency injection
 - Manifest - The output of bmos dependency injector. its an object with a configuration value and all the instantiated modules.
 
-# Next Steps
+## Next Steps
 Checkout the [docs](https://libertymutual.github.io/bmo/#/), stop worrying about boiler plate and focus on code that matters!
 
-# Contributing
+## Contributing
 
 We are always accepting PRs, feature requests and bug reports.
 If you want to contribute open an issue on our [github](https://github.com/libertymutual/bmo)
-explaining the feature and we can start the conversation on how best to address the request.
+explaining the feature or bug and we can start the conversation on how best to address it.
 Any code contributions should have accompanying tests and follow the core principles of extendability, modularity, and developer empowerment.
+For more detailed information on how to contribute check [here](/contributing/)

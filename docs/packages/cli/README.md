@@ -1,5 +1,4 @@
-
-# BMO CLI
+# @b-mo/cli
 
 BMO CLI is an  extensible command line interface for improving your work flow.
 Using its extensions you can easily startup a BMO http server, or even generate new projects and components.
@@ -42,7 +41,7 @@ Some templates are included but more can be added by using extensions
 
 |Option          | Description                                              |
 |----------------|----------------------------------------------------------|
-|project         | Creates a BMO http server project                        |
+|service         | Creates a BMO http server project                        |
 |resource        | Creates a restful resource with the given name           |
 |dependency      | Creates a new dependency for BMO dependency injection    |
 
