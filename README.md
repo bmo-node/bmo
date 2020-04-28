@@ -32,15 +32,11 @@ This is a list of commonly used terms throughout the docs and what they mean in 
 - Manifest - The output of bmos dependency injector. its an object with a configuration value and all the instantiated modules.
 
 # Next Steps
-Dig deeper into an individual tool or extension and read the docs!
+Checkout the [docs](https://libertymutual.github.io/bmo/#/), stop worrying about boiler plate and focus on code that matters!
 
-- [cli](/packages/cli/)
-- [config](/packages/config/)
-- [es6Require](/packages/es6Require/)
-- [httpServer](/packages/httpServer)
-- [injector](/packages/injector)
-- [mocker](/packages/mocker)
+# Contributing
 
-OR
-
-Checkout the [Recipes](/recipes/) and get started quick!
+We are always accepting PRs, feature requests and bug reports.
+If you want to contribute open an issue on our [github](https://github.com/libertymutual/bmo)
+explaining the feature and we can start the conversation on how best to address the request.
+Any code contributions should have accompanying tests and follow the core principles of extendability, modularity, and developer empowerment.

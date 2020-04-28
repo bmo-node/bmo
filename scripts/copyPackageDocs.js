@@ -15,7 +15,6 @@ const run = async () => {
     console.log(`Coppying ${location} to ${to}`)
     fs.copy(location, to)
   })
-  fs.copy('README.md', 'docs/README.md')
 }
 
 run()

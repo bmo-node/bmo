@@ -21,7 +21,7 @@ npm install -g @b-mo/cli
 ```
 
 
-From there you can install any of the bmo extensions to add new features to the cli:
+From there you can install any of the bmo extensions to add new features to the cli.
 
 # Terminology
 
@@ -29,7 +29,7 @@ This is a list of commonly used terms throughout the docs and what they mean in 
 
 - Dependencies - This refers to the bundle of modules available for your application to use through the dependency injector
 - Modules - Packages or files that are put into Dependencies and run through bmo's dependency injection
-- Manifest - The output of bmos dependency injector. its an object with a configuration value and all the instantiated modules.
+- Manifest - The output of bmos dependency injector. It is an object with a configuration value and all the instantiated modules.
 
 # Next Steps
 Dig deeper into an individual tool or extension and read the docs!
@@ -44,3 +44,10 @@ Dig deeper into an individual tool or extension and read the docs!
 OR
 
 Checkout the [Recipes](/recipes/) and get started quick!
+
+# Contributing
+
+We are always accepting PRs, feature requests and bug reports.
+If you want to contribute open an issue on our [github](https://github.com/libertymutual/bmo)
+explaining the feature or bug and we can start the conversation on how best to address it.
+Any code contributions should have accompanying tests and follow the core principles of extendability, modularity, and developer empowerment.
