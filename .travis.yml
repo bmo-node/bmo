@@ -7,6 +7,7 @@ before_deploy:
 - git remote set-url origin "https://${GITHUB_TOKEN}@github.com/libertymutual/bmo.git" > /dev/null 2>&1
 - git checkout master
 - echo "//registry.npmjs.org/:_authToken=\${NPM_API_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+- which npm
 deploy:
   provider: script
   script: "echo publishing packages && npm run publish:packages"
