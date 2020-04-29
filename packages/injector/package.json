@@ -14,5 +14,8 @@
     "espree": "^6.1.2",
     "esquery": "^1.0.1",
     "lodash": "^4.17.15"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
