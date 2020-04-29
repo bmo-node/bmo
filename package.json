@@ -9,8 +9,7 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "precommit": "npm run lint && npm test && npm run test:feature",
-    "test": "jest",
+    "test": "jest && npm run lint",
     "publish:packages": "lerna publish from-package --graph-type all --yes",
     "postinstall": "lerna bootstrap --no-ci && npm run link:cli",
     "link:cli": "if-env CI=true && echo 'ci skipping link' || echo 'linking cli' && cd ./packages/cli && npm link",

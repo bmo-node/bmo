@@ -27,5 +27,8 @@
   },
   "peerDependencies": {
     "@b-mo/http-server": "^0.5.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
