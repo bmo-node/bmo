@@ -9,6 +9,6 @@ before_deploy:
 - echo "//registry.npmjs.org/:_authToken=\${NPM_API_TOKEN}" >> $HOME/.npmrc 2> /dev/null
 deploy:
   provider: script
-  script: npm run publish:packages
+  script: "echo publishing packages && npm run publish:packages"
   on:
     branch: master
