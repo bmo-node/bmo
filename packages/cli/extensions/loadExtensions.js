@@ -53,7 +53,7 @@ export default memoize(async () => {
     const modules = flattenDeep((await Promise.all(loaders)))
 
     return transform(modules, (accumulator, value) => {
-      if (value.match(/bmo-extension/gim)) {
+      if (value.match(/bmo-extension/gim) || value.match(/@b-mo\/extension/)) {
         const modulePath = path.dirname(value)
         const pkg = es6Require(value)
         if (accumulator[pkg.name]) {
