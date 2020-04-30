@@ -1,5 +1,7 @@
 import execa from 'execa'
+import fs from 'fs-extra'
 import templates from './templates'
+import logger from '../../../../logger'
 // TODO
 // extendable registries
 // extendable eslint options
@@ -8,16 +10,16 @@ const yarn = 'yarn'
 const npm = 'npm'
 const install = 'install'
 const packageManagers = [ yarn, npm ]
-
+const shell = true
 const installCmds = {
   [yarn]: () => {
-    const cmd = execa(yarn, [ install ])
+    const cmd = execa(yarn, [ install ], { shell })
     cmd.stdout.pipe(process.stdout)
     cmd.stderr.pipe(process.stderr)
     return cmd
   },
   [npm]: () => {
-    const cmd = execa(npm, [ install ])
+    const cmd = execa(npm, [ install ], { shell })
     cmd.stdout.pipe(process.stdout)
     cmd.stderr.pipe(process.stderr)
     return cmd
@@ -26,12 +28,25 @@ const installCmds = {
 export default async ({ name }) => {
   const baseDir = process.cwd()
   const questions = [{
-    name: 'name',
-    default: name,
-    message: 'project name'
+    name: 'continue',
+    when: () => !fs.emptyDirSync(baseDir),
+    type: 'confirm',
+    message: 'The current directory is not empty. Do you want to continue?'
   },
   {
-    default: `A project description for ${name}`,
+    name: 'name',
+    default: name,
+    message: 'project name',
+    when: answers => {
+      if (!answers.continue) {
+        logger.info('Aborting project creation')
+        process.exit(0)
+      }
+
+      return true
+    }
+  },
+  {
     name: 'description',
     message: 'Project description'
   },
@@ -66,13 +81,17 @@ export default async ({ name }) => {
       [`${baseDir}/.gitignore`]: templates.gitIgnore
     },
     postProcess: async ({ answers: { packageManager, eslint }}) => {
+      logger.info('Installing dependencies...')
       await installCmds[packageManager]()
       if (eslint) {
-        const cmd = execa.command(`${packageManager} lint:fix`)
+        logger.info('Running eslint...')
+        const cmd = execa.command(`${packageManager} run lint:fix`, { shell })
         cmd.stdout.pipe(process.stdout)
         cmd.stderr.pipe(process.stderr)
         await cmd
       }
+
+      logger.info('Project creation successful!')
     }
   }
 }
