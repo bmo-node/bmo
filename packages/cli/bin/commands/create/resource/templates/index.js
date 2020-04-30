@@ -1,6 +1,6 @@
 import es6Require from '@b-mo/es6-require'
-import { routes } from '../../project/templates/config'
-// ToDo add schema / repository creation
+import { routes } from '../../service/templates/config'
+
 /* eslint-disable no-useless-escape */
 const handler = ({
   method,
