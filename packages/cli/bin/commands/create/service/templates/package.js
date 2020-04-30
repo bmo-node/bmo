@@ -35,7 +35,7 @@ const base = ({ name, description, serverVersion, cliVersion }) => ({
 })
 const scripts = {
   snyk: {
-    'snyk:test': 'snyk test --org=liberty-mutual-digital-discovery --severity-threshold=medium',
+    'snyk:test': 'snyk test',
     'snyk:wizard': 'snyk wizard'
   },
   eslint: {
