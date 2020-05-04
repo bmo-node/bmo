@@ -35,6 +35,7 @@ class Context {
       acc[key] = () => modules[key]
       return acc
     }, {})
+    return this
   }
 
   async build() {
@@ -57,7 +58,7 @@ class Context {
 
   async module() {
     await this._build()
-    const keys = (this._keys === undefined) ? [] : Object.keys(this._manifest.dependencies)
+    const keys = (this._keys === undefined) ? Object.keys(this._manifest.dependencies) : this._keys
     const exposed = {}
     keys.forEach(key => {
       if (!Object.prototype.hasOwnProperty.call(this._manifest.dependencies, key)) {
