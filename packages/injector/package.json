@@ -1,6 +1,6 @@
 {
   "name": "@b-mo/injector",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "dependency injector for bmo",
   "main": "index.js",
   "files": [

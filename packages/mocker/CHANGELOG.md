@@ -1,7 +1,7 @@
 # CHANGELOG
 
 v0.5.0
-- [UPDATE] Package name
+- [UPDATE] Package name and version
 
 v0.1.2
  - [FIX] Issue with extending
