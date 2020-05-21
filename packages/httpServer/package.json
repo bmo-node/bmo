@@ -6,11 +6,12 @@
   "author": "tsteele",
   "license": "Apache-2.0",
   "dependencies": {
-    "@hapi/joi": "17.1.1",
     "@b-mo/es6-require": "^0.5.0",
     "@b-mo/injector": "^0.5.0",
     "@b-mo/module-loader": "^0.5.0",
+    "@hapi/joi": "17.1.1",
     "chalk": "^4.0.0",
+    "commander": "^5.1.0",
     "eureka-client": "^1.1.0",
     "extendable-error": "^0.1.5",
     "http-methods-enum": "^0.1.1",
