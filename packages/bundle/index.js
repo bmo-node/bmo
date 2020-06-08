@@ -7,24 +7,46 @@ import resolveBundle from './resolve'
 import loadBundle from './load'
 import buildBundle from './build'
 
-export default {
-  async load({ dir = process.cwd() } = {}) {
-    const pkg = require(await pkgup(dir))
-    console.log(`Building ${pkg.name}@${pkg.version}`)
-    const bundle = await loadBundle({ dir, pkg })
-    const config = await loadConfig(path.resolve(dir, './config'))
-    const manifest = await buildBundle({ bundle, config, pkg })
-    console.log(manifest)
-    return {
-      manifest,
-      run(...runArgs) {
-        if (!manifest.dependencies.run) {
-          throw new Error('No run dependency found. Please add one to your bundle!')
-        }
+class Bundle {
+  constructor(params) {
+    this._params = params
+  }
 
-        return manifest.dependencies.run(...runArgs)
+  get manifest() {
+    return this._manifest
+  }
+
+  async load(params) {
+    const { dir } = params || this._params || { dir: process.cwd() }
+    this.cwd = dir
+    const pkg = this.pkg = require(await pkgup({ cwd: dir }))
+    this.bundle = await loadBundle({ dir, pkg })
+    this.config = await loadConfig(path.resolve(dir, './config'))
+    this._loaded = true
+    return this
+  }
+
+  async build() {
+    this._manifest = await buildBundle(this)
+    return this
+  }
+
+  async run(...runArgs) {
+    if (!this.manifest) {
+      if (!this._loaded) {
+        await this.load()
       }
+
+      await this.build()
     }
+
+    if (!this.manifest.dependencies.run) {
+      throw new Error('No run dependency found. Please add one to your bundle!')
+    }
+
+    return this.manifest.dependencies.run(...runArgs)
   }
 }
+
+export default params => new Bundle(params)
 

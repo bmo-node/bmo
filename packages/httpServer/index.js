@@ -1,4 +1,3 @@
-import App from './app'
 import dependencies from './dependencies'
 import config from './defaultConfig'
 export { default as dependencies } from './dependencies'

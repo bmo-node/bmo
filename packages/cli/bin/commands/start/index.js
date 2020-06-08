@@ -10,12 +10,10 @@ function collect(value, previous) {
 }
 
 commander
-  .option('--baseDir <dir>', 'Set the base directory')
-  .option('-c, --configDir <dir>', 'Set the configuration directory')
   .option('-d, --dev', 'Starts a watch on the base directory to look for changes')
   .option('-s, --serve <folder>', 'Adds a folder to be served statically', collect, [])
 
-logger.warn('bmo start will be deprecated in a future version of this package, you will instead have to install: @b-mo/extension-serve and use that for server capabilities')
+logger.warn('bmo start will be deprecated in a future version of this package, you will instead have to install: @b-mo/extension-run and use the new composable bundle feature to run your application.')
 
 const cwd = process.cwd()
 commander.parse(process.argv)

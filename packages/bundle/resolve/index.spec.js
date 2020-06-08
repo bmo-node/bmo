@@ -1,15 +1,19 @@
-import { resolveBundle } from './runApp'
+import resolveBundle from '.'
 describe('resolve bundle', () => {
   it('Should recursively merge the bundles together', () => {
     const bundle = {
       extends: {
         extends: {
+          extends: require.resolve('./test.bundle.js'),
           dependencies: {
-            baz: {}
+            baz: {},
+            middle: [ 'thing1' ]
           }
         },
         dependencies: {
-          bar: {}
+          bar: {},
+          middle: [ 'thing2' ]
+
         }
       },
       dependencies: {
@@ -20,10 +24,12 @@ describe('resolve bundle', () => {
       dependencies: {
         foo: {},
         bar: {},
-        baz: {}
+        baz: {},
+        buz: {},
+        middle: [ 'thing1', 'thing2' ]
       }
     }
-    const resolvedBundle = resolveBundle(bundle)
+    const resolvedBundle = resolveBundle({ bundle, cwd: __dirname })
     expect(resolvedBundle).toEqual(expected)
   })
 })

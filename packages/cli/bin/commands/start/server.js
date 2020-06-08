@@ -1,11 +1,18 @@
 import httpServer from '@b-mo/http-server'
+import bundle from '@b-mo/bundle'
+import es6Require from '@b-mo/es6-require'
+import fs from 'fs-extra'
 import { set } from 'lodash'
+
 export default async ({ config, args, cwd }) => {
-  const userConfig = await config()
-  userConfig.baseDir = args.baseDir || cwd
-  userConfig.server = userConfig.server || {}
-  set(userConfig, 'server.static', args.serve || [])
-  const server = httpServer(userConfig)
-  await server.start()
-  console.log(`Server listening on ${server.port}`)
+  const appBundle = bundle({ dir: cwd })
+  const routesPath = `${cwd}/routes`
+  await appBundle.load()
+  if (fs.existsSync(routesPath)) {
+    const routes = es6Require(routesPath)
+    appBundle.bundle.dependencies.routes = routes
+  }
+
+  appBundle.bundle.extends = httpServer
+  appBundle.run()
 }

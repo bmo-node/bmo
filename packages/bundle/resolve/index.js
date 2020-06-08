@@ -1,23 +1,32 @@
 import { mergeWith, isString } from 'lodash'
 import es6Require from '@b-mo/es6-require'
 
-const resolveLocalRequire = module => require.resolve(module, {
-  paths: [ `${process.cwd()}/node_modules/` ]
+const resolveLocalRequire = ({ moduleId, cwd }) => require.resolve(moduleId, {
+  paths: [ `${process.cwd()}/node_modules/`, cwd ]
 })
 
 const mergeArray = (objValue, srcValue) => {
   if (Array.isArray(objValue)) {
-    return objValue.concat(srcValue)
+    return [ ...srcValue, ...objValue ]
   }
 }
 
-const resolveBundle = bundle => {
+const resolveBundle = ({ bundle, cwd }) => {
   let resolved = {}
   if (bundle.extends) {
     if (isString(bundle.extends)) {
-      resolved = resolveBundle(es6Require(resolveLocalRequire(bundle.extends)))
+      resolved = resolveBundle({
+        bundle: es6Require(resolveLocalRequire({
+          moduleId: bundle.extends,
+          cwd
+        })),
+        cwd
+      })
     } else {
-      resolved = resolveBundle(bundle.extends)
+      resolved = resolveBundle({
+        bundle: bundle.extends,
+        cwd
+      })
     }
   }
 

@@ -16,7 +16,7 @@ export default ({
     args
   }
 }) => async () => {
-  console.log('Running http server...')
+  logger.info('Running http server...')
   middleware.forEach(mw => {
     if (has(mw, 'use') && !mw.use) {
       return

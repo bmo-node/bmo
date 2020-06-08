@@ -1,4 +1,7 @@
 # CHANGELOG
+v0.6.0
+- [CHANGE] Update package to support new composable bmo module pattern
+- [REMOVE] app.js in favor of new bundle running paradigm.
 
 v0.5.0
 - [CHANGE] Update version

@@ -1,11 +1,11 @@
-import pinoHttp from 'pino-http'
 
 export default ({
   config: {
     pino: pinoOpts
   },
   dependencies: {
-    serializers
+    serializers,
+    pinoHttp
   }
 }) => {
   const wrap = pinoHttp({

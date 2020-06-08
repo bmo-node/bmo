@@ -1,5 +1,3 @@
-
-import es6Require from '@b-mo/es6-require'
 import path from 'path'
 export default {
   commands: {

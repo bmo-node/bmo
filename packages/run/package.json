@@ -9,16 +9,10 @@
   "author": "tsteele",
   "license": "Apache-2.0",
   "dependencies": {
-    "@b-mo/config": "^0.5.0",
-    "@b-mo/es6-require": "^0.5.0",
-    "@b-mo/injector": "^0.5.1",
-    "@b-mo/module-loader": "^0.5.0",
+    "@b-mo/bundle": "0.1.0",
     "commander": "^5.1.0",
+    "dotenv": "^8.2.0",
     "esm": "^3.2.25",
-    "fs-extra": "^9.0.0",
-    "lodash": "^4.17.15",
-    "lodash.merge": "^4.6.2",
-    "nodemon": "^2.0.4",
-    "pkg-up": "^3.1.0"
+    "nodemon": "^2.0.4"
   }
 }

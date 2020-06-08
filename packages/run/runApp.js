@@ -1,8 +1,8 @@
 import bundle from '@b-mo/bundle'
-
+import dotenv from 'dotenv'
+dotenv.config()
 const run = async () => {
-  const b = await bundle.load()
-  b.run()
+  bundle().run()
 }
 
 run()
