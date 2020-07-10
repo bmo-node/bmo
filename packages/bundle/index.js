@@ -1,9 +1,6 @@
-import es6Require from '@b-mo/es6-require'
-import merge from 'lodash.merge'
 import path from 'path'
 import pkgup from 'pkg-up'
 import { load as loadConfig } from '@b-mo/config'
-import resolveBundle from './resolve'
 import loadBundle from './load'
 import buildBundle from './build'
 
@@ -19,7 +16,8 @@ class Bundle {
   async load(params) {
     const { dir } = params || this._params || { dir: process.cwd() }
     this.cwd = dir
-    const pkg = this.pkg = require(await pkgup({ cwd: dir }))
+    const pkg = require(await pkgup({ cwd: dir }))
+    this.pkg = pkg
     this.bundle = await loadBundle({ dir, pkg })
     this.config = await loadConfig(path.resolve(dir, './config'))
     this._loaded = true
@@ -27,16 +25,19 @@ class Bundle {
   }
 
   async build() {
-    this._manifest = await buildBundle(this)
+    if (!this._loaded) {
+      await this.load()
+    }
+
+    if (!this._manifest) {
+      this._manifest = await buildBundle(this)
+    }
+
     return this
   }
 
   async run(...runArgs) {
     if (!this.manifest) {
-      if (!this._loaded) {
-        await this.load()
-      }
-
       await this.build()
     }
 

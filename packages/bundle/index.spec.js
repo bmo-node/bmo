@@ -23,7 +23,7 @@ it('Default to the current working directory if one is not defined', async () =>
   let b = bundle()
   try {
     await (b.run())
-  } catch (e) {}
+  } catch (_) {} // Appease the unused eslint rule...
 
   expect(b.cwd).toEqual(process.cwd())
 })
