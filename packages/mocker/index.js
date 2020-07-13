@@ -67,22 +67,22 @@ export default ({ config: userConfig = {}, dependencies: userDeps = {}, mocks = 
 }
 
 // This will probably break with circular dependencies...
-const getDependencies = ( module, dependencies, found = {} ) => {
-  let deps = extract( module )
-  if ( found[ module ] ) {
+const getDependencies = (module, dependencies, found = {}) => {
+  let deps = extract(module)
+  if (found[module]) {
     return []
   }
 
-  found[ module ] = true
-  const subdeps = deps.map( d => {
-    const moduleName = getDependencyModuleName( d, dependencies )
-    const mod = get( dependencies, moduleName )
-    return isFunction( mod ) ?
-      getDependencies( mod, dependencies, found ) :
-      [ moduleName ];
-  } )
-  deps = deps.concat( subdeps )
-  deps = flatten( deps )
+  found[module] = true
+  const subdeps = deps.map(d => {
+    const moduleName = getDependencyModuleName(d, dependencies)
+    const mod = get(dependencies, moduleName)
+    return isFunction(mod) ?
+      getDependencies(mod, dependencies, found) :
+      [ moduleName ]
+  })
+  deps = deps.concat(subdeps)
+  deps = flatten(deps)
   return deps
 }
 
