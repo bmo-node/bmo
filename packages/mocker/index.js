@@ -1,7 +1,7 @@
 import inject, { extract, context } from '@b-mo/injector'
 import es6Require from '@b-mo/es6-require'
 import loadModules from '@b-mo/module-loader'
-import { set, get, has, flatten, merge, isUndefined, isString } from 'lodash'
+import { set, get, has, flatten, merge, isUndefined, isString, isFunction } from 'lodash'
 import { load as loadConfig } from '@b-mo/config'
 
 export default ({ config: userConfig = {}, dependencies: userDeps = {}, mocks = {}} = {}) => {
@@ -67,19 +67,22 @@ export default ({ config: userConfig = {}, dependencies: userDeps = {}, mocks = 
 }
 
 // This will probably break with circular dependencies...
-const getDependencies = (module, dependencies, found = {}) => {
-  let deps = extract(module)
-  if (found[module]) {
+const getDependencies = ( module, dependencies, found = {} ) => {
+  let deps = extract( module )
+  if ( found[ module ] ) {
     return []
   }
 
-  found[module] = true
-  const subdeps = deps.map(d => {
-    const moduleName = getDependencyModuleName(d, dependencies)
-    return getDependencies(get(dependencies, moduleName), dependencies, found)
-  })
-  deps = deps.concat(subdeps)
-  deps = flatten(deps)
+  found[ module ] = true
+  const subdeps = deps.map( d => {
+    const moduleName = getDependencyModuleName( d, dependencies )
+    const mod = get( dependencies, moduleName )
+    return isFunction( mod ) ?
+      getDependencies( mod, dependencies, found ) :
+      [ moduleName ];
+  } )
+  deps = deps.concat( subdeps )
+  deps = flatten( deps )
   return deps
 }
 
