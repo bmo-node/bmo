@@ -1,4 +1,6 @@
 # CHANGELOG
+v0.5.1
+- [Change] Allow configuration of the body parser middleware.
 
 v0.5.0
 - [CHANGE] Update version
