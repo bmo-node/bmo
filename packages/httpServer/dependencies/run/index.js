@@ -1,4 +1,4 @@
-import { get, has } from 'lodash'
+import { has } from 'lodash'
 export default ({
   config: {
     server: {
@@ -24,7 +24,6 @@ export default ({
 
     server.use(mw)
   })
-  const staticMW = path => server.use(serveStatic({ path }))
   const routers = routes.map(loadRoute).forEach(router => server.use(router.routes(), router.allowedMethods()))
   staticFiles.concat(args.serve).forEach(path => server.use(serveStatic({ path })))
   await server.listen(port)

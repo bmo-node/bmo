@@ -1,9 +1,11 @@
 import path from 'path'
 import fs from 'fs-extra'
 import es6Require from '@b-mo/es6-require'
-import { has } from 'lodash'
+import loadModules from '@b-mo/module-loader'
+import { has, merge } from 'lodash'
+import resolveBundle from '../resolve'
 
-export default async ({ pkg, dir }) => {
+const loadAppBundle = async ({ pkg, dir }) => {
   const mainFile = path.resolve(dir, (pkg.main || './index.js'))
   let dependencies
   let appBundle
@@ -27,4 +29,13 @@ export default async ({ pkg, dir }) => {
   }
 
   return appBundle
+}
+
+export default async ({ pkg, dir, config }) => {
+  const bundle = await loadAppBundle({ pkg, dir })
+  const mergedBundle = merge({}, {
+    dependencies: loadModules(pkg),
+    config: { ...config, pkg }
+  }, bundle)
+  return mergedBundle
 }

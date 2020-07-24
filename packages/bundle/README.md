@@ -26,10 +26,42 @@ bundle.run(...runArgs)
 Constructor:
 
 ```
-const b = bundle(config);
+const app = bundle(config);
 ```
+
+
 config:
 ```
 {
   dir // the directory to use as a root for the bundle
 }
+```
+
+Load a bundle:
+
+```
+await app.load(config)
+```
+
+Loads a configuration and dependency bundle, but does not resolve or perform the injection.
+config is the same as the constructor and takes precedent over the config passed there.
+
+
+Build a bundle:
+
+```
+await app.build()
+```
+
+Resolves and injects the dependency bundle, loading it if required, does not invoke the run() dependency.
+
+
+Run a bundle
+
+```
+await app.run(...runArgs)
+```
+
+Loads and Builds a bundle (if not called before) and then invokes the run() dependency passing through any args.
+
+

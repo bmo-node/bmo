@@ -3,37 +3,65 @@ import pkgup from 'pkg-up'
 import { load as loadConfig } from '@b-mo/config'
 import loadBundle from './load'
 import buildBundle from './build'
+import resolve from './resolve'
 
 class Bundle {
-  constructor(params) {
-    this._params = params
-  }
-
   get manifest() {
     return this._manifest
   }
 
-  async load(params) {
-    const { dir } = params || this._params || { dir: process.cwd() }
-    this.cwd = dir
-    const pkg = require(await pkgup({ cwd: dir }))
-    this.pkg = pkg
-    this.bundle = await loadBundle({ dir, pkg })
-    this.config = await loadConfig(path.resolve(dir, './config'))
-    this._loaded = true
+  dependencies(dependencies) {
+    if (!this.bundle) {
+      this.bundle = { dependencies }
+    } else {
+      this.bundle.dependencies = dependencies
+    }
+
+    return this
+  }
+
+  config(config) {
+    if (!this.bundle) {
+      this.bundle = { config }
+    } else {
+      this.bundle.config = config
+    }
+
+    return this
+  }
+
+  async load(params = { dir: process.cwd() }) {
+    if (!this.bundle) {
+      const { dir } = params
+      const pkg = require(await pkgup({ cwd: dir }))
+      const config = await loadConfig(path.resolve(dir, './config'))
+      this.cwd = dir
+      this.bundle = await loadBundle({ dir, pkg, config })
+    } else {
+      throw new Error('Calling load on a bundle that has already been set is not supported')
+    }
+
     return this
   }
 
   async build() {
-    if (!this._loaded) {
-      await this.load()
+    if (!this.resolved) {
+      await this.resolve()
     }
 
     if (!this._manifest) {
-      this._manifest = await buildBundle(this)
+      this._manifest = await buildBundle({ bundle: this.resolved })
     }
 
     return this
+  }
+
+  async resolve() {
+    if (!this.bundle) {
+      await this.load()
+    }
+
+    this.resolved = resolve(this)
   }
 
   async run(...runArgs) {
@@ -49,5 +77,5 @@ class Bundle {
   }
 }
 
-export default params => new Bundle(params)
+export default () => new Bundle()
 

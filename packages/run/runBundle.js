@@ -4,10 +4,6 @@ import runDevApp from './runDevApp'
 import { fork } from 'child_process'
 const esm = require.resolve('esm')
 
-function collect(value, previous) {
-  return previous.concat([ value ])
-}
-
 commander
   .option('-d, --dev', 'Starts a watch on the base directory to look for changes')
   .allowUnknownOption()

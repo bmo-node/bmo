@@ -26,6 +26,8 @@ describe('resolve bundle', () => {
         bar: {},
         baz: {},
         buz: {},
+        boo: {},
+        bim: {},
         middle: [ 'thing1', 'thing2' ]
       }
     }

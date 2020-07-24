@@ -3,15 +3,13 @@
   "version": "0.1.0",
   "description": "runs a given dependency context",
   "main": "index.js",
-  "files":[
+  "files": [
     "./build/*",
     "./load/",
     "./resolve/",
     "index.js"
   ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "author": "tsteele",
   "license": "Apache-2.0",
   "dependencies": {
