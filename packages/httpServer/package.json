@@ -1,6 +1,6 @@
 {
   "name": "@b-mo/http-server",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "",
   "main": "index.js",
   "author": "tsteele",
