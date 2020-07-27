@@ -19,7 +19,9 @@ export default [
   }) => helmet(helmetConfig),
   ({
     config: {
-      bodyparser: bodyparserConfig
+      server: {
+        bodyparser: bodyparserConfig
+      }
     }
   }) => bodyparser(bodyparserConfig),
   logger

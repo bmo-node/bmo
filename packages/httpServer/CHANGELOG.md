@@ -1,4 +1,7 @@
 # CHANGELOG
+v0.5.2
+- [Fix] bodyparser should be a part of the server configuration.
+
 v0.5.1
 - [Change] Allow configuration of the body parser middleware.
 
