@@ -1,6 +1,7 @@
 export default ({
   dependencies: {
     routes,
+    joi,
     http: {
       status: {
         OK
@@ -19,20 +20,35 @@ export default ({
     ctx.status = OK
   }
 
-  const error = () => {
+  const errorHandler = () => {
     throw new Error('You get an error!')
   }
 
+  const health = joi.object().keys({
+    status: joi.string(),
+    healthy: joi.boolean()
+  });
+
+  const error = joi.object().keys({
+    message: joi.string()
+  });
+
   routes.push({
     method: GET,
-    name: 'Health Check',
+    name: 'health',
     path: '/health',
+    schema: {
+      responseBody: health
+    },
     handler
   })
   routes.push({
     method: GET,
-    name: 'Get Error',
+    name: 'error',
     path: '/error',
-    handler: error
+    schema: {
+      responseBody: error
+    },
+    handler: errorHandler
   })
 }
