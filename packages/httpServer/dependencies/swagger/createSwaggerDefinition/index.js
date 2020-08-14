@@ -78,7 +78,7 @@ const getQueryParams = route => {
   return params
 }
 
-const jsonSchema = (schema, description = "Okay") => ({
+const jsonSchema = (schema, description = 'Okay') => ({
   description,
   content: {
     'application/json': {
@@ -87,7 +87,7 @@ const jsonSchema = (schema, description = "Okay") => ({
       }
     }
   }
-});
+})
 
 const requestBody = schema => `${schema}-${REQUEST_BODY}`
 

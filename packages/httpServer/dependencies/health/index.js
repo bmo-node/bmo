@@ -27,11 +27,11 @@ export default ({
   const health = joi.object().keys({
     status: joi.string(),
     healthy: joi.boolean()
-  });
+  })
 
   const error = joi.object().keys({
     message: joi.string()
-  });
+  })
 
   routes.push({
     method: GET,
