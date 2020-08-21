@@ -37,9 +37,9 @@ Dig deeper into an individual tool or extension and read the docs!
 - [cli](/packages/cli/)
 - [config](/packages/config/)
 - [es6Require](/packages/es6Require/)
-- [httpServer](/packages/httpServer)
-- [injector](/packages/injector)
-- [mocker](/packages/mocker)
+- [httpServer](/packages/httpServer/)
+- [injector](/packages/injector/)
+- [mocker](/packages/mocker/)
 
 OR
 
