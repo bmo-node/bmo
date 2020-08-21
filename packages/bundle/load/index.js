@@ -17,7 +17,7 @@ const loadAppBundle = async ({ pkg, dir }) => {
   } else {
     const dependenciesPath = path.resolve(dir, './dependencies/index.js')
     if (!fs.existsSync(dependenciesPath)) {
-      throw new Error('Module must either have a main file, index.js file or a dependencies/index.js file')
+      throw new Error(`Module must either have a main file, index.js file or a dependencies/index.js file. No matching paths in ${dir}`)
     }
 
     dependencies = es6Require(dependenciesPath)

@@ -4,55 +4,72 @@ import { load as loadConfig } from '@b-mo/config'
 import loadBundle from './load'
 import buildBundle from './build'
 import resolve from './resolve'
+import { has, set, merge } from 'lodash'
 
+const BUNDLE_DEPENDENCIES = 'bundle.dependencies'
+const BUNDLE_CONFIG = 'bundle.config'
 class Bundle {
+  constructor() {
+    this._overrides = {}
+  }
+
   get manifest() {
     return this._manifest
   }
 
   dependencies(dependencies) {
-    if (!this.bundle) {
-      this.bundle = { dependencies }
-    } else {
-      this.bundle.dependencies = dependencies
+    if (has(this, BUNDLE_DEPENDENCIES)) {
+      throw new Error('Dependencies have already been loaded for this bundle!')
     }
 
+    set(this, BUNDLE_DEPENDENCIES, dependencies)
     return this
   }
 
   config(config) {
-    if (!this.bundle) {
-      this.bundle = { config }
-    } else {
-      this.bundle.config = config
+    if (has(this, BUNDLE_CONFIG)) {
+      throw new Error('Config already loaded for bundle')
     }
 
+    set(this, BUNDLE_CONFIG, config)
     return this
   }
 
-  async load(params = { dir: process.cwd() }) {
+  setRoot(dir) {
+    this._root = dir
+    return this
+  }
+
+  get root() {
+    return this._root || process.cwd()
+  }
+
+  async load() {
     if (!this.bundle) {
-      const { dir } = params
+      const dir = this.root
       const pkg = require(await pkgup({ cwd: dir }))
       const config = await loadConfig(path.resolve(dir, './config'))
       this.cwd = dir
       this.bundle = await loadBundle({ dir, pkg, config })
     } else {
-      throw new Error('Calling load on a bundle that has already been set is not supported')
+      throw new Error('Calling load on a bundle that has already been created is not supported')
     }
 
     return this
   }
 
   async build() {
+    if (this._manifest) {
+      throw new Error('Cannot call build twice on the same module.')
+    }
+
     if (!this.resolved) {
       await this.resolve()
     }
 
-    if (!this._manifest) {
-      this._manifest = await buildBundle({ bundle: this.resolved })
-    }
-
+    this._manifest = await buildBundle({
+      bundle: merge({}, this.resolved, this._overrides)
+    })
     return this
   }
 
@@ -74,6 +91,10 @@ class Bundle {
     }
 
     return this.manifest.dependencies.run(...runArgs)
+  }
+
+  override({ dependencies, config }) {
+    this._overrides = merge({}, this._overrides, { dependencies, config })
   }
 }
 
