@@ -6,7 +6,6 @@ const resolveLocalRequire = ({ moduleId, cwd }) => require.resolve(moduleId, {
 })
 
 const mergeArray = (objValue, srcValue) => {
-  console.log(objValue, srcValue)
   if (Array.isArray(objValue) && Array.isArray(srcValue)) {
     return [ ...srcValue, ...objValue ]
   }

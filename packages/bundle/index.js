@@ -4,15 +4,16 @@ import { load as loadConfig } from '@b-mo/config'
 import loadBundle from './load'
 import buildBundle from './build'
 import resolve from './resolve'
-import { has, set, merge } from 'lodash'
+import {
+  merge,
+  has, set, get,
+  isString, isNumber, isFunction
+} from 'lodash'
 
 const BUNDLE_DEPENDENCIES = 'bundle.dependencies'
 const BUNDLE_CONFIG = 'bundle.config'
+const isExtendable = value => !isString(value) && !isNumber(value) && !isFunction(value)
 class Bundle {
-  constructor() {
-    this._overrides = {}
-  }
-
   get manifest() {
     return this._manifest
   }
@@ -95,6 +96,52 @@ class Bundle {
 
   override({ dependencies, config }) {
     this._overrides = merge({}, this._overrides, { dependencies, config })
+  }
+
+  // Given the full dependency path return the part that exists in the bundle.
+  getBundlePathNamespace(path) {
+    let ns
+    const parts = path.split('.')
+    do {
+      ns = get(this.bundle, parts.join('.'))
+      if (!ns) {
+        parts.pop()
+      }
+    } while (!ns && parts.length > 0)
+
+    return parts.join('.')
+  }
+
+  getNamespaceForPath(path) {
+    return get(this.bundle, this.getBundlePathNamespace(path))
+  }
+
+  add(path, module) {
+    if (!this.bundle) {
+      throw new Error('Bundle must be loaded before adding new dependencies.')
+    }
+
+    if (this.resolved) {
+      throw new Error('Cannot add dependency after bundle has been resolved.')
+    }
+
+    const ns = this.getNamespaceForPath(path)
+    if (ns) {
+      if (!isExtendable(ns)) {
+        throw new Error(`Unable to append to namespace type ${typeof ns}. Use override if you are trying to replace an existing module.`)
+      } else if (Array.isArray(ns)) {
+        // Namespace is an array type. Safe to append to.
+        ns.push(module)
+      } else if (isObject(ns)) {
+        // Namespace is a plain object should be safe to add to.
+        set(this.bundle.dependencies, path, module)
+      }
+    } else {
+      // No part of the existing path so it is safe to set it.
+      set(this.bundle.dependencies, path, module)
+    }
+
+    return this
   }
 }
 

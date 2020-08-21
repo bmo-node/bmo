@@ -9,7 +9,8 @@
     "@b-mo/config": "^0.5.0",
     "@b-mo/es6-require": "^0.5.0",
     "@b-mo/injector": "^0.5.0",
-    "@b-mo/module-loader":"^0.5.0",
+    "@b-mo/module-loader": "^0.5.0",
+    "dotenv": "^8.2.0",
     "lodash": "^4.17.15"
   },
   "publishConfig": {
