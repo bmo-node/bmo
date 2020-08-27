@@ -1,4 +1,4 @@
-# @lmig/bmo-es6-require
+# @b-mo/es6-require
 
 This module wraps around require and supports loading es6 modules with a require statement.
 
