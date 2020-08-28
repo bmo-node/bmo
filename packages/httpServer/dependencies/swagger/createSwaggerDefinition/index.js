@@ -78,7 +78,7 @@ const getQueryParams = route => {
   return params
 }
 
-const jsonSchema = (schema, description) => ({
+const jsonSchema = (schema, description = 'Okay') => ({
   description,
   content: {
     'application/json': {
@@ -88,15 +88,16 @@ const jsonSchema = (schema, description) => ({
     }
   }
 })
-const DEFAULT_RESPONSES = {
-  [BAD_REQUEST]: {},
-  [UNAUTHORIZED]: {},
-  [INTERNAL_SERVER_ERROR]: {}
-}
 
 const requestBody = schema => `${schema}-${REQUEST_BODY}`
 
 const responseBody = schema => `${schema}-${RESPONSE_BODY}`
+
+const DEFAULT_RESPONSES = {
+  [BAD_REQUEST]: jsonSchema(`${responseBody('error')}`, 'Bad Request'),
+  [UNAUTHORIZED]: jsonSchema(`${responseBody('error')}`, 'Unauthorized'),
+  [INTERNAL_SERVER_ERROR]: jsonSchema(`${responseBody('error')}`, 'Internal Server Error')
+}
 
 const formatters = {
   get: schema => ({

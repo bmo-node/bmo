@@ -1,5 +1,8 @@
 # CHANGELOG
 
+v0.5.1
+- [UPDATE] Handle Object dependencies
+
 v0.5.0
 - [UPDATE] Package name and version
 
