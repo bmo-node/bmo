@@ -15,8 +15,6 @@ const loadConfigFile = async path => {
 
     return config
   }
-
-  console.warn(`File: ${path} not found.`)
 }
 
 const load = async basePath => {

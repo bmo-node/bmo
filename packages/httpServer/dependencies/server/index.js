@@ -1,1 +1,9 @@
-export default ({ dependencies: { Koa }}) => new Koa()
+export default async ({
+  config: {
+    server: {
+      port,
+      staticFiles = []
+    }
+  },
+  dependencies: { app }
+}) => app().listen(port)

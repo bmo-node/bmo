@@ -12,6 +12,7 @@ import {
 
 const BUNDLE_DEPENDENCIES = 'bundle.dependencies'
 const BUNDLE_CONFIG = 'bundle.config'
+const BUNDLE_DEPENDENCY_PATH = 'dependencies.bmo.bundle'
 const isExtendable = value => !isString(value) && !isNumber(value) && !isFunction(value)
 class Bundle {
   get manifest() {
@@ -52,6 +53,8 @@ class Bundle {
       const config = await loadConfig(path.resolve(dir, './config'))
       this.cwd = dir
       this.bundle = await loadBundle({ dir, pkg, config })
+      // Injects a bundle builder into the dependencies
+      set(this.bundle, BUNDLE_DEPENDENCY_PATH, () => () => new Bundle())
     } else {
       throw new Error('Calling load on a bundle that has already been created is not supported')
     }
@@ -92,6 +95,12 @@ class Bundle {
     }
 
     return this.manifest.dependencies.run(...runArgs)
+  }
+
+  async stop() {
+    if (this.manifest.dependencies.stop) {
+      await this.manifest.dependencies.stop()
+    }
   }
 
   override({ dependencies, config }) {

@@ -4,6 +4,7 @@ import Router from 'koa-router'
 import commander from 'commander'
 import pinoHttp from 'pino-http'
 
+import app from './app'
 import args from './args'
 import createSwaggerDefinition from './swagger/createSwaggerDefinition'
 import errors from './errors'
@@ -21,6 +22,7 @@ import serveStatic from './serveStatic'
 import serializers from './serializers'
 import run from './run'
 import server from './server'
+import stop from './stop'
 
 export default {
   args,
@@ -40,9 +42,12 @@ export default {
   pinoHttp: () => pinoHttp,
   requestValidator,
   Router: () => Router,
-  run,
-  server,
   serializers,
   serveStatic,
-  swagger
+  swagger,
+  stop,
+  // These need to be at the end after everything else.
+  app,
+  server,
+  run
 }

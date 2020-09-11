@@ -1,6 +1,6 @@
 {
   "name": "@b-mo/config",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "loads configuration based on the NODE_ENV",
   "main": "index.js",
   "scripts": {},
