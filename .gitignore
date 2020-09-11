@@ -31,3 +31,4 @@ packages/yarn.lock
 !scripts/build
 package-lock.json
 yarn.lock
+!packages/bundle/build
