@@ -1,6 +1,6 @@
 import execa from 'execa'
 import es6Require from '@b-mo/es6-require'
-import { transform, flattenDeep, memoize } from 'lodash'
+import { transform, flattenDeep } from 'lodash'
 import fs from 'fs-extra'
 import path from 'path'
 import globby from 'globby'

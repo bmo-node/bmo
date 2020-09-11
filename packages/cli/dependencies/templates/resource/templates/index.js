@@ -42,7 +42,6 @@ export default [
 ${handlers.join(',\r\n')}
 ]
 `
-// TODO make this base dir aware
 const routesConfig = newRoutes => {
   const routesConfig = es6Require(`${process.cwd()}/config/routes`)
   const merged = { ...routesConfig, ...newRoutes }

@@ -61,7 +61,7 @@ it('Should throw an error when the bundle is not valid', async () => {
 it('Should throw an error when you try to set the dependencies twice', async () => {
   let err
   try {
-    let b = bundle()
+    bundle()
       .dependencies({ foo: () => () => true })
       .dependencies({ bar: () => () => true })
   } catch (e) {
@@ -74,7 +74,7 @@ it('Should throw an error when you try to set the dependencies twice', async () 
 it('Should throw an error when you try to set the config twice', async () => {
   let err
   try {
-    let b = bundle()
+    bundle()
       .config({ foo: true })
       .config({ bar: true })
   } catch (e) {

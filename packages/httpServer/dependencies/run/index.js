@@ -1,15 +1,7 @@
-import { has } from 'lodash'
 export default ({
-  config: {
-    server: {
-      port,
-      staticFiles = []
-    }
-  },
+  config,
   dependencies: {
-    logger,
-    server
+    logger
   }
-}) => async () => {
-  logger.info(`Server started on ${port}`)
-}
+}) => async () => logger.info(`Server started on ${config.get('server.port')}`)
+

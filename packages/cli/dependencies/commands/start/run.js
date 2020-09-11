@@ -33,7 +33,6 @@ export default ({
         restarting = false
       }, 500)
     })
-    // TODO Dev loop...
   } catch (e) {
     logger.error('Unable to load configuration. Ensure that a config directory is in the current directory')
     logger.error(e)

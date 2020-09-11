@@ -2,13 +2,11 @@ import { has } from 'lodash'
 export default ({
   config: {
     server: {
-      port,
       staticFiles = []
     }
   },
   dependencies: {
     Koa,
-    logger,
     middleware,
     routes,
     loadRoute,
@@ -24,7 +22,7 @@ export default ({
 
     app.use(mw)
   })
-  const routers = routes.map(loadRoute).forEach(router => app.use(router.routes(), router.allowedMethods()))
+  routes.map(loadRoute).forEach(router => app.use(router.routes(), router.allowedMethods()))
   staticFiles.concat(args.serve).forEach(path => app.use(serveStatic({ path })))
   return app
 }

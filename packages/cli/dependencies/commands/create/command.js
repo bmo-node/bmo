@@ -2,7 +2,6 @@
 export default ({
   dependencies: {
     program,
-    logger,
     commands: { create: { run }}
   }
 }) => program

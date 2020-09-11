@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import bundle from '@b-mo/bundle'
-import { get, set, merge, isArray, isObject, isFunction } from 'lodash'
+import { get, set, isArray, isObject, isFunction } from 'lodash'
 dotenv.config()
 const getMockPaths = (path, mocks, paths = []) => {
   if (isFunction(mocks)) {
@@ -23,7 +23,7 @@ export default ({ config, dependencies }) => {
       this._root = root
       return this
     },
-    extend(module) {
+    extend() {
       throw new Error('mocker.extends is deprecated. Please declare extensions as a part of your application definition')
     },
     config(path, value) {

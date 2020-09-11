@@ -4,7 +4,6 @@ const collect = (value, previous) => previous.concat([ value ])
 export default ({
   dependencies: {
     program,
-    logger,
     commands: { start: { run }}
   }
 }) => {

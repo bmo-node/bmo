@@ -1,4 +1,3 @@
-import execa from 'execa'
 import fs from 'fs-extra'
 import templates from './templates'
 export default ({ dependencies: { packageman, logger }}) => async ({ name }) => {

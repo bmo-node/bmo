@@ -1,9 +1,4 @@
 export default async ({
-  config: {
-    server: {
-      port,
-      staticFiles = []
-    }
-  },
+  config,
   dependencies: { app }
-}) => app().listen(port)
+}) => app().listen(config.get('server.port'))

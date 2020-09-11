@@ -5,7 +5,6 @@ export default ({
   dependencies: {
     logger,
     packageman,
-    runTemplate,
     extensions: {
       templates: extensionTemplates
     }

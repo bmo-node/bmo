@@ -3,7 +3,6 @@ import fs from 'fs-extra'
 import es6Require from '@b-mo/es6-require'
 import loadModules from '@b-mo/module-loader'
 import { has, merge } from 'lodash'
-import resolveBundle from '../resolve'
 
 const loadAppBundle = async ({ pkg, dir }) => {
   const mainFile = path.resolve(dir, (pkg.main || './index.js'))

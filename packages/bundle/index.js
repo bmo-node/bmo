@@ -7,13 +7,16 @@ import resolve from './resolve'
 import {
   merge,
   has, set, get,
-  isString, isNumber, isFunction
+  isString, isNumber,
+  isFunction, isObject
 } from 'lodash'
 
 const BUNDLE_DEPENDENCIES = 'bundle.dependencies'
 const BUNDLE_CONFIG = 'bundle.config'
 const BUNDLE_DEPENDENCY_PATH = 'dependencies.bmo.bundle'
+
 const isExtendable = value => !isString(value) && !isNumber(value) && !isFunction(value)
+
 class Bundle {
   get manifest() {
     return this._manifest
