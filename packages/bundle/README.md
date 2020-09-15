@@ -10,7 +10,7 @@ Install the bundle package using whatever package manager you are using these da
 ```yarn add @b-mo/bundle```
 
 
-By default then bundle will be loaded from the current working directory but you can override it with params
+By default, bundle will be loaded from the current working directory, but you can override it with params
 
 ```
 import bundle from '@b-mo/bundle'
@@ -63,4 +63,3 @@ await app.run(...runArgs)
 ```
 
 Loads and Builds a bundle (if not called before) and then invokes the run() dependency passing through any args.
-
