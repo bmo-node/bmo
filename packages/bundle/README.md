@@ -1,6 +1,6 @@
 # @b-mo/bundle
 
-This packages loads and resolves a dependency bundle. It allows you to easily extend dependency bundles
+This module packages, loads, and resolves a dependency bundle. It allows you to easily extend dependency bundles
 so that you can compose applications together easily.
 
 Install the bundle package using whatever package manager you are using these days:
@@ -63,5 +63,4 @@ await app.run(...runArgs)
 ```
 
 Loads and Builds a bundle (if not called before) and then invokes the run() dependency passing through any args.
-
 
