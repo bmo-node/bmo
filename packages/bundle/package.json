@@ -24,5 +24,8 @@
     "lodash.merge": "^4.6.2",
     "nodemon": "^2.0.4",
     "pkg-up": "^3.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
