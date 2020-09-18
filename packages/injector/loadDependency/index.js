@@ -15,13 +15,15 @@ const isPackageDependency = ({ dependency, pkg = {}}) => {
   return has(pkg, `dependencies.${dependency}`)
 }
 
+const isBuiltIn = name => builtIns.indexOf(name) !== -1
+
 const loadDependency = async (manifest, name, dependency, dependencies, circleChecked, dependencyProperty) => {
   const dependencyPath = `${dependencyProperty}.${name}`
   if (has(manifest, dependencyPath)) {
     return manifest
   }
 
-  if (builtIns.indexOf(name) !== -1) {
+  if (isBuiltIn(name)) {
     set(manifest, `${dependencyProperty}.${name}`, es6Require(name))
     return manifest
   }
@@ -46,7 +48,7 @@ const loadDependency = async (manifest, name, dependency, dependencies, circleCh
             // Covers the case for deeply nested modules.
             const moduleToLoad = parts[0]
             manifest = await (loadDependency(manifest, moduleToLoad, dependencies[moduleToLoad], dependencies, circleChecked, dependencyProperty))
-          } else if (builtIns.indexOf(dep) === -1 &&
+          } else if (!isBuiltIn(dep) &&
             !isPackageDependency({
               pkg: get(manifest, 'config.pkg'),
               dependency: dep
