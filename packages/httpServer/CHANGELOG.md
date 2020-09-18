@@ -1,9 +1,15 @@
 # CHANGELOG
+
+v0.6.0-beta.1
+- [CHANGE] Update package to support new composable bmo module pattern
+- [REMOVE] app.js in favor of new bundle running paradigm.
+
 v0.5.2
 - [Fix] bodyparser should be a part of the server configuration.
 
 v0.5.1
 - [Change] Allow configuration of the body parser middleware.
+
 
 v0.5.0
 - [CHANGE] Update version

@@ -53,6 +53,9 @@
       "default",
       "jest-spec-reporter"
     ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!@b-mo)"
+    ],
     "setupFiles": [
       "<rootDir>/scripts/setupTests.js"
     ],

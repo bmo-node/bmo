@@ -2,28 +2,28 @@
 
 BMO HTTP SERVER is a server side framework, focused at enabling developers to quickly implement high quality Restful services,
 but it can be used to implement any kind of http server.
-Aims to reduce boiler plate code by having an opinionated project structure, and provide
-flexibility in code by providing robust unobtrusive dependency injection.
+Aims to reduce boiler plate code by having extensible base applications for users to extend.
+This package contains the necessary dependencies to configure and run a custom http server.
 
-## Project structure
-BMO expects your project to be structured with some folder.
-In the 'baseDirectory' BMO expects there to be several folders
+To start a new project you may run `bmo create service my-service`
+
+This will create a new project with the following structure:
+
 ```
 |-\
 |--config
 |--dependencies
-|--routes
+|----routes
 ```
-BMO expects the top level modules to export certain things.
+
 
 ### Config
 
-The config directory is expected to export an async function that takes in an object parsed from the command line.
+The index file in config directory is expected to export either an object or an async function.
+Additional configurations are merged in based off the NODE_ENV variable.IE in production
 
 ```
-export default async cliParams =>({
-  // my configuration object
-  })
+export default async () =>({//...your default config})
 ```
 
 ### Dependencies
@@ -41,6 +41,7 @@ export default {
 ```
 
 Example dependency:
+
 ```
 export default async ({ config, dependencies: { foo } }) => ({
     // my module object

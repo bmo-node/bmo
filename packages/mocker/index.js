@@ -1,108 +1,69 @@
-import inject, { extract, context } from '@b-mo/injector'
-import es6Require from '@b-mo/es6-require'
-import loadModules from '@b-mo/module-loader'
-import { set, get, has, flatten, merge, isUndefined, isString, isFunction } from 'lodash'
-import { load as loadConfig } from '@b-mo/config'
-
-export default ({ config: userConfig = {}, dependencies: userDeps = {}, mocks = {}} = {}) => {
-  const appDeps = es6Require(`${process.cwd()}/dependencies`)
-  let dependencies = merge({}, appDeps, userDeps)
-  const logger = {
-    info: console.log,
-    warn: console.warn,
-    error: console.error
+import dotenv from 'dotenv'
+import bundle from '@b-mo/bundle'
+import { get, set, isArray, isObject, isFunction } from 'lodash'
+dotenv.config()
+const getMockPaths = (path, mocks, paths = []) => {
+  if (isFunction(mocks)) {
+    console.log(mocks)
+    paths.push(path)
+  } else if (isArray(mocks)) {
+    mocks.forEach((val, index) => getMockPaths(`${path}[${index}]`, val, mocks, paths))
+  } else if (isObject(mocks)) {
+    Object.keys(mocks).forEach(key => getMockPaths(`${path.length > 0 ? `${path}.` : ''}${key}`, mocks[key], paths))
   }
-  dependencies.logger = () => logger
-  dependencies.bmo = () => ({ di: { context }})
+
+  return paths
+}
+
+export default ({ config, dependencies }) => {
+  let bundleConfig = { ...config }
+  let bundleDependencies = { ...dependencies }
   return {
-    extend(module) {
-      if (isString(module)) {
-        module = require(require.resolve(module, { paths: [ `${process.cwd()}/node_modules` ]}))
-      }
-
-      if (!module.dependencies) {
-        throw new Error('Module must expose dependencies to be extended')
-      }
-
-      if (module.defaultConfig) {
-        userConfig = merge({}, module.defaultConfig, userConfig)
-      }
-
-      dependencies = merge({}, dependencies, module.dependencies)
+    setRoot(root) {
+      this._root = root
       return this
     },
+    extend() {
+      throw new Error('mocker.extends is deprecated. Please declare extensions as a part of your application definition')
+    },
     config(path, value) {
-      set(userConfig, path, value)
+      set(bundleConfig, path, value)
       return this
     },
     mock(path, mock) {
-      set(mocks, path, mock)
+      set(bundleDependencies, path, mock)
       return this
     },
     async build(module) {
-      const modules = loadModules(`${process.cwd()}`)
-      dependencies = merge({}, modules, dependencies)
-      const appConfig = await loadConfig(`${process.cwd()}/config`)
-      const config = merge({}, appConfig, userConfig)
-      const deps = getDependencies(module, dependencies)
-      const bundle = {}
-      deps.forEach(dep => {
-        const moduleName = getDependencyModuleName(dep, dependencies)
-        if (!isUndefined(get(mocks, moduleName))) {
-          set(bundle, moduleName, () => get(mocks, moduleName))
-        } else {
-          bundle[moduleName] = get(dependencies, moduleName)
-        }
-      })
       try {
-        const manifest = await inject(config, { ...bundle, module })
-        manifest.dependencies.module.manifest = manifest
-        return manifest.dependencies.module
+        const mockBundle = bundle()
+        if (this._root) {
+          mockBundle.setRoot(this._root)
+        }
+
+        await mockBundle.load()
+        mockBundle.override({
+          config: bundleConfig
+        })
+        mockBundle.add('module', module)
+        // Add parallel mocks namespace
+        mockBundle.add('mocks', bundleDependencies)
+        await mockBundle.build()
+        const { mocks, ...dependencies } = mockBundle.manifest.dependencies
+        // Now merge the mocks back to the real dependencies.
+        getMockPaths('', mocks, [])
+          .forEach(path => {
+            set(dependencies, path, get(mocks, path))
+          })
+        const mod = dependencies.module
+        mod.manifest = mockBundle.manifest
+        return mod
       } catch (e) {
-        logger.error(e)
+        console.log('Failed to build')
+        console.error(e)
         throw e
       }
     }
   }
 }
 
-// This will probably break with circular dependencies...
-const getDependencies = (module, dependencies, found = {}) => {
-  let deps = extract(module)
-  if (found[module]) {
-    return []
-  }
-
-  found[module] = true
-  const subdeps = deps.map(d => {
-    const moduleName = getDependencyModuleName(d, dependencies)
-    const mod = get(dependencies, moduleName)
-    return isFunction(mod) ?
-      getDependencies(mod, dependencies, found) :
-      [ moduleName ]
-  })
-  deps = deps.concat(subdeps)
-  deps = flatten(deps)
-  return deps
-}
-
-const getDependencyModuleName = (modulePath, dependencies) => {
-  let moduleName = modulePath
-  while (!has(dependencies, moduleName) && moduleName.length > 0) {
-    const s = moduleName.split('.')
-    s.pop()
-    if (s.length > 1) {
-      moduleName = s.join('.')
-    } else if (s[0]) {
-      moduleName = s[0]
-    } else {
-      moduleName = ''
-    }
-  }
-
-  if (moduleName.length === 0) {
-    throw new Error(`No dependency in path ${modulePath} found`)
-  }
-
-  return moduleName
-}

@@ -1,0 +1,7 @@
+{
+  "name": "test-bundle",
+  "version": "0.1.0",
+  "bmo":{
+    "extends":"./extension.js"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "@b-mo/cli",
-  "version": "0.5.1",
+  "version": "0.6.0-beta.1",
   "description": "",
   "main": "index.js",
   "scripts": {},
@@ -10,23 +10,24 @@
   "author": "tsteele",
   "license": "Apache 2.0",
   "dependencies": {
+    "@b-mo/bundle": "^0.1.0",
     "@b-mo/config": "^0.5.0",
     "@b-mo/es6-require": "^0.5.0",
-    "chalk": "^2.4.2",
-    "commander": "^3.0.0",
+    "chalk": "^4.1.0",
+    "commander": "^6.1.0",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
-    "execa": "^2.0.4",
-    "fs-extra": "^8.1.0",
-    "globby": "^10.0.1",
+    "execa": "^4.0.3",
+    "fs-extra": "^9.0.1",
+    "globby": "^11.0.1",
     "http-methods-enum": "^0.1.1",
-    "inquirer": "6.5.1",
-    "lodash": "^4.17.15",
-    "nodemon": "^2.0.2",
+    "inquirer": "7.3.3",
+    "lodash": "^4.17.20",
+    "nodemon": "^2.0.4",
     "pkg-up": "^3.1.0"
   },
   "peerDependencies": {
-    "@b-mo/http-server": "^0.5.0"
+    "@b-mo/http-server": "^0.6.0"
   },
   "publishConfig": {
     "access": "public"
