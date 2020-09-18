@@ -22,7 +22,7 @@ const loadDependency = async (manifest, name, dependency, dependencies, circleCh
   }
 
   if (builtIns.indexOf(name) !== -1) {
-    set(manifest, `${dependencyProperty}.${name}`, require(name))
+    set(manifest, `${dependencyProperty}.${name}`, es6Require(name))
     return manifest
   }
 
