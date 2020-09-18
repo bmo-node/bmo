@@ -3,12 +3,14 @@ import loadDependency from './loadDependency'
 import compose from './compose'
 import context from './context'
 const DEPENDENCY_PROPERTY = 'dependencies'
+
 const bmo = {
   di: {
     context: () => context
   },
   es6Require: () => es6Require
 }
+
 export default async (config, dependencies) => {
   dependencies.bmo = bmo
   try {
