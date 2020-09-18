@@ -1,4 +1,6 @@
 # CHANGELOG
+v0.6.0
+- [ADD] Package dependencies and node built-in modules are now added by the dependency injector automatically
 
 v0.5.1
 - [FIX] Return the context for building after inherit is called.

@@ -9,10 +9,25 @@ import {
 import extractDependencies from './extractDependencies'
 import compose from '../compose'
 import circularDependencyCheck from './circularDependencyCheck'
+import builtIns from 'builtin-modules'
+import es6Require from '@b-mo/es6-require'
+const isPackageDependency = ({ dependency, pkg = {}}) => {
+  return has(pkg, `dependencies.${dependency}`)
+}
 
 const loadDependency = async (manifest, name, dependency, dependencies, circleChecked, dependencyProperty) => {
   const dependencyPath = `${dependencyProperty}.${name}`
   if (has(manifest, dependencyPath)) {
+    return manifest
+  }
+
+  if (builtIns.indexOf(name) !== -1) {
+    set(manifest, `${dependencyProperty}.${name}`, require(name))
+    return manifest
+  }
+
+  if (isPackageDependency({ pkg: get(manifest, 'config.pkg'), dependency: name })) {
+    set(manifest, `${dependencyProperty}.${name}`, es6Require(name))
     return manifest
   }
 
@@ -31,7 +46,11 @@ const loadDependency = async (manifest, name, dependency, dependencies, circleCh
             // Covers the case for deeply nested modules.
             const moduleToLoad = parts[0]
             manifest = await (loadDependency(manifest, moduleToLoad, dependencies[moduleToLoad], dependencies, circleChecked, dependencyProperty))
-          } else {
+          } else if (builtIns.indexOf(dep) === -1 &&
+            !isPackageDependency({
+              pkg: get(manifest, 'config.pkg'),
+              dependency: dep
+            })) {
             throw new Error(`Unknown dependency ${dep} in module: ${name}`)
           }
         }
