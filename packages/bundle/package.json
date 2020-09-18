@@ -1,13 +1,15 @@
 {
   "name": "@b-mo/bundle",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "runs a given dependency context",
   "main": "index.js",
   "files": [
-    "./build/*",
-    "./load/",
-    "./resolve/",
-    "index.js"
+    "build/",
+    "load/",
+    "resolve/",
+    "index.js",
+    "!index.spec.js",
+    "!test.bundle.js"
   ],
   "scripts": {},
   "author": "tsteele",
