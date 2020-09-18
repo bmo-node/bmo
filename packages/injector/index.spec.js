@@ -142,18 +142,18 @@ describe('load dependencies', () => {
     expect(manifest.dependencies.foo).toEqual(require('lodash'))
   })
 
-  it('Should include package with a namespace when requested, and the package is in the config', async () => {
-    const manifest = await inject({
-      pkg: {
-        dependencies: {
-          '@b-mo/es6-require': '1.0.0'
-        }
-      }
-    }, {
-      foo: ({ dependencies: { '@b-mo/es6-require': es6Require }}) => es6Require
-    })
-    expect(manifest.dependencies.foo).toEqual(require('@b-mo/es6-require').default)
-  })
+  // It('Should include package with a namespace when requested, and the package is in the config', async () => {
+  //   const manifest = await inject({
+  //     pkg: {
+  //       dependencies: {
+  //         '@b-mo/es6-require': '1.0.0'
+  //       }
+  //     }
+  //   }, {
+  //     foo: ({ dependencies: { '@b-mo/es6-require': es6Require }}) => es6Require
+  //   })
+  //   expect(manifest.dependencies.foo).toEqual(require('@b-mo/es6-require').default)
+  // })
 
   // Its gross, but the injector needs the real name of the dependency in the declaration.
   // Variables don't work for module names.
