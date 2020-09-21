@@ -1,1 +1,7 @@
-export default ({ config: { pkg: { version }}, dependencies: { commander: { program }}}) => program.version(version)
+export default ({
+  config,
+  dependencies: {
+    commander: program
+  }
+}) => program.version(version)
+

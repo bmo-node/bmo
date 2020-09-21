@@ -44,11 +44,11 @@ export default () => async ({ name }) => ({
     const merged = { name, ...answers }
     const handlers = []
     each(HANDLER_TEMPLATES, async (template, method) => {
-      files[`routes/${name}/${version}/handlers/${method}/index.js`] = () => templates.handler(template(merged))
-      files[`routes/${name}/${version}/handlers/${method}/index.test.js`] = templates.test
+      files[`dependencies/routes/${name}/${version}/handlers/${method}/index.js`] = () => templates.handler(template(merged))
+      files[`dependencies/routes/${name}/${version}/handlers/${method}/index.test.js`] = templates.test
       handlers.push(method)
     })
-    files[`routes/${name}/${version}/handlers/index.js`] = () => templates.index(handlers)
+    files[`dependencies/routes/${name}/${version}/handlers/index.js`] = () => templates.index(handlers)
     files['config/routes.js'] = () => templates.routesConfig({
       [name]: {
         [version]: `${path}/${version}`
