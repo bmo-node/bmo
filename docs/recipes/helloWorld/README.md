@@ -164,7 +164,7 @@ by destructuring the value off of the manifest passed to the module function lik
 
 And now we should see both of our log messages!
 
-This example is trivial, but there are many advantages to using this patterns.
+This example is trivial, but there are many advantages to using this pattern.
 Unit testing becomes a breeze since we essentially have constructor level injection on everything.
 Pair it with our [mocker framework](/packages/mocker) and getting 100% unit test coverage has never been easier.
 
@@ -198,6 +198,5 @@ You can easily swap out or compose functionality together at runtime:
 In addition to that module functions may also return promises or be async functions.
 The framework will wait for those dependencies to resolve before continuing,
 but be aware many async functions will delay application startup, especially since module instantiation is a serial process.
-
 
 
