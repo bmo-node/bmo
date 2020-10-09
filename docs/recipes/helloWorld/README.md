@@ -96,7 +96,7 @@ export default {
 are using older versions of node **
 
 For this tutorial we will just create an index.js file and export the dependencies, with one
-super basic module:
+ basic module:
 
 ```js
 export default {
@@ -198,4 +198,3 @@ You can easily swap out or compose functionality together at runtime:
 In addition to that module functions may also return promises or be async functions.
 The framework will wait for those dependencies to resolve before continuing,
 but be aware many async functions will delay application startup, especially since module instantiation is a serial process.
-
