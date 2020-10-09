@@ -51,8 +51,8 @@ It all starts with a dependency bundle. It is essentially an object where all of
 }
 ```
 During the startup process each module function is walked and its `dependencies` are inspected, and after
-ensuring that all the dependencies are available (by running the same algorithm) the module function will be called with the 'manifest'
-and the resulting value will be available for other modules in the manifest to consume.
+ensuring that all the dependencies are available (by running the same algorithm) the module function will be called with the 'manifest'.
+The resulting value will be available for other modules in the manifest to consume.
 
 The manifest has a structure like so:
 
