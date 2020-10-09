@@ -122,7 +122,7 @@ export default ({
     requestBody:myResourceSchema
   }
   method,
-  handler:[authenticate, authorize({allowedRoles:[admin]}), async (ctx,next)=>{}]
+  handler:[authenticate, authorize({ allowedRoles:[admin] }), async (ctx,next)=>{}]
 })
 
 ```
@@ -132,8 +132,8 @@ Other notes:
 the http server comes with request and response logging by default, but you can modify the format by providing new
 serializers to the logger.
 
-You can provide application level middleware by populating a dependency called 'middleware' with your
-module definitions. Those will be added to the application middleware stack before any of your routes are mounted.
+You can provide application level middleware by populating an array of dependencies with the key 'middleware' in your
+manifest. Those will be added to the application middleware stack before any of your routes are mounted.
 
 There is no need for babel or other transpilers to use es6 functionality when you are using the bmo cli.
 Applications are launched with [esm](https://www.npmjs.com/package/esm).

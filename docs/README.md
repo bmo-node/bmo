@@ -40,7 +40,7 @@ Dig deeper into an individual tool or extension and read the docs!
 
 OR
 
-Checkout the [Recipes](/recipes/) and get started quick!
+Checkout the other [Recipes](/recipes/) to get started writing apps now!
 
 # Contributing
 

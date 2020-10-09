@@ -13,14 +13,15 @@ Lets take a look at how to use it.
 
 First install the mocking framework
 
-```
+```sh
 npm install -d @b-mo/mocker
 ```
 
 From here you can use the mocker with your testing framework of choice.
 
 Lets say we have the following module:
-```
+
+```js
 // repositories/thing.js
 export default ({ dependencies:{ dbConnection, thingFactory } }) =>({
   list:async (params) => {
@@ -33,7 +34,7 @@ In our spec file we want to test that our list function returns a list of proper
 We want to mock the dbConnection but import the thingFactory dependency we are using in our project the mocker helps us
 accomplish this easily.
 
-```
+```js
 //repositories/thing.spec.js
 import mocker from '@b-mo/mocker'
 import module from 'thing'

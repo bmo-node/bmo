@@ -8,11 +8,11 @@ From here create an empty directory for your application and initialize your pac
 
 Once you have completed the prompts use your favorite package manager to install the bmo cli and the run extension.
 
-```
+```sh
 yarn add @b-mo/cli @b-mo/extension-run
 ```
 
-```
+```sh
 npm install @b-mo/cli @b-mo/extension-run
 ```
 
@@ -28,9 +28,9 @@ after that lets add a script to run our application in the scripts section of th
 
 Now when we run `npm run start` or `yarn start` our application will be invoked through the bmo cli.
 
-Now if we were try try and start our application we would see a the following error:
+Now if we were try and start our application we would see a the following error:
 
-```
+```sh
 (node:45409) UnhandledPromiseRejectionWarning:
 Error: Module must either have a main file, index.js file or a dependencies/index.js file.
 No matching paths in <your project>
@@ -70,14 +70,11 @@ where there used to be a module functions there will now be the values returned 
 
 Lets see what this looks like in action:
 
-To get started we need to expose our dependencies so the cli can find our dependency bundle:
+To get started we need to expose our dependencies so the cli can find our dependency bundle.
 
 A package can expose it's dependencies for the cli one of 3 ways:
 
 -> Either the 'main' file or 'index.js' file in the root of the package should exist and export an object with the shape:
-
-** the bmo cli will automatically run your code using `esm` so you should not need any extra setup to use ES6 modules even if you
-are using older versions of node **
 
 ```js
 export default {
@@ -95,10 +92,13 @@ export default {
 }
 ```
 
+** the bmo cli will automatically run your code using `esm` so you should not need any extra setup to use ES6 modules even if you
+are using older versions of node **
+
 For this tutorial we will just create an index.js file and export the dependencies, with one
 super basic module:
 
-```
+```js
 export default {
   dependencies:{
     helloWorld:()=>console.log('hello world')
@@ -108,7 +108,7 @@ export default {
 
 Now if we run the application we will see this:
 
-```
+```sh
 hello world
 (node:46524) UnhandledPromiseRejectionWarning: Error: No run dependency found. Please add one to your bundle!
 ```
@@ -122,6 +122,7 @@ We can do that simply by adding a run function to our dependencies, and lets fix
 
 Notice how the module functions RETURN a function
 
+
 ```js
 {
   dependencies:{
@@ -133,9 +134,10 @@ Notice how the module functions RETURN a function
 }
 
 ```
+
 Now when we run this we will see:
 
-```
+```sh
 Running....
 ```
 
@@ -162,9 +164,8 @@ by destructuring the value off of the manifest passed to the module function lik
 
 And now we should see both of our log messages!
 
-Now you might think that this example is trivial and you would be correct in thinking that, but
-there are many advantages to using this pattern for modules. Unit testing becomes a breeze since
-we essentially have constructor level injection on everything.
+This example is trivial, but there are many advantages to using this patterns.
+Unit testing becomes a breeze since we essentially have constructor level injection on everything.
 Pair it with our [mocker framework](/packages/mocker) and getting 100% unit test coverage has never been easier.
 
 You can easily swap out or compose functionality together at runtime:
@@ -172,15 +173,15 @@ You can easily swap out or compose functionality together at runtime:
 ```js
 {
   config:{
-    isProd:process.NODE_ENV === 'production'
+    isProd: process.NODE_ENV === 'production'
   },
-  dependencies:{
-    logger:({
+  dependencies: {
+    logger: ({
       config:{
         isProd
       }
-    })=> isProd ? ()=>{} : console.log,
-    helloWorld: ({logger})=> ()=> logger('hello world'),
+    })  => isProd ? () => {} : console.log,
+    helloWorld: ({ dependencies:{ logger } })=> ()=> logger('hello world'),
     run: ({
       dependencies:{
         logger,
@@ -196,7 +197,7 @@ You can easily swap out or compose functionality together at runtime:
 
 In addition to that module functions may also return promises or be async functions.
 The framework will wait for those dependencies to resolve before continuing,
-but be aware many async functions may delay application startup, especially since right now module instantiation is a serial process.
+but be aware many async functions will delay application startup, especially since module instantiation is a serial process.
 
 
 
