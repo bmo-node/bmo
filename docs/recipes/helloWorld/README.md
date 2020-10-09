@@ -65,8 +65,8 @@ The manifest has a structure like so:
 
 The config object is the resolved object from your config folder, as well as any additional configurations supplied by other modules.
 
-The dependencies object's structure will match your dependency bundle's structure with the difference being
-where there used to be a module functions there will now be the values returned by those functions.
+The dependencies object's structure will match your dependency bundle's structure with the difference being,
+where there used to be module functions, there will now be the values returned by those functions.
 
 Lets see what this looks like in action:
 
