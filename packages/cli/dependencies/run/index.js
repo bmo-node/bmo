@@ -4,5 +4,9 @@ export default (({
 }) => () => {
   console.log(logo())
   console.log(`BMO CLI v ${version}`)
-  program.parseAsync(process.argv)
+  if (program.parseAsync) {
+    return program.parseAsync(process.argv)
+  }
+
+  return program.parse(process.argv)
 })

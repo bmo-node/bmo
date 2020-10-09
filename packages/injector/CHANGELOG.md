@@ -1,4 +1,7 @@
 # CHANGELOG
+v0.6.1
+- [ADD] Ensure the bmo modules are run through the normal DI process.
+
 v0.6.0
 - [ADD] Package dependencies and node built-in modules are now added by the dependency injector automatically
 
