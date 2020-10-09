@@ -4,7 +4,7 @@
 
 bmo is a collection of packages aimed at supercharging a developers workflow.
 At its core it is an application framework paired with an extensible CLI
-that allows developers to quickly modularize and customize their environment for their needs.
+that allows developers to quickly modularize and customize the environment for their needs.
 
 # Getting Started
 
