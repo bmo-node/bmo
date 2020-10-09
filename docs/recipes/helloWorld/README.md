@@ -16,7 +16,7 @@ yarn add @b-mo/cli @b-mo/extension-run
 npm install @b-mo/cli @b-mo/extension-run
 ```
 
-after that lets add a script to run our application in the scripts section of the package.json add:
+After that, lets add a script to run our application in the scripts section of the package.json add:
 
 ```json
 {
