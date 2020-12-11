@@ -18,7 +18,7 @@ yarn add @b-mo/cli @b-mo/extension-run
 npm install @b-mo/cli @b-mo/extension-run
 ```
 
-after that lets add a script to run our application in the scripts section of the package.json add:
+After that, lets add a script to run our application in the scripts section of the package.json add:
 
 ```json
 {
@@ -58,8 +58,8 @@ It all starts with a dependency bundle. It is essentially an object where all of
 ```
 
 During the startup process each module function is walked and its `dependencies` are inspected, and after
-ensuring that all the dependencies are available (by running the same algorithm) the module function will be called with the 'manifest'
-and the resulting value will be available for other modules in the manifest to consume.
+ensuring that all the dependencies are available (by running the same algorithm) the module function will be called with the 'manifest'.
+The resulting value will be available for other modules in the manifest to consume.
 
 The manifest has a structure like so:
 
@@ -72,8 +72,8 @@ The manifest has a structure like so:
 
 The config object is the resolved object from your config folder, as well as any additional configurations supplied by other modules.
 
-The dependencies object's structure will match your dependency bundle's structure with the difference being
-where there used to be a module functions there will now be the values returned by those functions.
+The dependencies object's structure will match your dependency bundle's structure with the difference being,
+where there used to be module functions, there will now be the values returned by those functions.
 
 Lets see what this looks like in action:
 
@@ -105,7 +105,7 @@ are using older versions of node **
 ## Adding dependencies
 
 For this tutorial we will just create an index.js file and export the dependencies, with one
-super basic module:
+ basic module:
 
 ```js
 export default {
@@ -179,8 +179,9 @@ And now we should see both of our log messages!
 
 ## Next steps
 
-This example is trivial, but there are many advantages to using this patterns.
-Unit testing becomes a breeze since we essentially have constructor level injection on everything.
+This example is trivial, but there are many advantages to using this pattern.
+Unit testing becomes a breeze since we have constructor level injection on our modules.
+
 Pair it with our [mocker framework](/packages/mocker) and getting 100% unit test coverage has never been easier.
 
 You can easily swap out or compose functionality together at runtime:
@@ -213,6 +214,3 @@ You can easily swap out or compose functionality together at runtime:
 In addition to that module functions may also return promises or be async functions.
 The framework will wait for those dependencies to resolve before continuing,
 but be aware many async functions will delay application startup, especially since module instantiation is a serial process.
-
-
-
