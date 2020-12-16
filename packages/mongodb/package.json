@@ -1,0 +1,17 @@
+{
+  "name": "@b-mo/mongodb",
+  "version": "0.3.0",
+  "description": "provides an interface to mongo databases",
+  "main": "index.js",
+  "author": "breul",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "mongodb": "3.3.5"
+  },
+  "peerDependencies": {
+    "@lmig/bmo-injector": ">0.2.4"
+  },
+  "bmo": {
+    "module": true
+  }
+}
