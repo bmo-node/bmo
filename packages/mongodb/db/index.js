@@ -8,7 +8,6 @@ export default async ({
       poolSize = 20
     },
     events: { shutdown }
-
   },
   dependencies: {
     logger,
@@ -27,7 +26,6 @@ export default async ({
       poolSize,
       useUnifiedTopology: true
     })
-    process.env.UV_THREADPOOL_SIZE = Number(poolSize)
     logger.info(`Connected to ${url}`)
     const temp = Object.keys(databases).map(db => client.db(db)).reduce((acc, db) => Object.assign(acc, { [db.namespace]: db }), {})
     events.on(shutdown, async () => {
