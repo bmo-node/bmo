@@ -2,7 +2,7 @@ import { isString, get } from 'lodash'
 import es6Require from '@b-mo/es6-require'
 
 const getLocalPath = module => require.resolve(`${module}`, {
-  paths: [ `${process.cwd()}/node_modules/` ]
+  paths: [ `${process.cwd()}/node_modules/`, __dirname ]
 })
 
 export default pkg => {
