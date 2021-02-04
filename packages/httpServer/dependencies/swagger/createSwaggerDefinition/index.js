@@ -100,6 +100,12 @@ const DEFAULT_RESPONSES = {
 }
 
 const formatters = {
+  delete: schema => ({
+    responses: {
+      [OK]: jsonSchema(`${responseBody(schema)}`),
+      ...DEFAULT_RESPONSES
+    }
+  }),
   get: schema => ({
     responses: {
       [OK]: jsonSchema(`${responseBody(schema)}`),
