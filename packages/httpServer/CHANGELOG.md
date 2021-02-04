@@ -1,5 +1,8 @@
 # CHANGELOG
 
+v0.6.0-beta.2
+- [CHANGE] Add responses to delete method in swagger definition creation to generate valid OpenAPI specs.
+
 v0.6.0-beta.1
 - [CHANGE] Update package to support new composable bmo module pattern
 - [REMOVE] app.js in favor of new bundle running paradigm.
@@ -9,7 +12,6 @@ v0.5.2
 
 v0.5.1
 - [Change] Allow configuration of the body parser middleware.
-
 
 v0.5.0
 - [CHANGE] Update version
