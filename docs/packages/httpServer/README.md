@@ -37,7 +37,7 @@ after that lets add some scripts and config values to the package.json:
   }
 }
 ```
-Then in either the root index.js, the 'main' file in the package.json file we will create the default export for our projects dependencies:
+Then in either the root index.js file, or the file specified by the package.json 'main' property, we will create the default export for our project's dependencies:
 ```
 export default { dependencies:{} }
 ```
