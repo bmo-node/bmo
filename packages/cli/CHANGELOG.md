@@ -1,5 +1,8 @@
 # CHANGELOG
 
+v0.7.0
+- [CHORE] update dependencies. Align version numbers.
+
 v0.6.0-beta.2
 - [Fix] Issue with commander DI.
 - [Fix] Path for route generators
