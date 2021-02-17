@@ -1,4 +1,4 @@
-import joi from '@hapi/joi'
+import joi from 'joi'
 import ui from './ui'
 import swagger from '.'
 import http from '../http'
