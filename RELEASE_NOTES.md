@@ -8,6 +8,7 @@ All packages have been updated to the latest versions. Mostly transparent change
 
 #### Http server:
 - Helmet Updated to latest version, there may be some breaking config changes based on application: You can view their change log here: https://github.com/helmetjs/helmet/blob/main/CHANGELOG.md
+- Fixed issue where the status code was being logged before being set.
 
 #### Injector:
 - Espree has been updated so newer es6 syntax should be working now.
@@ -35,12 +36,14 @@ project format to continue working.
 
 #### Breaking application format changes:
 ##### Route Loading
-- Routes is no longer loaded from the root of the project. It is treated just like any other dependency.
-- To update this just explicitly include the routes as a dependency in your application.
+- Routes are no longer loaded from the root of the project. It is treated just like any other dependency.
+- To update just explicitly include the routes as a dependency in your application.
 
 ##### HTTP server harness
 - The new run command does not assume you want to start an http server. It just loads and resolves a dependency bundle in the working directory.
-- To account for this you will need to declare that your application extends the bmo http server dependency context. You can do this by adding the following to your package.json
+- First install @b-mo/http-server into your project's dependencies.
+- Then you will need to declare that your application extends the bmo http server dependency context. You can do this by adding the following to your package.json
+
 ```
 {
   "bmo":{
@@ -49,6 +52,10 @@ project format to continue working.
 }
 ```
 The extends field takes a package name as a string, or an array of strings each with a package name.
+
+### Known Issues
+
+- The http server has two modules that conflict with built in modules. The injector logs a warning, it can be safely ignored.
 
 
 
