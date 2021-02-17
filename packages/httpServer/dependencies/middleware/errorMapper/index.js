@@ -6,12 +6,7 @@ export default ({
   try {
     await next()
   } catch (e) {
-    if (e.message) {
-      ctx.body = {
-        message: e.message
-      }
-    }
+    ctx.status = errorMap.getErrorStatus(e)
+    throw e
   }
-
-  return ctx
 }
