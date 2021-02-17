@@ -1,0 +1,16 @@
+{
+  "name": "@b-mo/jest-mocker",
+  "version": "0.1.0",
+  "description": "a version of the bmo mocker that supports jest based mocks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tsteele",
+  "license": "Apache 2.0",
+  "dependencies": {
+    "@b-mo/mocker": "^0.5.1",
+    "jest": "^26.6.3",
+    "lodash.has": "^4.5.2"
+  }
+}

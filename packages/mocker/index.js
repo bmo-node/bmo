@@ -15,7 +15,11 @@ const getMockPaths = (path, mocks, paths = []) => {
   return paths
 }
 
-export default ({ config, dependencies }) => {
+export default ({
+  config,
+  dependencies,
+  postProcess = [ m => m ]// An array of functions that take in the built module and allow consumers to modify it before being returned
+}) => {
   let bundleConfig = { ...config }
   let bundleDependencies = { ...dependencies }
   return {
@@ -49,15 +53,18 @@ export default ({ config, dependencies }) => {
         // Add parallel mocks namespace
         mockBundle.add('mocks', bundleDependencies)
         await mockBundle.build()
+        console.log(mockBundle)
+
         const { mocks, ...dependencies } = mockBundle.manifest.dependencies
-        // Now merge the mocks back to the real dependencies.
+        // Now merge the mocks back to the real dep[[endencies.
         getMockPaths('', mocks, [])
           .forEach(path => {
             set(dependencies, path, get(mocks, path))
           })
         const mod = dependencies.module
         mod.manifest = mockBundle.manifest
-        return mod
+
+        return postProcess.reduce((val, fn) => fn(val, mockBundle.resolved.dependencies), mod)
       } catch (e) {
         console.log('Failed to build')
         console.error(e)
