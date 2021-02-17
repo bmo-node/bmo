@@ -1,4 +1,8 @@
 # CHANGELOG
+
+v0.7.0
+- [UPDATE] Update Dependencies. Align version numbers
+
 v0.6.1
 - [ADD] Ensure the bmo modules are run through the normal DI process.
 
