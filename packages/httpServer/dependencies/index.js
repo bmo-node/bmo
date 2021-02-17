@@ -1,4 +1,4 @@
-import joi from '@hapi/joi'
+import joi from 'joi'
 import Koa from 'koa'
 import Router from 'koa-router'
 import commander from 'commander'
