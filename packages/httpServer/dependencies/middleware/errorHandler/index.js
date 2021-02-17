@@ -1,8 +1,4 @@
-export default ({
-  dependencies: {
-    errorMap
-  }
-}) => async (ctx, next) => {
+export default () => async (ctx, next) => {
   try {
     await next()
   } catch (e) {
