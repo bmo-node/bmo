@@ -7,7 +7,7 @@ If either module is a function (async or sync) call it and merge the resulting o
 configuration taking priority.
 
 
-#Example usage
+# Example usage
 Say you have the following directory structure in your project
 /root
   /config
@@ -26,7 +26,7 @@ console.log(config)
 // Your test config
 ```
 
-#API
+# API
 
 ```
 const config = await load(directory)

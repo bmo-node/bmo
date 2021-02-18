@@ -21,7 +21,7 @@
     "fs-extra": "^9.0.1",
     "globby": "^11.0.1",
     "http-methods-enum": "^0.1.1",
-    "inquirer": "7.3.3",
+    "inquirer": "^7.3.3",
     "lodash": "^4.17.20",
     "nodemon": "^2.0.4",
     "pkg-up": "^3.1.0"
