@@ -12,11 +12,6 @@ const base = ({ name, description, serverVersion, cliVersion }) => ({
   },
   author: '',
   license: 'SEE LICENSE.md',
-  dependencies: {
-    '@b-mo/cli': `^${cliVersion}`,
-    '@b-mo/http-server': `${serverVersion}`,
-    '@b-mo/extension-run': `${serverVersion}`
-  },
   devDependencies: {
     jest: '^24.8.0'
   },
