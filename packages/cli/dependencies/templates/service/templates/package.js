@@ -1,4 +1,4 @@
-const base = ({ name, description, serverVersion, cliVersion }) => ({
+const base = ({ name, description }) => ({
   name: name,
   version: '1.0.0',
   description: description,

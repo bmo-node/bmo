@@ -2,6 +2,7 @@
 
 v0.7.0
 - [CHORE] update dependencies. Align version numbers.
+- [FIX] Issue where status code would be logged as 404 before being set by the error handler.
 
 v0.6.0-beta.2
 - [CHANGE] Add responses to delete method in swagger definition creation to generate valid OpenAPI specs.
