@@ -1,4 +1,8 @@
 # CHANGELOG
+
+v0.7.0
+- [CHORE] update dependencies. Align version numbers.
+
 v0.5.1
 - [UPDATE] Adding __dirname as a potential location for node_modules
 
