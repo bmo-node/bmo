@@ -20,7 +20,7 @@
     "fs-extra": "^9.1.0",
     "globby": "^11.0.2",
     "http-methods-enum": "^0.1.1",
-    "inquirer": "7.3.3",
+    "inquirer": "^7.3.3",
     "lodash": "^4.17.20",
     "pkg-up": "^3.1.0"
   },
