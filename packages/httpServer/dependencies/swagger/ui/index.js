@@ -1,4 +1,4 @@
-export default () => ({ docs, base, redocPath }) => `
+export default () => ({ docs, base, redoc }) => `
 <!DOCTYPE html>
 <html>
   <head>
@@ -21,7 +21,7 @@ export default () => ({ docs, base, redocPath }) => `
   </head>
   <body>
     <redoc spec-url='${docs}'></redoc>
-    <script src="${redocPath}"> </script>
+    <script src="${redoc}"> </script>
   </body>
 </html>
 `
