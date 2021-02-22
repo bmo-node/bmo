@@ -1,5 +1,8 @@
 # CHANGELOG
 
+v0.7.1
+- [CHORE] Remove un-needed peer dependency to fix issue with new npm.
+
 v0.7.0
 - [CHORE] update dependencies. Align version numbers.
 
