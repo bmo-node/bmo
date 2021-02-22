@@ -1,6 +1,6 @@
 {
   "name": "@b-mo/cli",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "",
   "main": "index.js",
   "scripts": {},
@@ -23,9 +23,6 @@
     "inquirer": "^7.3.3",
     "lodash": "^4.17.20",
     "pkg-up": "^3.1.0"
-  },
-  "peerDependencies": {
-    "@b-mo/http-server": "^0.6.0"
   },
   "publishConfig": {
     "access": "public"
