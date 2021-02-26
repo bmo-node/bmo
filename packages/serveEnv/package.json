@@ -1,0 +1,12 @@
+{
+  "name": "@b-mo/serve-env",
+  "version": "0.7.0",
+  "description": "Serves the environment as an endpoint",
+  "main": "index.js",
+  "scripts": {},
+  "author": "tsteele",
+  "license": "Apache 2.0",
+  "bmo": {
+    "module": true
+  }
+}
