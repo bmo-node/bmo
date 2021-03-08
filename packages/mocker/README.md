@@ -30,12 +30,14 @@ returns an IOC container for building your test modules.
 ```
 
 ```
+**[DEPRECATED]**
 container.extend(package)
 
 either an object with a dependencies key or the name of a package
 that exposes a dependencies property. The dependencies will be included
 when the container is built.
 
+This function is deprecated, declare extensions as a part of you "bmo" config in the project's package.json
 ```
 
 ```
@@ -62,3 +64,7 @@ module - the base module you would like to be instantiated
 returns the created module with the mocked values instead of the normal dependencies.
 
 ```
+
+
+Performance notes: The container will load and resolve your projects dependencies when you first call build.
+Subsequent calls to build should be faster assuming you do not re-create the whole container and re-use the same container to build new module instances.

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+v0.7.1
+- [Update] Don't log module names
+
 v0.7.0
 - [CHORE] update dependencies. Align version numbers.
 
