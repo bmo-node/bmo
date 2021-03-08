@@ -14,7 +14,6 @@ export default pkg => {
   const modules = get(module, 'bmo.modules', {})
   return Object.keys(modules).reduce((agg, key) => {
     const value = modules[key]
-    console.log(`Loading module ${key} as ${value}`)
     const mod = es6Require(getLocalPath(key))
     const modPackage = es6Require(getLocalPath(`${key}/package.json`))
     if (get(modPackage, 'bmo.module')) {
