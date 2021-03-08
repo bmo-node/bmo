@@ -1,6 +1,6 @@
 {
   "name": "@b-mo/mocker",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "utility for testing bmo modules",
   "main": "index.js",
   "author": "tsteele",
