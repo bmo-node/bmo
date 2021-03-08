@@ -112,9 +112,18 @@ class Bundle {
     return this
   }
 
-  get bundleDependencies(){
-    return this.resolved ? this.resolved.dependencies : this.bundle ? this.bundle.dependencies : throw new Error('Bundle not loaded')
+  get bundleDependencies() {
+    if (this.resolved) {
+      return this.resolved.dependencies
+    }
+
+    if (this.bundle) {
+      return this.bundle.dependencies
+    }
+
+    return {}
   }
+
   // Given the full dependency path return the part that exists in the bundle.
   getBundlePathNamespace(path) {
     let ns

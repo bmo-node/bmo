@@ -1,20 +1,8 @@
 import dotenv from 'dotenv'
 import bundle from '@b-mo/bundle'
 import { extract as extractDependencyNames } from '@b-mo/injector'
-import { get, set, isArray, isObject, isFunction } from 'lodash'
+import { get, set } from 'lodash'
 dotenv.config()
-const getMockPaths = (path, mocks, paths = []) => {
-  if (isFunction(mocks)) {
-    paths.push(path)
-  } else if (isArray(mocks)) {
-    mocks.forEach((val, index) => getMockPaths(`${path}[${index}]`, val, mocks, paths))
-  } else if (isObject(mocks)) {
-    Object.keys(mocks).forEach(key => getMockPaths(`${path.length > 0 ? `${path}.` : ''}${key}`, mocks[key], paths))
-  }
-
-  return paths
-}
-
 const getModules = ({
   bundle,
   mocks,
