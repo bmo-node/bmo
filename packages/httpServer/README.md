@@ -1,4 +1,4 @@
-# BMO HTTP SERVER
+# @b-mo/http-server
 
 BMO HTTP SERVER is a server side framework, focused at enabling developers to quickly implement high quality Restful services,
 but it can be used to implement any kind of http server.

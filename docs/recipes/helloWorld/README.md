@@ -182,7 +182,7 @@ And now we should see both of our log messages!
 This example is trivial, but there are many advantages to using this pattern.
 Unit testing becomes a breeze since we have constructor level injection on our modules.
 
-Pair it with our [mocker framework](/packages/mocker) and getting 100% unit test coverage has never been easier.
+Pair it with our [mocker framework](/packages/mocker/) and getting 100% unit test coverage has never been easier.
 
 You can easily swap out or compose functionality together at runtime:
 

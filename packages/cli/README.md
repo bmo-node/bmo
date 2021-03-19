@@ -20,6 +20,9 @@ new resources and dependencies,
 
 ### Start
 
+**[DEPRECATED]**
+Use `bmo run` instead.
+
 `bmo start`
 
 |Option          | Description                                              |

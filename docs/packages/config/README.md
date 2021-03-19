@@ -9,12 +9,15 @@ configuration taking priority.
 
 # Example usage
 Say you have the following directory structure in your project
+
+```
 /root
   /config
    -index.js
    -test.config.js
    -production.config.js
    -develop.config.js
+```
 
 ```
 process.env.NODE_ENV='test'

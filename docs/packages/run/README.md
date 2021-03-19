@@ -1,4 +1,4 @@
-# BMO RUN
+# @b-mo/extension-run
 
 This is an extension for the bmo cli, its purpose it to provide a simple interface to run your project as dependency bundle.
 
@@ -14,4 +14,6 @@ using the bundle package, and attempt to invoke the run function. Thats it!
 
 Supported flags:
 
--d --dev - Runs your application in a dev loop, changes will cause the application to restart.
+|Flag      | Description                                                                         |
+|----------|-------------------------------------------------------------------------------------|
+|-d  --dev | Runs your application in a dev loop, changes will cause the application to restart. |

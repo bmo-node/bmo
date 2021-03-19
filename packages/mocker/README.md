@@ -1,11 +1,11 @@
-# BMO MOCKER
+# @b-mo/mocker
 
 This module is meant to help you test your modules faster. It loads your dependencies and configuration for your app
 and provides you an interface to swap out modules before building your module for testing. Currently the module assumes that your
 directory structure has a `config` and `dependencies` folder in the directory where you run your test process.
 Those folders should contain your bmo config and your dependency modules.
 
-#Example usage
+## Example usage
 
 ```
 import mocker from '@b-mo/mocker';
@@ -18,7 +18,7 @@ expect(fooInstance.getBars()).toEqual({ baz:'bar' });
 ```
 
 
-#API
+## API
 
 ```
 const container = mocker({ config, dependencies })
