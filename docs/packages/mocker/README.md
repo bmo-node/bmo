@@ -30,7 +30,7 @@ returns an IOC container for building your test modules.
 ```
 
 ```
-container.extend(package)
+container.extend(package) [DEPRECATED]
 
 either an object with a dependencies key or the name of a package
 that exposes a dependencies property. The dependencies will be included
