@@ -18,9 +18,8 @@ new resources and dependencies,
 
 ## Commands
 
-### Start
+### Start **[DEPRECATED]**
 
-**[DEPRECATED]**
 Use `bmo run` instead.
 
 `bmo start`
