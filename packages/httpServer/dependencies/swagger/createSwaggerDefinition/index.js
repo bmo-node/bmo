@@ -151,6 +151,7 @@ const getPathDefinition = route => {
     key: `${formattedPath}.${method}`,
     value: {
       summary: `${schemaName}`,
+      description: route.description,
       parameters,
       ...schemaDef
     }

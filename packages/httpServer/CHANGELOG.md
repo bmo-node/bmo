@@ -1,5 +1,8 @@
 # CHANGELOG
 
+v0.7.2
+- [Update] A routes description field will now be passed through to the swagger doc generator.
+
 v0.7.1
 - [Update] Redoc is entirely served from within the framework now. This should resolve any content policy issues with helmet.
 
