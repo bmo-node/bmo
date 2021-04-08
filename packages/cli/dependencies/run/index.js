@@ -5,7 +5,7 @@ export default (({
   },
   dependencies: { logo, commander: program }
 }) => () => {
-  if(printLogo) {
+  if (printLogo) {
     console.log(logo())
   }
 
