@@ -1,4 +1,4 @@
-# BMO HTTP SERVER
+# @b-mo/http-server
 
 BMO HTTP SERVER is a server side framework, focused at enabling developers to quickly implement high quality Restful services,
 but it can be used to implement any kind of http server.
@@ -37,7 +37,7 @@ after that lets add some scripts and config values to the package.json:
   }
 }
 ```
-Then in either the root index.js, the 'main' file in the package.json file we will create the default export for our projects dependencies:
+Then in either the root index.js, or the 'main' file in the package.json file we will create the default export for our projects dependencies:
 ```
 export default { dependencies:{} }
 ```
