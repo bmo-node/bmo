@@ -1,5 +1,8 @@
 # CHANGELOG
 
+v0.7.2
+- [Update] Allow logo output to be suppressed in config (for production use).
+
 v0.7.1
 - [CHORE] Remove un-needed peer dependency to fix issue with new npm.
 
