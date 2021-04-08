@@ -53,7 +53,7 @@ eventually ending up with an object with all your build modules.
 
 ### Package dependencies and built in modules:
 The injector will detect and load nodejs builtin modules into your dependency context for you.
-To use packages defined in your package.json populate the 'pkg' key on your config with the package.json
+To use packages defined in your package.json, populate the 'pkg' key on your config with the package.json
 structure and the dependency injector will also automatically load any dependencies requested in modules.
 Some of the other tools will do this for you, but if you use this package directly you will need to load it yourself.
 
@@ -91,4 +91,3 @@ export default ({
 ### Any tools that modify the AST of your code may break dependency injection
 
 Using transpilers, minifiers, or uglifiers that modify the AST may or may not work. (probably won't)
-
