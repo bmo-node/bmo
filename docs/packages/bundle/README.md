@@ -44,7 +44,7 @@ await app.load(config)
 ```
 
 Loads a configuration and dependency bundle, but does not resolve or perform the injection.
-config is the same as the constructor and takes precedent over the config passed there.
+The config parameter is the same as the constructor and takes precedent over the config value passed there.
 
 
 Build a bundle:
