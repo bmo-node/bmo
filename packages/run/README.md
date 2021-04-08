@@ -1,6 +1,6 @@
 # @b-mo/extension-run
 
-This is an extension for the bmo cli, its purpose it to provide a simple interface to run your project as dependency bundle.
+This is an extension for the bmo cli; its purpose it to provide a simple interface to run your project as a dependency bundle.
 
 
 You can install it either as a global dependency, or in your local project:
