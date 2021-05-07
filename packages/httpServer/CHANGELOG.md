@@ -1,5 +1,8 @@
 # CHANGELOG
 
+v0.7.3
+- [Update] Routes may now define a 'successStatus' and the swagger generator will use that as the response status for the success in the documentation.
+
 v0.7.2
 - [Update] A routes description field will now be passed through to the swagger doc generator.
 
