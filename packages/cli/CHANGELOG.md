@@ -1,5 +1,8 @@
 # CHANGELOG
 
+v0.7.3
+- [Update] Use latest version of commander, and fix issue where add command would not properly execute.
+
 v0.7.2
 - [Update] Allow logo output to be suppressed in config (for production use).
 
