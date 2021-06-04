@@ -56,7 +56,7 @@ This will add the given package as a dependency and include it in your manifest 
 
 |Option          | Description                                              |
 |----------------|----------------------------------------------------------|
-|as <alias>      | When injected into the manifest it will use this instead |
+|--as <alias>    | When injected into the manifest it will use this instead |
 |                | of the module name.                                      |
 
 
