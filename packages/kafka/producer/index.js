@@ -2,7 +2,6 @@
 const simpleProducer = (topic, producer) => ({
   async send(payload) {
     return new Promise((resolve, reject) => {
-      console.log(topic, payload)
       producer.send([{
         topic,
         messages: JSON.stringify(payload)
