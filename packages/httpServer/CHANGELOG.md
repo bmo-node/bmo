@@ -1,5 +1,8 @@
 # CHANGELOG
 
+v0.7.5
+- [CHORE] update dependencies.
+
 v0.7.4
 - [Update] Adding HTTP 412 Status to included http server errors
 
