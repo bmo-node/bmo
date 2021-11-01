@@ -38,7 +38,7 @@ Checkout the other [Recipes](/recipes/) to get started writing apps now!
 # Contributing
 
 We are always accepting PRs, feature requests and bug reports.
-If you want to contribute open an issue on our [github](https://github.com/libertymutual/bmo)
+If you want to contribute open an issue on our [github](https://github.com/bmo-node/bmo)
 explaining the feature or bug and we can start the conversation on how best to address it.
 Any code contributions should have accompanying tests and follow the core principles of extendability, modularity, and developer empowerment.
 For more detailed information on how to contribute check [here](/contributing)
