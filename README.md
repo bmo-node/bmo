@@ -26,3 +26,7 @@ If you want to contribute open an issue on our [github](https://github.com/liber
 explaining the feature or bug and we can start the conversation on how best to address it.
 Any code contributions should have accompanying tests and follow the core principles of extendability, modularity, and developer empowerment.
 For more detailed information on how to contribute check [here](/contributing)
+
+# LICENSE
+
+Licensed under the Apache License, Version 2.0 (the "License"): http://www.apache.org/licenses/LICENSE-2.0
