@@ -1,5 +1,9 @@
 # CHANGELOG
 
+v0.8.0
+- [UPDATE] display joi descriptors for queryParams in docs
+- [ADD] define pathParam schema and display joi descriptors in docs
+
 v0.7.5
 - [CHORE] update dependencies.
 
