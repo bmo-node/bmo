@@ -1,5 +1,6 @@
 # CHANGELOG
-
+v0.7.1
+- [FIX] Changed the resolution order for dependencies so that ones at the app level are preffered over ones in an extended bundle.
 v0.7.0
 - [CHORE] update dependencies. Align version numbers.
 - [FIX] Bug where a dependency with the same name as a built in module would not be loaded.

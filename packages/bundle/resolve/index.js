@@ -2,12 +2,12 @@ import { mergeWith, isString } from 'lodash'
 import es6Require from '@b-mo/es6-require'
 
 const resolveLocalRequire = ({ moduleId, cwd }) => require.resolve(moduleId, {
-  paths: [`${cwd}/node_modules/`, cwd]
+  paths: [ `${cwd}/node_modules/`, cwd ]
 })
 
 const mergeArray = (objValue, srcValue) => {
   if (Array.isArray(objValue) && Array.isArray(srcValue)) {
-    return [...objValue, ...srcValue]
+    return [ ...objValue, ...srcValue ]
   }
 }
 
