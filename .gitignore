@@ -29,7 +29,5 @@ coverage
 
 packages/yarn.lock
 !scripts/build
-!package-lock.json
-packages/**/package-lock.json
 yarn.lock
 !packages/bundle/build
