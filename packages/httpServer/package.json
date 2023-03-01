@@ -1,6 +1,6 @@
 {
   "name": "@b-mo/http-server",
-  "version": "0.7.3",
+  "version": "0.7.5",
   "description": "",
   "main": "index.js",
   "author": "tsteele",
@@ -20,7 +20,7 @@
     "koa-static": "^5.0.0",
     "lodash": "^4.17.20",
     "pino-http": "^5.5.0",
-    "redoc": "^2.0.0-rc.48"
+    "redoc": "^2.0.0-rc.56"
   },
   "devDependencies": {
     "jest-mock-process": "^1.4.0"
