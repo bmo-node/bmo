@@ -1,5 +1,7 @@
 # CHANGELOG
-
+v0.7.2
+ - [FIX] Changed the resolution order for dependencies so that ones at the app level are preffered over ones in an extended bundle.
+ 
 v0.7.1
 - [FIX] Ensuring that when trying to get a namespace it uses the correct dependency graph.
 - [FIX] issue where resolve would not chain.

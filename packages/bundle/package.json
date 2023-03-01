@@ -1,6 +1,6 @@
 {
   "name": "@b-mo/bundle",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "runs a given dependency context",
   "main": "index.js",
   "files": [
