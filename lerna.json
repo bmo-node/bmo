@@ -4,6 +4,7 @@
   ],
   "npmClient":"npm",
   "version": "independent",
+  "verifyAccess": false,
   "command":{
     "bootstrap": {
       "npmClientArgs": [
