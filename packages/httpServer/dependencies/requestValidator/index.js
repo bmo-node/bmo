@@ -9,7 +9,6 @@ export default () => schema => {
     if (result.error) {
       throw new Error(`Invalid request: ${result.error.annotate()}`)
     }
-
     await next()
   }
 }

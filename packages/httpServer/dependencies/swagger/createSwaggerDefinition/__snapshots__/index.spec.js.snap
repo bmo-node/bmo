@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createSwaggerDefinition defined routes should match snapshot 1`] = `
+Object {
+  "components": Object {
+    "schemas": Object {
+      "GET--api-test-v1-:idtest-pathParams": Object {
+        "additionalProperties": false,
+        "properties": Object {
+          "idtest": Object {
+            "description": "asdf",
+            "enum": Array [
+              1,
+              2,
+              3,
+            ],
+            "format": "float",
+            "type": "number",
+          },
+        },
+        "type": "object",
+      },
+      "GET--api-test-v1-:idtest-queryParams": Object {
+        "additionalProperties": false,
+        "properties": Object {
+          "testParam": Object {
+            "description": "a test",
+            "enum": Array [
+              1,
+              2,
+              3,
+            ],
+            "format": "float",
+            "type": "number",
+          },
+        },
+        "required": Array [
+          "testParam",
+        ],
+        "type": "object",
+      },
+      "GET--api-test-v1-:idtest-requestBody": Object {
+        "additionalProperties": false,
+        "properties": Object {
+          "test": Object {
+            "description": "test date",
+            "format": "float",
+            "type": "number",
+          },
+        },
+        "type": "object",
+      },
+      "GET--api-test-v1-:idtest-responseBody": Object {
+        "additionalProperties": false,
+        "properties": Object {
+          "test": Object {
+            "default": 2023-01-17T22:30:33.174Z,
+            "format": "date-time",
+            "type": "string",
+          },
+        },
+        "type": "object",
+      },
+    },
+  },
+  "info": Object {
+    "contact": "no one",
+    "description": "test server",
+    "title": "testServer",
+    "version": "0.0.1",
+  },
+  "openapi": "3.0.0",
+  "paths": Object {
+    "/api/test/v1/{idtest}": Object {
+      "get": Object {
+        "description": "a  test path to demo things work",
+        "parameters": Array [
+          Object {
+            "description": "asdf  ---  Additional Parameter Context: {\\"only\\":true}",
+            "in": "path",
+            "name": "idtest",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+            "style": "simple",
+          },
+          Object {
+            "description": "a test  ---  Additional Parameter Context: {\\"only\\":true,\\"default\\":0}",
+            "in": "query",
+            "name": "testParam",
+            "required": true,
+            "schema": Object {
+              "type": "number",
+            },
+            "style": "simple",
+          },
+        ],
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "$ref": "#/components/schemas/GET--api-test-v1-:idtest-responseBody",
+                },
+              },
+            },
+            "description": "OK",
+          },
+          "400": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "$ref": "#/components/schemas/error-responseBody",
+                },
+              },
+            },
+            "description": "Bad Request",
+          },
+          "401": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "$ref": "#/components/schemas/error-responseBody",
+                },
+              },
+            },
+            "description": "Unauthorized",
+          },
+          "500": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "$ref": "#/components/schemas/error-responseBody",
+                },
+              },
+            },
+            "description": "Internal Server Error",
+          },
+        },
+        "summary": "GET--api-test-v1-:idtest",
+      },
+    },
+    "/api/test/v2/{boom}": Object {
+      "post": Object {
+        "description": "demo POST",
+        "parameters": Array [
+          Object {
+            "description": "boom path param",
+            "in": "path",
+            "name": "boom",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+            "style": "simple",
+          },
+        ],
+        "summary": "POST--api-test-v2-:boom",
+      },
+    },
+  },
+}
+`;

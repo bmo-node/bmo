@@ -4,12 +4,14 @@ import httpStatus from 'http-status-codes'
 
 const PATH_DELIMITER = '/'
 const PARAM_DELIMITER = ':'
+const REQUIRED = 'required'
 const SCHEMA_TYPES = {
   QUERY_PARAMS: 'queryParams',
   RESPONSE_BODY: 'responseBody',
-  REQUEST_BODY: 'requestBody'
+  REQUEST_BODY: 'requestBody',
+  PATH_PARAMS: 'pathParams'
 }
-const { REQUEST_BODY, RESPONSE_BODY, QUERY_PARAMS } = SCHEMA_TYPES
+const { REQUEST_BODY, RESPONSE_BODY, QUERY_PARAMS, PATH_PARAMS } = SCHEMA_TYPES
 const {
   OK,
   CREATED,
@@ -37,26 +39,33 @@ export default () => (routes, { title, description, contact, version }) => {
   }
 }
 
-const simplePathParam = name => ({
-  name,
-  in: 'path',
-  description: `${name} path param`,
-  required: true,
-  style: 'simple',
-  schema: {
-    type: 'string'
+const definePathParam = ({ name, type, flags }) => {
+  const { description, ...metadata } = flags
+  const detailedDescription = description ?
+    `${description}  ---  Additional Parameter Context: ${JSON.stringify(metadata)}` :
+    `${name} path param`
+  return {
+    name,
+    in: 'path',
+    description: detailedDescription,
+    required: true,
+    style: 'simple',
+    schema: { type }
   }
-})
+}
 
-const getPathParams = path => {
-  const params = []
+const getPathParams = ({ path, schema = {}}) => {
   const parts = path.split(PATH_DELIMITER)
-  parts.forEach(part => {
-    if (part[0] === PARAM_DELIMITER) {
-      params.push(part.substring(1))
-    }
-  })
-  return params.map(simplePathParam)
+  const pathSchema = has(schema, `${PATH_PARAMS}`) ?
+    schema[PATH_PARAMS].describe().keys :
+    {}
+  return parts.filter(part => part[0] === PARAM_DELIMITER)
+    .map(part => {
+      const name = part.substring(1)
+      return definePathParam({
+        name, type: 'string', flags: {}, ...pathSchema[name]
+      })
+    })
 }
 
 const formatPathParams = path => {
@@ -66,25 +75,32 @@ const formatPathParams = path => {
     .join(PATH_DELIMITER)
 }
 
-const simpleQueryParam = name => ({
-  name,
-  in: 'query',
-  description: `${name} query param`,
-  required: false,
-  style: 'simple',
-  schema: {
-    type: 'string'
+const defineQueryParam = ({ name, flags, type }) => {
+  const { description, presence, ...metadata } = flags
+  const detailedDescription = description ?
+    `${description}  ---  Additional Parameter Context: ${JSON.stringify(metadata)}` :
+    `${name} path param`
+  return {
+    name,
+    in: 'query',
+    description: detailedDescription,
+    required: presence === REQUIRED,
+    style: 'simple',
+    schema: { type }
   }
-})
+}
 
 const getQueryParams = route => {
-  const params = []
-  if (has(route.schema, QUERY_PARAMS)) {
-    const queryParams = Object.keys(route.schema[QUERY_PARAMS].describe().keys)
-    queryParams.forEach(paramName => params.push(simpleQueryParam(paramName)))
-  }
-
-  return params
+  const queryParams = has(route.schema, QUERY_PARAMS) ?
+    route.schema[QUERY_PARAMS].describe().keys :
+    {}
+  return Object.entries(queryParams)
+    .map(([ key, value ]) => defineQueryParam({
+      name: key,
+      flags: {},
+      type: 'string',
+      ...value
+    }))
 }
 
 const jsonSchema = (schema, description) => ({
@@ -156,11 +172,10 @@ const formatRequestParams = (schemaName, httpMethod, route) => {
 }
 
 const getPathDefinition = route => {
-  const { path } = route
-  const pathParams = getPathParams(path)
+  const pathParams = getPathParams(route)
   const queryParams = getQueryParams(route)
   const parameters = pathParams.concat(queryParams)
-  const formattedPath = formatPathParams(path)
+  const formattedPath = formatPathParams(route.path)
   const schemaName = getComponentName(route)
   const method = route.method.toLowerCase()
   let schemaDef = {}
@@ -205,5 +220,6 @@ const getComponents = (routes, parentPath, aggregate = {}) => {
       })
     }
   })
+
   return aggregate
 }
