@@ -7,7 +7,7 @@ const resolveLocalRequire = ({ moduleId, cwd }) => require.resolve(moduleId, {
 
 const mergeArray = (objValue, srcValue) => {
   if (Array.isArray(objValue) && Array.isArray(srcValue)) {
-    return [ ...srcValue, ...objValue ]
+    return [ ...objValue, ...srcValue ]
   }
 }
 
@@ -44,7 +44,7 @@ const resolveBundle = ({ bundle, cwd }) => {
     }
   }
 
-  bundle = mergeWith({}, bundle, resolved, mergeArray)
+  bundle = mergeWith({}, resolved, bundle, mergeArray)
 
   delete bundle.extends
   return bundle

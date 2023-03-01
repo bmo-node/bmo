@@ -8,26 +8,29 @@ const schema = joi
   })
 
 describe('Request validator', () => {
-  it('Should error when the request body does not match the schema', () => {
+  it('Should error when the request body does not match the schema', async () => {
     const testValidator = validator()(schema)
     const ctx = { request: { body: { notName: 'test' }}}
+    let error
     try {
-      testValidator(ctx, () => {})
+      await testValidator(ctx, () => {})
+    } catch (e) {
+      error = e
+    }
+
+    expect(error).toBeInstanceOf(Error)
+  })
+  it('Should error when the schema cannot be validated', async () => {
+    try {
+      await validator()({})
     } catch (e) {
       expect(e).toBeInstanceOf(Error)
     }
   })
-  it('Should error when the schema cannot be validated', () => {
-    try {
-      validator()({})
-    } catch (e) {
-      expect(e).toBeInstanceOf(Error)
-    }
-  })
-  it('Should call next when the body is valid', () => {
+  it('Should call next when the body is valid', async () => {
     const testValidator = validator()(schema)
     const next = jest.fn()
-    testValidator({ request: { body: { name: 'test' }}}, next)
+    await testValidator({ request: { body: { name: 'test' }}}, next)
     expect(next).toHaveBeenCalled()
   })
 })

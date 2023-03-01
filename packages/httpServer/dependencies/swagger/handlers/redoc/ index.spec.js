@@ -39,7 +39,7 @@ describe('swagger > handlers > redoc', () => {
     ctx = { set, params: { version }}
   }
 
-  describe('File exists', async () => {
+  describe('File exists', () => {
     beforeEach(async () => {
       setup()
       await mod(ctx)

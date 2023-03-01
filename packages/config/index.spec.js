@@ -1,4 +1,3 @@
-/* eslint-disable require-atomic-updates */
 import { load } from '.'
 
 const DEFAULT_TEST_CONFIG = `${__dirname}/test/defaultOnly`

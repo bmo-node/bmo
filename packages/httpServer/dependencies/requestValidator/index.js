@@ -1,5 +1,4 @@
 import { isFunction } from 'lodash'
-// TODO Error typing
 export default () => schema => {
   if (!isFunction(schema.validate)) {
     throw new Error('Schema must have a validate function')
