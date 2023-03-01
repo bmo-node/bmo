@@ -26,9 +26,10 @@ node_modules
 coverage
 *.iml
 !packages/node_modules
-packages/**/package-lock.json
+
 packages/yarn.lock
 !scripts/build
-package-lock.json
+!package-lock.json
+packages/**/package-lock.json
 yarn.lock
 !packages/bundle/build
