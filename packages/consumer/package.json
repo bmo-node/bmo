@@ -1,0 +1,11 @@
+{
+  "name": "@b-mo/consumer",
+  "version": "1.0.0",
+  "description": "Contains the base logic for b-mo based consumers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tsteele",
+  "license": "Apache-2.0"
+}
